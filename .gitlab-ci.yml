@@ -11,12 +11,14 @@ build-job:       # This job runs in the build stage, which runs first.
   tags:
     - group04_runner
   script:
+    - cd accomatch
     - mvn clean install
 
 test-job:   # This job runs in the test stage.
   stage: test    # It only starts when the job in the build stage completes successfully.
   script:
     - echo "Running tests... "
+    - cd accomatch
     - mvn test
 
 
