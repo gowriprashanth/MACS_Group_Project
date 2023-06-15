@@ -4,6 +4,7 @@ image: maven:latest
 stages:          # List of stages for jobs, and their order of execution
   - build
   - test
+  - delpoy
   
 
 build-job:       # This job runs in the build stage, which runs first.
@@ -13,6 +14,8 @@ build-job:       # This job runs in the build stage, which runs first.
   script:
     - cd accomatch
     - mvn clean install
+  only:
+    - develop
 
 test-job:   # This job runs in the test stage.
   stage: test    # It only starts when the job in the build stage completes successfully.
@@ -20,6 +23,16 @@ test-job:   # This job runs in the test stage.
     - echo "Running tests... "
     - cd accomatch
     - mvn test
+  only:
+    - develop
 
+deploy-job:
+  stage: deploy
+  script:
+    - echo "Delpoy the master/main branch"
+    - curl -s "https://api.render.com/deploy/srv-ci5iiltgkuvh0tm5ue20?key=IrqLK9wDkMU"
+  only:
+    - main
+  
 
 
