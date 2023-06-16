@@ -11,15 +11,15 @@ function NavBar() {
       <nav className="navbar">
         <div className="nav-container">
           <NavLink exact to="/" className="nav-logo">
-            AccoMatch
-            <i className="fas fa-code"></i>
+            AccoMatch 
+            <i className="fas fa-home"></i>
           </NavLink>
 
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <li className="nav-item">
               <NavLink
                 exact
-                to="/"
+                to="/posts"
                 activeClassName="active"
                 className="nav-links"
                 onClick={handleClick}
@@ -30,7 +30,7 @@ function NavBar() {
             <li className="nav-item">
               <NavLink
                 exact
-                to="/about"
+                to="/"
                 activeClassName="active"
                 className="nav-links"
                 onClick={handleClick}
