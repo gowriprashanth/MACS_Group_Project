@@ -23,7 +23,11 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(@RequestBody UserModel model){
-//         return userservice.Login(model);
+         return userservice.Login(model);
+    }
+
+    @GetMapping("/login")
+    public String login(){
         return "Login Successful";
     }
 
