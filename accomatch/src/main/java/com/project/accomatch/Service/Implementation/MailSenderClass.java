@@ -1,4 +1,4 @@
-package com.project.accomatch.mail;
+package com.project.accomatch.Service.Implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;

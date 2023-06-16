@@ -2,7 +2,7 @@ package com.project.accomatch.Controller;
 
 import com.project.accomatch.Model.UserModel;
 import com.project.accomatch.Service.UserService;
-import com.project.accomatch.mail.MailSenderClass;
+import com.project.accomatch.Service.Implementation.MailSenderClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    UserService userservice;
+    public UserService userservice;
 
     @Autowired
-    MailSenderClass mailSender;
+    public MailSenderClass mailSender;
 
     @PostMapping("/signup")
     public String signUp(@RequestBody UserModel model){
@@ -23,27 +23,27 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(@RequestBody UserModel model){
-        try {
-            return userservice.Login(model);
-        }catch(Exception e){
-            return e.getMessage();
-        }
-
+         return userservice.Login(model);
     }
 
     @PostMapping("/forgotpassword")
     public String forgotPassword(@RequestBody UserModel model){
         try {
-            return userservice.ForgotPassword(model);
+
+            String subject = "Password Reset";
+            String body = "Click on the Below link to reset your Password";
+            mailSender.sendEmail(model.getEmail(), "Test Subject", "Test Body");
+            return "Mail Sent";
+//            return userservice.ForgotPassword(model);
         }catch(Exception e){
             return e.getMessage();
         }
     }
 
-    @PostMapping("/sendemail")
-    public void sendEmail(){
+    @PostMapping("/updatepassword")
+    public void updatePassword(@RequestBody UserModel model){
         try {
-            mailSender.sendEmail("shreyasbalajin@gmail.com", "Test Subject", "Test Body");
+            userservice.ForgotPassword(model);
         }catch(Exception e){
             return;
         }
