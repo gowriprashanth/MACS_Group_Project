@@ -2,7 +2,7 @@ package com.project.accomatch.Controller;
 
 import com.project.accomatch.Model.UserModel;
 import com.project.accomatch.Service.UserService;
-import com.project.accomatch.mail.MailSenderClass;
+import com.project.accomatch.Service.Implementation.MailSenderClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

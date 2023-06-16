@@ -80,11 +80,13 @@ public class UserTableOperations {
 
             rs = statement.executeQuery("select * from users where email = '"+model.getEmail() +"' and `password` = '"+model.getPassword() +"';");
             if(rs.next()){
+                rs.close();
                 statement.close();
                 connect.close();
                 return "Login Successful";
             }
             else{
+                rs.close();
                 statement.close();
                 connect.close();
                 return "User not found";
