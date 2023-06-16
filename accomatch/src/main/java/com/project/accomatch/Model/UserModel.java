@@ -12,19 +12,13 @@ package com.project.accomatch.Model;
 //         createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
 //         updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL
 
-import jakarta.persistence.*;
 import java.sql.Timestamp;
 
-@Entity
-@Table(name="users")
+
+
 public class UserModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
     private int userID;
-
-    @Column(name = "email") // same as database
     private String email;
 
     public UserModel(String email, String name, String Password2, int age, String gender, String mobile, String address, int isAdmin, int isLeaseholder, Timestamp createdAt, Timestamp updatedAt) {
@@ -41,34 +35,23 @@ public class UserModel {
         this.updated_at = updatedAt;
     }
 
-    @Column(name = "name")
     private String name;
-
-    @Column(name = "password")
     private String password;
 
-    @Column(name = "age")
     private int age;
 
-    @Column(name = "gender")
     private String gender;
 
-    @Column(name = "mobile")
     private String mobile;
 
-    @Column(name = "address")
     private String address;
 
-    @Column(name = "is_admin")
     private int is_admin;
 
-    @Column(name = "is_leaseholder")
     private int is_leaseholder;
 
-    @Column(name = "created_at")
     private Timestamp created_at;
 
-    @Column(name = "updated_at")
     private Timestamp updated_at;
 
     public UserModel() {
