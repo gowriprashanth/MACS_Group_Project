@@ -33,11 +33,6 @@ public class UserController {
         return "Login Successful";
     }
 
-    @GetMapping("/login")
-    public String login(){
-        return "Login Successful";
-    }
-
     @PostMapping("/forgotpassword")
     public String forgotPassword(@RequestBody UserModel model){
         try {
