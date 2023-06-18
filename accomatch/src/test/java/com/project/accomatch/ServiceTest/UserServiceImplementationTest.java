@@ -85,5 +85,21 @@ class UserServiceImplementationTest {
         verify(userTableOperations, times(1)).LoginUser(userModel);
         assertEquals("Error occurred", result);
     }
+
+    @Test
+    void forgotPassword_shouldReturnResultFromUserTableOperations() {
+        UserModel userModel = new UserModel();
+        when(userTableOperations.ForgotPassword(any(UserModel.class))).thenReturn("Password Updated");
+        String Res = userService.ForgotPassword(userModel);
+        assertEquals("Password Updated", Res);
+    }
+
+    @Test
+    void checkEmailID_shouldReturnResultFromUserTableOperations() {
+        UserModel userModel = new UserModel();
+        when(userTableOperations.ForgotPassword(any(UserModel.class))).thenReturn("Password Updated");
+        String Res = userService.ForgotPassword(userModel);
+        assertEquals("Password Updated", Res);
+    }
 }
 
