@@ -13,10 +13,10 @@ import java.util.Objects;
 public class UserController {
 
     @Autowired
-    public UserService userservice;
+    private UserService userservice;
 
     @Autowired
-    public MailSenderClass mailSender;
+    private MailSenderClass mailSender;
 
     @PostMapping("/signup")
     public String signUp(@RequestBody UserModel model){
