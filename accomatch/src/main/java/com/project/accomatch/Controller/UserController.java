@@ -28,6 +28,11 @@ public class UserController {
         return userservice.Login(model);
     }
 
+    @GetMapping("/login")
+    public String login(){
+        return "Login Successful";
+    }
+
     @PostMapping("/forgotpassword")
     public String forgotPassword(@RequestBody UserModel model){
         try {
