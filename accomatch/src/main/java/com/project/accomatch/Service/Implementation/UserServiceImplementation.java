@@ -26,5 +26,11 @@ public class UserServiceImplementation implements UserService {
         return userTableOperations.ForgotPassword(usermodel);
     }
 
+    @Override
+    public String CheckEmailID(String mailID) {
+        return userTableOperations.CheckMailID(mailID);
+    }
+
 }
+
 
