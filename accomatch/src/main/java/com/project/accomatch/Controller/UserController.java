@@ -1,10 +1,12 @@
 package com.project.accomatch.Controller;
 
 import com.project.accomatch.Model.UserModel;
-import com.project.accomatch.Service.UserService;
 import com.project.accomatch.Service.Implementation.MailSenderClass;
+import com.project.accomatch.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/users")
@@ -23,29 +25,40 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(@RequestBody UserModel model){
-         return userservice.Login(model);
+        return userservice.Login(model);
+    }
+
+    @GetMapping("/login")
+    public String login(){
+        return "Login Successful";
     }
 
     @PostMapping("/forgotpassword")
     public String forgotPassword(@RequestBody UserModel model){
         try {
 
-            String subject = "Password Reset";
-            String body = "Click on the Below link to reset your Password";
-            mailSender.sendEmail(model.getEmail(), "Test Subject", "Test Body");
-            return "Mail Sent";
-//            return userservice.ForgotPassword(model);
+            String mailID = model.getEmail();
+            String result = userservice.CheckEmailID(mailID);
+            if(Objects.equals(result, "ID exists")){
+                String subject = "Password Reset";
+                String body = "Click on the Below link to reset your Password";
+                mailSender.sendEmail(model.getEmail(), subject, body);
+                return "Mail Sent";
+            }
+            else{
+                return result;
+            }
         }catch(Exception e){
             return e.getMessage();
         }
     }
 
     @PostMapping("/updatepassword")
-    public void updatePassword(@RequestBody UserModel model){
+    public String updatePassword(@RequestBody UserModel model){
         try {
-            userservice.ForgotPassword(model);
+            return userservice.ForgotPassword(model);
         }catch(Exception e){
-            return;
+            return e.getMessage();
         }
     }
 }

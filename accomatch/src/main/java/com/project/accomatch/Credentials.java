@@ -12,13 +12,12 @@ public class Credentials {
 
     public void credentialsFinder() {
         Properties identity = new Properties();
-        String propertyFilename = "credentials.prop";
+        String propertyFilename = "accomatch/src/main/java/com/project/accomatch/credentials.prop";
 
         try {
             InputStream stream = new FileInputStream(propertyFilename);
 
             identity.load(stream);
-
             username = identity.getProperty("username");
             password = identity.getProperty("password");
             JDBC = identity.getProperty("Connection");
