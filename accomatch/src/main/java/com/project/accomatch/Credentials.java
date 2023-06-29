@@ -21,9 +21,9 @@ public class Credentials {
             username = identity.getProperty("username");
             password = identity.getProperty("password");
             JDBC = identity.getProperty("Connection");
-
+            System.out.println(username);
         } catch (Exception e) {
-            return;
+            throw new RuntimeException(e);
         }
     }
 
