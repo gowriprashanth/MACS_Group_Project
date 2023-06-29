@@ -1,7 +1,7 @@
 import './Login.css';
 import {useRef, useState , useEffect} from 'react';
 import { Link } from 'react-router-dom'; // Import the Link component from react-router-dom
-
+import axios from 'axios';
 
 export const Login =() =>{
 
@@ -13,7 +13,11 @@ export const Login =() =>{
     const [errMsg, setErrMsg] =useState ('');
     const [success, setSuccess] = useState(false);
 
+
+
     useEffect(() =>{
+        
+        
         userRef.current.focus();
     },[])
 
@@ -21,16 +25,31 @@ export const Login =() =>{
         setErrMsg('');
     }, [user,pwd])
 
+     
+ /* const checkLogin = async () => {
+    const result = await axios.post("http://localhost:8080/users/login",{email : user,password :pwd}).then(function (response) {
+        console.log(result);
+      }).catch(function (error) {
+        console.log(error);
+      });
+     
+  }
+*/
     const handleSubmit =async (e) => {
         e.preventDefault();
         console.log(user,pwd);
+        let bodyObj = {
+            email:user,
+            password:pwd
+        }
         setUser('');
         setPwd('');
-        fetch("http://localhosr:8080/login",{
+        fetch("http://localhost:8080/users/login",{
             method: "POST",
             headers:{"Content-Type":"application/json"},
-            body:JSON.stringify()
+            body:JSON.stringify(bodyObj),
         }).then((response) => {
+            console.log(response);
             if (response.ok) {
               setSuccess(true);
             } else {
