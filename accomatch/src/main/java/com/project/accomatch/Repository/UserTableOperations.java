@@ -30,9 +30,9 @@ public class UserTableOperations {
             // Create a statement object.
             statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
-            statement.execute("use accomatch;");
+            //statement.execute("use accomatch;");
 
-            String sql = "INSERT INTO users (email, `name`, password, age, gender, mobile, address, is_admin, is_leaseholder, createdAt, updatedAt) " +
+            String sql = "INSERT INTO user (email, `name`, password, age, gender, mobile, address, is_admin, is_leaseholder, createdAt, updatedAt) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement stmt = connect.prepareStatement(sql);
@@ -56,10 +56,10 @@ public class UserTableOperations {
             stmt.close();
             statement.close();
             connect.close();
-            return "user added successfully";
+            return "Success";
 
         }catch(Exception e){
-            return e.getMessage();
+            return "Error";
         }
 
 
@@ -78,24 +78,24 @@ public class UserTableOperations {
             // Create a statement object.
             statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
-            statement.execute("use accomatch;");
+            //statement.execute("use accomatch;");
 
-            rs = statement.executeQuery("select * from users where email = '"+model.getEmail() +"' and `password` = '"+model.getPassword() +"';");
+            rs = statement.executeQuery("select * from user where email = '"+model.getEmail() +"' and `password` = '"+model.getPassword() +"';");
             if(rs.next()){
                 rs.close();
                 statement.close();
                 connect.close();
-                return "Login Successful";
+                return "Success";
             }
             else{
                 rs.close();
                 statement.close();
                 connect.close();
-                return "User not found";
+                return "Fail";
             }
 
         }catch(Exception e){
-            return e.getMessage();
+            return "Error";
         }
 
     }
@@ -112,22 +112,22 @@ public class UserTableOperations {
             // Create a statement object.
             statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
-            statement.execute("use accomatch;");
+            //statement.execute("use accomatch;");
 
-            rs = statement.executeQuery("select * from users where email = '"+Mail +"';");
+            rs = statement.executeQuery("select * from user where email = '"+Mail +"';");
             if(rs.next()){
                 statement.close();
                 connect.close();
-                return "ID exists";
+                return "Success";
             }
             else{
                 statement.close();
                 connect.close();
-                return "Email not found in the database. Please Sign Up";
+                return "Fail";
             }
 
         }catch(Exception e){
-            return e.getMessage();
+            return "Error";
         }
 
     }
@@ -144,17 +144,17 @@ public class UserTableOperations {
             // Create a statement object.
             statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
-            statement.execute("use accomatch;");
-            String sql = "UPDATE users SET password = ? WHERE email = ?";
+            //statement.execute("use accomatch;");
+            String sql = "UPDATE user SET password = ? WHERE email = ?";
             PreparedStatement stmt = connect.prepareStatement(sql);
             stmt.setString(1, model.getPassword());
             stmt.setString(2, model.getEmail());
             stmt.executeUpdate();
             statement.close();
             connect.close();
-            return "Password Updated Successfully";
+            return "Success";
         }catch(Exception e){
-            return e.getMessage();
+            return "Error";
         }
 
     }
