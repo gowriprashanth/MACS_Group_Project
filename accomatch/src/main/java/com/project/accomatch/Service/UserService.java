@@ -12,4 +12,5 @@ public interface UserService {
 
         String CheckEmailID(String mailID);
 
+
 }

@@ -1,6 +1,11 @@
 package com.project.accomatch.Model;
 
-public class UserModel {
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+
+public class UserModel implements UserDetails {
 
     private int userID;
     private String email;
@@ -29,6 +34,11 @@ public class UserModel {
     private int is_leaseholder;
     public UserModel() {
 
+    }
+
+    public UserModel(String email, String password) {
+        this.email=email;
+        this.password=password;
     }
 
     public int getIs_admin() {
@@ -72,8 +82,38 @@ public class UserModel {
         this.name = name;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public void setPassword(String password) {
@@ -128,4 +168,11 @@ public class UserModel {
         this.is_leaseholder = isLeaseholder;
     }
 
+    public String getRole(){
+        if(this.is_admin==1){
+            return "Admin";
+        }else{
+            return "Leaseholder";
+        }
+    }
 }

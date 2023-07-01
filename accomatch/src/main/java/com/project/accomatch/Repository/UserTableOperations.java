@@ -2,6 +2,7 @@ package com.project.accomatch.Repository;
 
 import com.project.accomatch.Credentials;
 import com.project.accomatch.Model.UserModel;
+import com.project.accomatch.security.Service.UserDetailsImpl;
 import org.springframework.stereotype.Repository;
 import java.sql.*;
 
@@ -30,7 +31,7 @@ public class UserTableOperations {
             // Create a statement object.
             statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
-            statement.execute("use accomatch;");
+
 
             String sql = "INSERT INTO users (email, `name`, password, age, gender, mobile, address, is_admin, is_leaseholder, createdAt, updatedAt) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -56,10 +57,11 @@ public class UserTableOperations {
             stmt.close();
             statement.close();
             connect.close();
-            return "user added successfully";
+            return "success";
 
         }catch(Exception e){
-            return e.getMessage();
+            e.printStackTrace();
+            return "error";
         }
 
 
@@ -74,30 +76,65 @@ public class UserTableOperations {
             ResultSet rs;
             // Connect to the database.
             getCredentials();
-            connect = DriverManager.getConnection(JDBC, username, password);
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/group04?useSSL=false&serverTimezone=UTC", "root", "Raman@1418");
             // Create a statement object.
             statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
-            statement.execute("use accomatch;");
 
-            rs = statement.executeQuery("select * from users where email = '"+model.getEmail() +"' and `password` = '"+model.getPassword() +"';");
+
+            rs = statement.executeQuery("select * from user where email = '"+model.getEmail() +"' and `password` = '"+model.getPassword() +"';");
             if(rs.next()){
                 rs.close();
                 statement.close();
                 connect.close();
-                return "Login Successful";
+                return "success";
             }
             else{
                 rs.close();
                 statement.close();
                 connect.close();
-                return "User not found";
+                return "fail";
             }
 
         }catch(Exception e){
-            return e.getMessage();
+            System.err.println( e.getMessage());
+            return "error";
+
         }
 
+    }
+
+
+    public UserDetailsImpl loadUserByUsername(UserDetailsImpl model) {
+        try {
+            Connection connect;
+            Statement statement;
+            ResultSet rs;
+
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/group04?useSSL=false&serverTimezone=UTC", "root", "Raman@1418");
+            // Create a statement object.
+            statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            rs = statement.executeQuery("SELECT * FROM user WHERE email = '" + model.getEmail() + "';");
+            if (rs.next()) {
+                UserDetailsImpl user = new UserDetailsImpl();
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                rs.close();
+                statement.close();
+                connect.close();
+
+                return user;
+            } else {
+                rs.close();
+                statement.close();
+                connect.close();
+                return null;
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
     }
 
     public String CheckMailID(String Mail){
@@ -158,4 +195,7 @@ public class UserTableOperations {
         }
 
     }
+
+
+
 }
