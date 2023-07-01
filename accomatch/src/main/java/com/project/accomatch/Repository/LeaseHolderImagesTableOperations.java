@@ -29,7 +29,7 @@ public class LeaseHolderImagesTableOperations {
             // Create a statement object.
             statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
-            statement.execute("use accomatch;");
+         //   statement.execute("use accomatch;");
             String sql = "INSERT INTO leaseholder_images (application_id,image_link)"+
                     "VALUES (?,?)";
             PreparedStatement stmt = connect.prepareStatement(sql);

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
-
+@CrossOrigin("http://localhost:3000")
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -25,7 +25,8 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(@RequestBody UserModel model){
-        return userservice.Login(model);
+       String res=  userservice.Login(model);
+        return res;
     }
 
     @GetMapping("/login")
