@@ -20,11 +20,57 @@ export const Signup = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLeaseOwner, setIsLeaseOwner] = useState(false);
 
+  const [errMsg, setErrMsg] =useState ('');
+  const [success, setSuccess] = useState(false);
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(email, name, password, age, gender, mobile, address, isAdmin, isLeaseOwner);
-    // Perform signup logic here
+    let bodyObj = {
+      email: email,
+      name: name,
+      password: password,
+      age: age,
+      gender: gender,
+      mobile: mobile,
+      address: address,
+      is_admin: isAdmin ? 1 : 0,
+    is_leaseholder: isLeaseOwner ? 1 : 0
+    };
+    setEmail('');
+    setName('');
+    setPassword('');
+    setAge('');
+    setGender('');
+    setName('');
+    setMobile('');
+    setAddress('');
+    setIsAdmin(false);
+    setIsLeaseOwner(false);
+    fetch("http://localhost:8080/users/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(bodyObj),
+    })
+      .then((response) => {
+        console.log(response);
+        return response.text(); // Read the response data as text
+      })
+      .then((data) => {
+        console.log(data); // Log the response data
+        if (data === "success") {
+          setSuccess(true);
+        } else {
+          setErrMsg("Signup failed. Please try again."); // Set an appropriate error message
+        }
+      })
+      .catch((error) => {
+        setErrMsg("An error occurred. Please try again."); // Set an appropriate error message
+      });
   };
+
+
 
   useEffect(() => {
     emailRef.current.focus();

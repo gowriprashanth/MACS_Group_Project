@@ -28,11 +28,11 @@ function App() {
         </Routes>
       </main>
 
-      {!isLoggedIn && <NavBar />}
+      {<NavBar />}
 
       <div className="pages">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/posts" element={<Posts />} />
           <Route path="/applicants" element={<Applicants />} />
           <Route path="/contact" element={<Contact />} />
