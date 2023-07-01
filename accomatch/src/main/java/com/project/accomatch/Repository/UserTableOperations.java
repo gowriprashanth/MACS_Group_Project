@@ -1,31 +1,27 @@
 package com.project.accomatch.Repository;
 
-import com.project.accomatch.Credentials;
 import com.project.accomatch.Model.UserModel;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import java.sql.*;
 
 @Repository
 public class UserTableOperations {
 
+    @Value("${username.db.accomatch}")
     private String username;
-    private String password;
-    private String JDBC;
 
-    private void getCredentials(){
-        Credentials credentials = new Credentials();
-        credentials.credentialsFinder();
-        username = credentials.getUsername();
-        password = credentials.getPassword();
-        JDBC = credentials.getJDBC();
-    }
+    @Value("${password.db.accomatch}")
+    private String password;
+
+    @Value("${Connection.db.accomatch}")
+    private String JDBC;
     public String signUpUser(UserModel model){
 
         try{
             Connection connect;
             Statement statement;
             // Connect to the database.
-            getCredentials();
             connect = DriverManager.getConnection(JDBC, username, password);
             // Create a statement object.
             statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -73,7 +69,6 @@ public class UserTableOperations {
             Statement statement;
             ResultSet rs;
             // Connect to the database.
-            getCredentials();
             connect = DriverManager.getConnection(JDBC, username, password);
             // Create a statement object.
             statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -106,7 +101,6 @@ public class UserTableOperations {
             Connection connect;
             Statement statement;
             ResultSet rs;
-            getCredentials();
             // Connect to the database.
             connect = DriverManager.getConnection(JDBC, username, password);
             // Create a statement object.
@@ -138,7 +132,6 @@ public class UserTableOperations {
             Connection connect;
             Statement statement;
             ResultSet rs;
-            getCredentials();
             // Connect to the database.
             connect = DriverManager.getConnection(JDBC, username, password);
             // Create a statement object.

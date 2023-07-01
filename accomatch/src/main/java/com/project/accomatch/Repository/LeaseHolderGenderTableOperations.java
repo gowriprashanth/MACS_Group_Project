@@ -1,30 +1,29 @@
 package com.project.accomatch.Repository;
 
-import com.project.accomatch.Credentials;
+//import com.project.accomatch.Credentials;
 import com.project.accomatch.Model.LeaseHolderModel;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 
 @Repository
 public class LeaseHolderGenderTableOperations {
+    @Value("${username.db.accomatch}")
     private String username;
+
+    @Value("${password.db.accomatch}")
     private String password;
+
+    @Value("${Connection.db.accomatch}")
     private String JDBC;
 
-    private void getCredentials(){
-        Credentials credentials = new Credentials();
-        credentials.credentialsFinder();
-        username = credentials.getUsername();
-        password = credentials.getPassword();
-        JDBC = credentials.getJDBC();
-    }
     public boolean createGenderReferences(LeaseHolderModel leaseHolderModel,int leaseholder_application_id){
         try {
             Connection connect;
             Statement statement;
             // Connect to the database.
-            getCredentials();
+            //getCredentials();
             connect = DriverManager.getConnection(JDBC, username, password);
             // Create a statement object.
             statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
