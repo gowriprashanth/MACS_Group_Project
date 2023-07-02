@@ -2,12 +2,14 @@ package com.project.accomatch.Repository;
 
 import com.project.accomatch.Model.Posts;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Repository
 public class LeaseholderAdsDao {
 
     @Value("${username.db.accomatch}")
