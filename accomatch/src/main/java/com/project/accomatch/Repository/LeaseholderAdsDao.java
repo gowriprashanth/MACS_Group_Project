@@ -1,6 +1,7 @@
 package com.project.accomatch.Repository;
 
 import com.project.accomatch.Model.Posts;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,14 +10,19 @@ import java.util.List;
 
 public class LeaseholderAdsDao {
 
-    private final String jdbcUrl = "jdbc:mysql://localhost:3306/group04";
-    private final String username = "root";
-    private final String password = "Raman@1418";
+    @Value("${username.db.accomatch}")
+    private String username;
+
+    @Value("${password.db.accomatch}")
+    private String password;
+
+    @Value("${Connection.db.accomatch}")
+    private String JDBC;
 
     public List<Posts> getListOfPosts() {
         List<Posts> listOfPosts = new ArrayList<>();
 
-        try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password);
+        try (Connection connection = DriverManager.getConnection(JDBC, username, password);
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery("SELECT * FROM leaseholder_ads")) {
 
