@@ -35,7 +35,7 @@ public class LeaseholderAdsDao {
                 String locationCity = resultSet.getString("location_city");
                 int size = resultSet.getInt("size");
                 String roomType = resultSet.getString("room_type");
-                String document = resultSet.getString("document");
+                String document = resultSet.getString("document_link");
                 double rent = resultSet.getDouble("rent");
                 String otherPreferences = resultSet.getString("other_preferences");
                 Date startDate = resultSet.getDate("start_date");
