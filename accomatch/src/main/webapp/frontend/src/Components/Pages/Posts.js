@@ -1,21 +1,30 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import './Posts.css';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const Posts = () => {
   const [posts, setPosts] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const navigate = useNavigate();
+  
   useEffect(() => {
     loadPosts();
   }, []);
 
   const loadPosts = async () => {
-    const result = await axios.get("http://localhost:8080/api/leaseowner/dashboard/get/list/post");
-    console.log(result.data);
-    setPosts(result.data);
+    try {
+      const response = await axios.get("http://localhost:8080/api/leaseowner/dashboard/get/list/post");
+      setPosts(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   }
+
+  const handleDetailsClick = (postId) => {
+    navigate(`/posts/${postId}`);
+  };
 
   const openModal = (post) => {
     setSelectedPost(post);
@@ -40,7 +49,7 @@ export const Posts = () => {
               <img src={post.document} alt={`Post ${post.title}`} />
             </div>
             <div className="post-details">
-              <h3  onClick={() => openModal(post)}>{post.title}</h3>
+              <h3 onClick={() => openModal(post)}>{post.title}</h3>
               <p>{post.subtitle}</p>
               <p>Address: {post.address}</p>
               <p>City: {post.city}</p>
@@ -63,7 +72,7 @@ export const Posts = () => {
             <p>Room Type: {selectedPost.roomType}</p>
             <p>Area: {selectedPost.area} sqft</p>
             <p>Available From: {selectedPost.availableFrom}</p>
-            <button onClick={apply}>Apply</button>
+            <button onClick={() => handleDetailsClick(selectedPost.leaseholderApplicationId)}>More Details</button>
             <button onClick={closeModal}>Close</button>
           </div>
         </div>
