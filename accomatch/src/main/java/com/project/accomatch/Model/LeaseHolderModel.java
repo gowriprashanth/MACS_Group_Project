@@ -152,7 +152,7 @@ public class LeaseHolderModel {
     }
 
 
-    public LeaseHolderModel(int user_id, int size, String title, String subtitle, String address, String location_city, String room_type, String document, String other_preferences, double rent, int start_age, int end_age, String start_date, ArrayList<String> foodPreferences, ArrayList<String> images, ArrayList<String> genderPreferences) throws ParseException {
+    public LeaseHolderModel(int user_id, int size, String title, String subtitle, String address, String location_city, String room_type, String document, String other_preferences, double rent, int start_age, int end_age, String start_date, ArrayList<String> food_preferences, ArrayList<String> images, ArrayList<String> gender_preferences) throws ParseException {
         this.user_id = user_id;
         this.size = size;
         this.title = title;
@@ -166,11 +166,11 @@ public class LeaseHolderModel {
         this.is_verified = 0;
         this.start_age = start_age;
         this.end_age = end_age;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         this.start_date = simpleDateFormat.parse(start_date);
         System.out.println(this.start_date);
-        food_preferences = foodPreferences;
+        this.food_preferences = food_preferences;
         this.images = images;
-        gender_preferences = genderPreferences;
+        this.gender_preferences = gender_preferences;
     }
 }
