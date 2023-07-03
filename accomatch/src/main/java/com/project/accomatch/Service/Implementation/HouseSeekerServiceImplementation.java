@@ -6,6 +6,8 @@ import com.project.accomatch.Service.HouseSeekerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class HouseSeekerServiceImplementation implements HouseSeekerService {
     @Autowired
@@ -26,4 +28,18 @@ public class HouseSeekerServiceImplementation implements HouseSeekerService {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public List<HouseSeekerModel> getListOfAllApplicantPosts() {
+        try {
+            //String houseseeker_application_id = houseSeekerTableOperations.getListOfAllApplicantPosts();
+            //boolean isFoodPreferencesAdded = houseSeekerFoodTableOperations.createFoodReferences(houseSeekerModel,houseseeker_application_id);
+            //boolean isGenderPreferencesAdded = houseSeekerGenderTableOperations.createGenderReferences(houseSeekerModel,houseseeker_application_id);
+
+            return houseSeekerTableOperations.getListOfAllApplicantPosts();
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
 }
+
