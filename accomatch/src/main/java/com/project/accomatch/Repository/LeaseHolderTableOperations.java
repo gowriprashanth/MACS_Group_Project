@@ -27,7 +27,7 @@ public class LeaseHolderTableOperations {
             statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
          //   statement.execute("use accomatch;");
-            String sql = "INSERT INTO leaseholder_ads (user_id,title,subtitle,address,location_city,size,room_type,document,rent,other_preferences,start_date,start_age,end_age,is_verified,createdAt,updatedAt)"+
+            String sql = "INSERT INTO leaseholder_ads (user_id,title,subtitle,address,location_city,size,room_type,document_link,rent,other_preferences,start_date,start_age,end_age,is_verified,createdAt,updatedAt)"+
                          "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement stmt = connect.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             stmt.setInt(1,leaseHolderModel.getUser_id());
