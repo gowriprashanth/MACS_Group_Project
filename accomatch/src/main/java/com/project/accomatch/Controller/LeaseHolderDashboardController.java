@@ -92,5 +92,10 @@ public class LeaseHolderDashboardController {
         return new PostDetails(post, images, foodPreferences, genderPreferences);
     }*/
 
+    @GetMapping("/get/list/getListOfPersonalPosts/{user_Id}")
+    public Posts getListOfPersonalPosts(@PathVariable int user_Id) {
+        return dashboardService.getListOfPersonalPosts(user_Id);
+    }
+
 }
 
