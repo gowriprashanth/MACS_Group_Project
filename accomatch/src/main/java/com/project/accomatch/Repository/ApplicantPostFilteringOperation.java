@@ -26,10 +26,10 @@ public class ApplicantPostFilteringOperation {
             try (Connection connect = DriverManager.getConnection(JDBC, username, password);
                     Statement statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)){
                 String query = "SELECT leaseholder_ads.*" +
-                        "                 FROM leaseholder_ads" +
-                        "                 JOIN leaseholder_gender_preferences ON leaseholder_ads.leaseholder_application_id = leaseholder_gender_preferences.application_id" +
-                        "                 JOIN leaseholder_food_preferences ON leaseholder_ads.leaseholder_application_id = leaseholder_food_preferences.application_id" +
-                        "                 WHERE gender_pref = ? AND food_pref = ? AND ? >= start_age AND ? <= end_age";
+                        "       FROM leaseholder_ads" +
+                        "       JOIN leaseholder_gender_preferences ON leaseholder_ads.leaseholder_application_id = leaseholder_gender_preferences.application_id" +
+                        "       JOIN leaseholder_food_preferences ON leaseholder_ads.leaseholder_application_id = leaseholder_food_preferences.application_id" +
+                        "       WHERE gender_pref = ? AND food_pref = ? AND ? >= start_age AND ? <= end_age";
 
                 PreparedStatement Pstatement = connect.prepareStatement(query);
                 String preferedGender = null;
@@ -47,7 +47,7 @@ public class ApplicantPostFilteringOperation {
                     preferedGender = "none";
                 }
                 int age = Integer.parseInt(jsonMap.get("age"));
-
+                
                 if(Objects.equals(jsonMap.get("Veg"), "1") && Objects.equals(jsonMap.get("NonVeg"), "0")){
                     preferedFood = "Veg";
                 }

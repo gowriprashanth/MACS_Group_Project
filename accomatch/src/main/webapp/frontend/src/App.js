@@ -8,6 +8,8 @@ import { Applicants } from './Components/Pages/Applicants';
 import { Contact } from './Components/Pages/Contact';
 import { Login } from './Login';
 import { Signup } from './Signup';
+import { ForgetPasswordEmail } from './ForgetPasswordEmail';
+import { ForgetPassword } from './ForgetPassword';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -28,6 +30,8 @@ function App() {
           <Route path="/posts/:applicationId" element={<PostsDetailsPage />} />
           <Route path="/applicants" element={<Applicants />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/forgetpassword" element={<ForgetPasswordEmail />} />
+          <Route path="/updatepassword" element={<ForgetPassword />} />
         </Routes>
       </div>
     </Router>
