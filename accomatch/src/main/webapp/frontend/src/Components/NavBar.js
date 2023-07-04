@@ -60,6 +60,28 @@ function NavBar() {
                 Activity
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/create"
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleClick}
+              >
+                Create
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/createApplicant"
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleClick}
+              >
+                Create for houseseeker
+              </NavLink>
+            </li>
           </ul>
           <div className="nav-icon" onClick={handleClick}>
             <i className={click ? "fas fa-times" : "fas fa-bars"}></i>

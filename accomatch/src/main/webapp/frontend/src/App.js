@@ -8,6 +8,8 @@ import { Contact } from "./Components/Pages/Contact";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Login } from './Login';
 import { Signup } from './Signup';
+import {HouseSeekerCreateApplication} from "./Components/Pages/HouseSeekerCreateApplication";
+import{LeaseHolderCreateApplication} from "./Components/Pages/LeaseHolderCreateApplication";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -36,6 +38,8 @@ function App() {
           <Route path="/posts" element={<Posts />} />
           <Route path="/applicants" element={<Applicants />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/create" element={<LeaseHolderCreateApplication/>}/>
+          <Route path="/createApplicant" element={<HouseSeekerCreateApplication/>}/>
         </Routes>
       </div>
     </Router>
