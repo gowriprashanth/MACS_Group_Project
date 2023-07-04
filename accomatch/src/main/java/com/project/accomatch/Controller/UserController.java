@@ -1,5 +1,6 @@
 package com.project.accomatch.Controller;
 
+import com.project.accomatch.HasherClass;
 import com.project.accomatch.Model.UserModel;
 import com.project.accomatch.Service.Implementation.MailSenderClass;
 import com.project.accomatch.Service.UserService;
@@ -37,12 +38,14 @@ public class UserController {
     @PostMapping("/forgotpassword")
     public String forgotPassword(@RequestBody UserModel model){
         try {
-
+            System.out.println(model.getEmail());
             String mailID = model.getEmail();
+            String email = HasherClass.hashEmail(mailID);
             String result = userservice.CheckEmailID(mailID);
-            if(Objects.equals(result, "ID exists")){
+            if(Objects.equals(result, "Success")){
                 String subject = "Password Reset";
-                String body = "Click on the Below link to reset your Password";
+                String body = "Click on the Below link to reset your Password\n\n" +
+                        "http://localhost:3000/updatepassword?email=" + email;
                 mailSender.sendEmail(model.getEmail(), subject, body);
                 return "Mail Sent";
             }
@@ -57,6 +60,9 @@ public class UserController {
     @PostMapping("/updatepassword")
     public String updatePassword(@RequestBody UserModel model){
         try {
+            model.setEmail(HasherClass.unHashEmail(model.getEmail()));
+            System.out.println(model.getEmail());
+            System.out.println("Unhashed");
             return userservice.ForgotPassword(model);
         }catch(Exception e){
             return e.getMessage();
