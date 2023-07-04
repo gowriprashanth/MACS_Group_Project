@@ -103,5 +103,45 @@ public class LeaseholderAdsDao {
 
         return post;
     }
+    public Posts getListOfPersonalPosts(int user_id){
+        Posts post = null;
 
+        try (Connection connection = DriverManager.getConnection(JDBC, username, password);
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM leaseholder_ads WHERE user_id = ?")) {
+
+            statement.setInt(1, user_id);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    int leaseholderApplicationId = resultSet.getInt("leaseholder_application_id");
+                    int userId = resultSet.getInt("user_id");
+                    String title = resultSet.getString("title");
+                    String subtitle = resultSet.getString("subtitle");
+                    String address = resultSet.getString("address");
+                    String locationCity = resultSet.getString("location_city");
+                    int size = resultSet.getInt("size");
+                    String roomType = resultSet.getString("room_type");
+                    String document = resultSet.getString("document_link");
+                    double rent = resultSet.getDouble("rent");
+                    String otherPreferences = resultSet.getString("other_preferences");
+                    Date startDate = resultSet.getDate("start_date");
+                    int startAge = resultSet.getInt("start_age");
+                    int endAge = resultSet.getInt("end_age");
+                    boolean isVerified = resultSet.getBoolean("is_verified");
+                    Date createdAt = resultSet.getTimestamp("createdAt");
+                    Date updatedAt = resultSet.getTimestamp("updatedAt");
+
+                    post = new Posts(leaseholderApplicationId, userId, title, subtitle, address, locationCity, size,
+                            roomType, document, rent, otherPreferences, startDate, startAge, endAge, isVerified,
+                            createdAt, updatedAt);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle exception
+        }
+
+        return post;
+    }
 }

@@ -41,4 +41,8 @@ public class LeaseHolderDashboardService {
     public Posts getPostByApplicationId(int applicationId){
         return leaseholderAdsDao.getPostByApplicationId(applicationId);
     }
+
+    public Posts getListOfPersonalPosts(int userID){
+        return leaseholderAdsDao.getListOfPersonalPosts(userID);
+    }
 }
