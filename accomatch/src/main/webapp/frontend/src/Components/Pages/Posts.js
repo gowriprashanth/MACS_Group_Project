@@ -1,3 +1,5 @@
+// Posts.js
+
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import './Posts.css';
@@ -27,6 +29,7 @@ export const Posts = () => {
   };
 
   const openModal = (post) => {
+    console.log("model is open",post)
     setSelectedPost(post);
     setIsModalOpen(true);
   }
@@ -62,7 +65,7 @@ export const Posts = () => {
         ))}
       </div>
       {isModalOpen && (
-        <div className="modal">
+        <div className="custom-modal"> {/* Updated class name */}
           <div className="modal-content">
             <h3>{selectedPost.title}</h3>
             <p>{selectedPost.subtitle}</p>
