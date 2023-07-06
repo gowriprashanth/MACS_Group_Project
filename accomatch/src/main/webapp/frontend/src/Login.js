@@ -110,6 +110,13 @@ export const Login =() =>{
                     <a href="/signup">Sign Up</a>
                     </span>
                 </p>
+            <p>
+                Forgot Password? <br/>
+                <span className="line">
+                    {/* Put the reference for the  link */}
+                    <a href="/forgetpassword">Reset Password</a>
+                    </span>
+            </p>
         </section>
         )}
         </>

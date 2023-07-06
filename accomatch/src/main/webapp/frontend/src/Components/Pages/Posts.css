@@ -1,3 +1,5 @@
+/* Posts.css */
+
 .dashboard-container {
   margin: 20px;
 }
@@ -40,7 +42,7 @@
   font-weight: normal;
 }
 
-.modal {
+.custom-modal { /* Updated class name */
   position: fixed;
   top: 0;
   left: 0;
@@ -52,7 +54,7 @@
   justify-content: center;
 }
 
-.modal-content {
+.custom-modal .modal-content { /* Updated class name */
   background-color: #fff;
   padding: 20px;
   border-radius: 5px;
@@ -60,10 +62,10 @@
   text-align: center;
 }
 
-.modal-content h3 {
+.custom-modal .modal-content h3 { /* Updated class name */
   margin-top: 0;
 }
 
-.modal-content button {
+.custom-modal .modal-content button { /* Updated class name */
   margin-top: 10px;
 }
