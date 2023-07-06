@@ -25,10 +25,10 @@ public class ApplicantPostFilteringOperation {
 
             try (Connection connect = DriverManager.getConnection(JDBC, username, password);
                     Statement statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)){
-                String query = "SELECT leaseholder_ads.*" +
-                        "       FROM leaseholder_ads" +
-                        "       JOIN leaseholder_gender_preferences ON leaseholder_ads.leaseholder_application_id = leaseholder_gender_preferences.application_id" +
-                        "       JOIN leaseholder_food_preferences ON leaseholder_ads.leaseholder_application_id = leaseholder_food_preferences.application_id" +
+                String query = "SELECT leaseholder_ads.* " +
+                        "       FROM leaseholder_ads " +
+                        "       JOIN leaseholder_gender_preferences ON leaseholder_ads.leaseholder_application_id = leaseholder_gender_preferences.application_id " +
+                        "       JOIN leaseholder_food_preferences ON leaseholder_ads.leaseholder_application_id = leaseholder_food_preferences.application_id " +
                         "       WHERE gender_pref = ? AND food_pref = ? AND ? >= start_age AND ? <= end_age";
 
                 PreparedStatement Pstatement = connect.prepareStatement(query);
@@ -47,7 +47,7 @@ public class ApplicantPostFilteringOperation {
                     preferedGender = "none";
                 }
                 int age = Integer.parseInt(jsonMap.get("age"));
-                
+
                 if(Objects.equals(jsonMap.get("Veg"), "1") && Objects.equals(jsonMap.get("NonVeg"), "0")){
                     preferedFood = "Veg";
                 }
@@ -65,6 +65,48 @@ public class ApplicantPostFilteringOperation {
                 Pstatement.setString(2, preferedFood);
                 Pstatement.setInt(3, age);
                 Pstatement.setInt(4, age);
+
+//                String defaultValue = "SELECT leaseholder_ads.* " +
+//                        "FROM leaseholder_ads " +
+//                        "JOIN leaseholder_gender_preferences ON leaseholder_ads.leaseholder_application_id = leaseholder_gender_preferences.application_id " +
+//                        "JOIN leaseholder_food_preferences ON leaseholder_ads.leaseholder_application_id = leaseholder_food_preferences.application_id where (" +
+//                        "room_type = 'sharing' or room_type IS NULL) and (gender_pref = ";
+//                String[] array = {"element1", "element2", "element3"};
+//
+//                StringBuilder stringBuilder = new StringBuilder(defaultValue);
+//
+//                if (array.length > 0) {
+//                    for (String element : array) {
+//                        stringBuilder.append(element).append(" OR ").append(" gender_pref = ");
+//                    }
+//                    // Remove the last " OR" from the StringBuilder
+//                    stringBuilder.delete(stringBuilder.length() - 19, stringBuilder.length());
+//                    stringBuilder.append(" or gender_pref is null) ");
+//                }
+//                if(array.length == 0){
+//                    stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
+//                    stringBuilder.append("is null)");
+//                }
+//                    stringBuilder.append(" and (food_pref = ");
+//
+//
+//                if (array.length > 0) {
+//                    for (String element : array) {
+//                        stringBuilder.append(element).append(" OR ").append(" food_pref = ");
+//                    }
+//                    // Remove the last " OR" from the StringBuilder
+//                    stringBuilder.delete(stringBuilder.length() - 17, stringBuilder.length());
+//                    stringBuilder.append(" or gender_pref is null);");
+//                }
+//                if(array.length == 0){
+//                    stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
+//                    stringBuilder.append("is null);");
+//                }
+//
+//
+//                String finalString = stringBuilder.toString();
+//
+//                System.out.println(finalString);
 
                 ResultSet resultSet = Pstatement.executeQuery();
 

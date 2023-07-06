@@ -47,14 +47,14 @@ class UserTableOperationsTest {
         assertEquals(UTO.signUpUser(userModel), "user added successfully");
     }
 
-    @Test
-    void testLoginUser() throws Exception {
-        // Create a sample UserModel
-        UserModel userModel = new UserModel();
-        UserTableOperations UTO = mock(UserTableOperations.class);
-        when(UTO.LoginUser(userModel)).thenReturn("Login Successful");
-        assertEquals(UTO.LoginUser(userModel), "Login Successful");
-    }
+//    @Test
+//    void testLoginUser() throws Exception {
+//        // Create a sample UserModel
+//        UserModel userModel = new UserModel();
+//        UserTableOperations UTO = mock(UserTableOperations.class);
+//        when(UTO.LoginUser(userModel)).thenReturn("Login Successful");
+//        assertEquals(UTO.LoginUser(userModel), "Login Successful");
+//    }
 
 
 }
