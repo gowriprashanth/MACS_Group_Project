@@ -32,9 +32,6 @@ public class HouseSeekerServiceImplementation implements HouseSeekerService {
     @Override
     public List<HouseSeekerModel> getListOfAllApplicantPosts() {
         try {
-            //String houseseeker_application_id = houseSeekerTableOperations.getListOfAllApplicantPosts();
-            //boolean isFoodPreferencesAdded = houseSeekerFoodTableOperations.createFoodReferences(houseSeekerModel,houseseeker_application_id);
-            //boolean isGenderPreferencesAdded = houseSeekerGenderTableOperations.createGenderReferences(houseSeekerModel,houseseeker_application_id);
 
             return houseSeekerTableOperations.getListOfAllApplicantPosts();
         } catch (Exception e){
