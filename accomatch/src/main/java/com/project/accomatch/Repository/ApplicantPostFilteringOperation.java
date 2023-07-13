@@ -105,7 +105,7 @@ public class ApplicantPostFilteringOperation {
                     java.util.Date startDate = resultSet.getDate("start_date");
                     int startAge = resultSet.getInt("start_age");
                     int endAge = resultSet.getInt("end_age");
-                    boolean isVerified = resultSet.getBoolean("is_verified");
+                    int isVerified = resultSet.getInt("is_verified");
                     java.util.Date createdAt = resultSet.getTimestamp("createdAt");
                     Date updatedAt = resultSet.getTimestamp("updatedAt");
 
