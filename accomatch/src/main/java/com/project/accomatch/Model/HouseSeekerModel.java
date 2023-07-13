@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class HouseSeekerModel {
-    private int user_id;
+    private int user_id, housekeeper_application_Id;
     private String location_city,room_type,other_preferences;
-    private Date start_date;
+    private Date start_date, created_At, updated_At;
 
     public HouseSeekerModel(int user_id, String location_city, String room_type, String other_preferences, Date start_date, ArrayList<String> food_preferences, ArrayList<String> gender_preferences) {
         this.user_id = user_id;
@@ -19,6 +19,17 @@ public class HouseSeekerModel {
     }
 
     private ArrayList<String> food_preferences,gender_preferences;
+
+    public HouseSeekerModel(int housekeeperApplicationId, int userId, String locationCity, String otherPreferences, String roomType, Date startDate, Date createdAt, Date updatedAt) {
+        this.housekeeper_application_Id = housekeeperApplicationId;
+        this.user_id = userId;
+        this.location_city = locationCity;
+        this.other_preferences = otherPreferences;
+        this.room_type = roomType;
+        this.start_date = startDate;
+        this.created_At = createdAt;
+        this.updated_At = updatedAt;
+    }
 
     public int getUser_id() {
         return user_id;
