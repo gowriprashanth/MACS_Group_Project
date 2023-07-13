@@ -105,7 +105,7 @@ public class ApplicantPostFilteringOperation {
                     java.util.Date startDate = resultSet.getDate("start_date");
                     int startAge = resultSet.getInt("start_age");
                     int endAge = resultSet.getInt("end_age");
-                    boolean isVerified = resultSet.getBoolean("is_verified");
+                    int isVerified = resultSet.getInt("is_verified");
                     java.util.Date createdAt = resultSet.getTimestamp("createdAt");
                     Date updatedAt = resultSet.getTimestamp("updatedAt");
 
@@ -116,7 +116,47 @@ public class ApplicantPostFilteringOperation {
                     listOfFilteredPosts.add(post);
 
                 }
-
+//                String defaultValue = "SELECT leaseholder_ads.* " +
+//                        "FROM leaseholder_ads " +
+//                        "JOIN leaseholder_gender_preferences ON leaseholder_ads.leaseholder_application_id = leaseholder_gender_preferences.application_id " +
+//                        "JOIN leaseholder_food_preferences ON leaseholder_ads.leaseholder_application_id = leaseholder_food_preferences.application_id where (" +
+//                        "room_type = 'sharing' or room_type IS NULL) and (gender_pref = ";
+//                String[] array = {"element1", "element2", "element3"};
+//
+//                StringBuilder stringBuilder = new StringBuilder(defaultValue);
+//
+//                if (array.length > 0) {
+//                    for (String element : array) {
+//                        stringBuilder.append(element).append(" OR ").append(" gender_pref = ");
+//                    }
+//                    // Remove the last " OR" from the StringBuilder
+//                    stringBuilder.delete(stringBuilder.length() - 19, stringBuilder.length());
+//                    stringBuilder.append(" or gender_pref is null) ");
+//                }
+//                if(array.length == 0){
+//                    stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
+//                    stringBuilder.append("is null)");
+//                }
+//                    stringBuilder.append(" and (food_pref = ");
+//
+//
+//                if (array.length > 0) {
+//                    for (String element : array) {
+//                        stringBuilder.append(element).append(" OR ").append(" food_pref = ");
+//                    }
+//                    // Remove the last " OR" from the StringBuilder
+//                    stringBuilder.delete(stringBuilder.length() - 17, stringBuilder.length());
+//                    stringBuilder.append(" or gender_pref is null);");
+//                }
+//                if(array.length == 0){
+//                    stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
+//                    stringBuilder.append("is null);");
+//                }
+//
+//
+//                String finalString = stringBuilder.toString();
+//
+//                System.out.println(finalString);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
