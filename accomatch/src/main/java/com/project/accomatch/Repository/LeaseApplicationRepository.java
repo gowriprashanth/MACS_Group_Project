@@ -18,14 +18,15 @@ public class LeaseApplicationRepository {
     @Value("${Connection.db.accomatch}")
     private String JDBC;
 
-    public List<Applicant> getListOfApplicant() {
+    public List<Applicant> getListOfApplicant(int application_id) {
         List<Applicant> listOfApplicants = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection(JDBC, username, password);
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("(SELECT user_id,name,email,age,gender,mobile FROM user where user_id =(SELECT user_id FROM leaseholder_applicant ))"
+             PreparedStatement statement = connection.prepareStatement("(SELECT user_id,name,email,age,gender,mobile FROM user where user_id =" +
+                     "(SELECT user_id FROM leaseholder_applicant where application_id = ?))"
              )) {
-
+            statement.setInt(1,application_id);
+            ResultSet resultSet= statement.executeQuery();
             while (resultSet.next()) {
                 //int applicationId = resultSet.getInt("application_id");
                 int userId = resultSet.getInt("user_id");

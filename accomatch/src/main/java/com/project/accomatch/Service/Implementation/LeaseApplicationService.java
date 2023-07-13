@@ -11,7 +11,7 @@ public class LeaseApplicationService {
 
     @Autowired
     LeaseApplicationRepository leaseApplcationRepository;
-    public List<Applicant> getListOfApplicants() {
-        return leaseApplcationRepository.getListOfApplicant();
+    public List<Applicant> getListOfApplicants(int application_id) {
+        return leaseApplcationRepository.getListOfApplicant(application_id);
     }
 }
