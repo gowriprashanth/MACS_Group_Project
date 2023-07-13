@@ -17,14 +17,14 @@ public class Posts {
     private Date startDate;
     private int startAge;
     private int endAge;
-    private boolean isVerified;
+    private int isVerified;
     private Date createdAt;
     private Date updatedAt;
 
     public Posts(int leaseholderApplicationId, int userId, String title, String subtitle,
                  String address, String locationCity, int size, String roomType, String document,
                  double rent, String otherPreferences, Date startDate, int startAge, int endAge,
-                 boolean isVerified, Date createdAt, Date updatedAt) {
+                 int isVerified, Date createdAt, Date updatedAt) {
         this.leaseholderApplicationId = leaseholderApplicationId;
         this.userId = userId;
         this.title = title;
@@ -163,11 +163,11 @@ public class Posts {
         this.endAge = endAge;
     }
 
-    public boolean isVerified() {
+    public int isVerified() {
         return isVerified;
     }
 
-    public void setVerified(boolean verified) {
+    public void setVerified(int verified) {
         isVerified = verified;
     }
 
