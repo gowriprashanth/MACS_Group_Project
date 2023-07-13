@@ -29,7 +29,9 @@ public class ApplicantPostFilteringOperation {
                         "       FROM leaseholder_ads " +
                         "       JOIN leaseholder_gender_preferences ON leaseholder_ads.leaseholder_application_id = leaseholder_gender_preferences.application_id " +
                         "       JOIN leaseholder_food_preferences ON leaseholder_ads.leaseholder_application_id = leaseholder_food_preferences.application_id " +
-                        "       WHERE gender_pref = ? AND food_pref = ? AND ? >= start_age AND ? <= end_age";
+                        "       WHERE gender_pref = ? AND food_pref = ?  " +
+                        "       AND (? = '' OR ? >= start_age) " +
+                        "       AND (? = '' OR ? <= end_age)";
 
                 PreparedStatement Pstatement = connect.prepareStatement(query);
                 String preferedGender = null;
@@ -46,7 +48,17 @@ public class ApplicantPostFilteringOperation {
                 else if(Objects.equals(jsonMap.get("Male"), null) && Objects.equals(jsonMap.get("Female"), null)){
                     preferedGender = "none";
                 }
-                int age = Integer.parseInt(jsonMap.get("age"));
+
+                String ageString = jsonMap.get("age");
+                int age = 0;
+
+                if (!ageString.isEmpty()) {
+                    try {
+                        age = Integer.parseInt(ageString);
+                    } catch (NumberFormatException e) {
+                        ageString="";
+                    }
+                }
 
                 if(Objects.equals(jsonMap.get("Veg"), "1") && Objects.equals(jsonMap.get("NonVeg"), "0")){
                     preferedFood = "Veg";
@@ -63,50 +75,18 @@ public class ApplicantPostFilteringOperation {
 
                 Pstatement.setString(1, preferedGender);
                 Pstatement.setString(2, preferedFood);
-                Pstatement.setInt(3, age);
-                Pstatement.setInt(4, age);
+                if(ageString.isEmpty()){
+                    Pstatement.setString(3, ageString);
+                    Pstatement.setString(4, ageString);
+                    Pstatement.setString(5, ageString);
+                    Pstatement.setString(6, ageString);
+                }else{
+                    Pstatement.setInt(3, age);
+                    Pstatement.setInt(4, age);
+                    Pstatement.setInt(5, age);
+                    Pstatement.setInt(6, age);
+                }
 
-//                String defaultValue = "SELECT leaseholder_ads.* " +
-//                        "FROM leaseholder_ads " +
-//                        "JOIN leaseholder_gender_preferences ON leaseholder_ads.leaseholder_application_id = leaseholder_gender_preferences.application_id " +
-//                        "JOIN leaseholder_food_preferences ON leaseholder_ads.leaseholder_application_id = leaseholder_food_preferences.application_id where (" +
-//                        "room_type = 'sharing' or room_type IS NULL) and (gender_pref = ";
-//                String[] array = {"element1", "element2", "element3"};
-//
-//                StringBuilder stringBuilder = new StringBuilder(defaultValue);
-//
-//                if (array.length > 0) {
-//                    for (String element : array) {
-//                        stringBuilder.append(element).append(" OR ").append(" gender_pref = ");
-//                    }
-//                    // Remove the last " OR" from the StringBuilder
-//                    stringBuilder.delete(stringBuilder.length() - 19, stringBuilder.length());
-//                    stringBuilder.append(" or gender_pref is null) ");
-//                }
-//                if(array.length == 0){
-//                    stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
-//                    stringBuilder.append("is null)");
-//                }
-//                    stringBuilder.append(" and (food_pref = ");
-//
-//
-//                if (array.length > 0) {
-//                    for (String element : array) {
-//                        stringBuilder.append(element).append(" OR ").append(" food_pref = ");
-//                    }
-//                    // Remove the last " OR" from the StringBuilder
-//                    stringBuilder.delete(stringBuilder.length() - 17, stringBuilder.length());
-//                    stringBuilder.append(" or gender_pref is null);");
-//                }
-//                if(array.length == 0){
-//                    stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
-//                    stringBuilder.append("is null);");
-//                }
-//
-//
-//                String finalString = stringBuilder.toString();
-//
-//                System.out.println(finalString);
 
                 ResultSet resultSet = Pstatement.executeQuery();
 
