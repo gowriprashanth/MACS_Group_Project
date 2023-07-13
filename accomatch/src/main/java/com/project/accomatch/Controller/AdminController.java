@@ -1,13 +1,17 @@
 package com.project.accomatch.Controller;
-
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Service.Implementation.LeaseHolderDashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-
+@CrossOrigin("http://localhost:3000")
+@RestController
+@RequestMapping("/admin")
 public class AdminController {
 
 
@@ -34,6 +38,5 @@ public class AdminController {
     {
         return dashboardService.getListOfPostsByStatus(status);
     }
-
 
 }

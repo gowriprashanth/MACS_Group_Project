@@ -14,4 +14,5 @@ public class LeaseApplicationService {
     public List<Applicant> getListOfApplicants(int application_id) {
         return leaseApplcationRepository.getListOfApplicant(application_id);
     }
+
 }

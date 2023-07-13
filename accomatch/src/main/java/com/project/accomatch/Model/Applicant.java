@@ -18,9 +18,6 @@ public class Applicant {
         this.mobile=mobile;
     }
 
-    public Applicant(){
-
-    }
     public int getUserId() {
         return userId;
     }
