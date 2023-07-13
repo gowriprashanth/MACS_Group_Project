@@ -16,4 +16,5 @@ public class LeaseApplicationController {
     public List<Applicant> getListOfPosts(@PathVariable int application_id) {
         return applicantService.getListOfApplicants(application_id);
     }
+
 }
