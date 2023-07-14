@@ -2,11 +2,13 @@ package com.project.accomatch.Service;
 
 import com.project.accomatch.Model.UserModel;
 
+import java.util.Map;
+
 public interface UserService {
 
         String SignUp(UserModel usermodel);
 
-        String Login(UserModel usermodel);
+        Map<String, String> Login(UserModel usermodel);
 
         String ForgotPassword(UserModel usermodel);
 

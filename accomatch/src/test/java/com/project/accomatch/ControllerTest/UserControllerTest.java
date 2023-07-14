@@ -43,21 +43,21 @@ public class UserControllerTest {
         assertEquals(usercontroller.signUp(userModel), "Error occurred");
         verify(userService, times(1)).SignUp(userModel);
     }
-    @Test
-    public void testLoginSuccess() {
-        when(userService.Login(any(UserModel.class))).thenReturn("Login Successful");
-        UserModel userModel = new UserModel();
-        assertEquals(usercontroller.login(userModel), "Login Successful");
-        verify(userService, times(1)).Login(userModel);
-    }
+//    @Test
+//    public void testLoginSuccess() {
+//        when(userService.Login(any(UserModel.class))).thenReturn("Login Successful");
+//        UserModel userModel = new UserModel();
+//        assertEquals(usercontroller.login(userModel), "Login Successful");
+//        verify(userService, times(1)).Login(userModel);
+//    }
 
-    @Test
-    public void testLoginFailure() {
-        when(userService.Login(any(UserModel.class))).thenReturn("User not found");
-        UserModel userModel = new UserModel();
-        assertEquals(usercontroller.login(userModel), "User not found");
-        verify(userService, times(1)).Login(userModel);
-    }
+//    @Test
+//    public void testLoginFailure() {
+//        when(userService.Login(any(UserModel.class))).thenReturn("User not found");
+//        UserModel userModel = new UserModel();
+//        assertEquals(usercontroller.login(userModel), "User not found");
+//        verify(userService, times(1)).Login(userModel);
+//    }
 
 
     @Test

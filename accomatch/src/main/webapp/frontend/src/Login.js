@@ -47,7 +47,11 @@ export const Login =() =>{
         })
         .then((data) => {
             console.log(data); // Log the response data
-            if (data === "success") {
+            sessionStorage.setItem("user_id", data.User_id);
+            sessionStorage.setItem("name", data.Name);
+            sessionStorage.setItem("email", data.Email);
+            sessionStorage.setItem("type", data.type);
+            if (data.Status === "Success") {
             setSuccess(true);
             } else {
             setErrMsg("Login failed. Please try again."); // Set an appropriate error message

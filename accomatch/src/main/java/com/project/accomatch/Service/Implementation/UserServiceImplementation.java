@@ -6,6 +6,8 @@ import com.project.accomatch.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 public class UserServiceImplementation implements UserService {
 
@@ -17,7 +19,7 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public String Login(UserModel usermodel) {
+    public Map<String, String> Login(UserModel usermodel) {
         return userTableOperations.LoginUser(usermodel);
     }
 

@@ -26,6 +26,11 @@ public class LeaseHolderDashboardService {
         return leaseholderAdsDao.getListOfPosts();
     }
 
+    public List<Posts> getListOfPostsByStatus(int status) {
+        return leaseholderAdsDao.getListOfPostsByStatus( status);
+    }
+
+
     public List<String> getListOfgenderPreferencesByApplicationId(int applicantionId){
       return   leaseHolderGenderTableOperations.getGenderPreferencesByApplicationId(applicantionId);
     }

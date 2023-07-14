@@ -3,7 +3,10 @@ package com.project.accomatch.Repository;
 import com.project.accomatch.Model.UserModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
+
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @Repository
 public class UserTableOperations {
@@ -62,7 +65,7 @@ public class UserTableOperations {
 
     }
 
-    public String LoginUser(UserModel model){
+    public Map<String, String> LoginUser(UserModel model){
 
         try{
             Connection connect;
@@ -73,24 +76,46 @@ public class UserTableOperations {
             // Create a statement object.
             statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
-            //statement.execute("use accomatch;");
-
             rs = statement.executeQuery("select * from user where email = '"+model.getEmail() +"' and `password` = '"+model.getPassword() +"';");
             if(rs.next()){
+                Map<String, String > returnMap = new HashMap<>();
+                returnMap.put("Email", rs.getString("email"));
+                returnMap.put("User_id", rs.getString("user_id"));
+                returnMap.put("Name", rs.getString("name"));
+                int admin = rs.getInt("is_admin");
+                int leaseHolder = rs.getInt("is_holder");
+                if(admin == 0 && leaseHolder == 0){
+                    returnMap.put("type", "AP");
+                }
+                else if(admin == 1 && leaseHolder == 0){
+                    returnMap.put("type", "AD");
+                }
+                else if(admin == 0 && leaseHolder == 1){
+                    returnMap.put("type", "LH");
+                }
+                else{
+                    returnMap.put("type", "AP");
+                }
+
+                returnMap.put("Status", "Success");
                 rs.close();
                 statement.close();
                 connect.close();
-                return "Success";
+                return returnMap;
             }
             else{
                 rs.close();
                 statement.close();
                 connect.close();
-                return "Fail";
+                Map<String, String > returnMap = new HashMap<>();
+                returnMap.put("Status", "Fail");
+                return returnMap;
             }
 
         }catch(Exception e){
-            return "Error";
+            Map<String, String > returnMap = new HashMap<>();
+            returnMap.put("Status", e.getMessage());
+            return returnMap;
         }
 
     }
