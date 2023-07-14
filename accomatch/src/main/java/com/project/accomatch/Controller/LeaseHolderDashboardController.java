@@ -93,7 +93,7 @@ public class LeaseHolderDashboardController {
     }*/
 
     @GetMapping("/get/list/getListOfPersonalPosts/{user_Id}")
-    public Posts getListOfPersonalPosts(@PathVariable int user_Id) {
+    public List<Posts> getListOfPersonalPosts(@PathVariable int user_Id) {
         return dashboardService.getListOfPersonalPosts(user_Id);
     }
 
