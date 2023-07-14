@@ -22,8 +22,8 @@ public class LeaseApplicationRepository {
         List<Applicant> listOfApplicants = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection(JDBC, username, password);
-             PreparedStatement statement = connection.prepareStatement("(SELECT user_id,name,email,age,gender,mobile FROM user where user_id =" +
-                     "(SELECT user_id FROM leaseholder_applicant where application_id = ?))"
+             PreparedStatement statement = connection.prepareStatement("(SELECT user_id,name,email,age,gender,mobile FROM user where user_id IN (" +
+                     "(SELECT user_id FROM leaseholder_applicant where application_id = ?)))"
              )) {
             statement.setInt(1,application_id);
             ResultSet resultSet= statement.executeQuery();
