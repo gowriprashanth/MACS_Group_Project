@@ -48,15 +48,16 @@ export const Posts = () => {
             <div className="post-image">
               <img src={post.document} alt={`Post ${post.title}`} />
             </div>
-            <div className="post-details">
-              <h3 onClick={() => openModal(post)}>{post.title}</h3>
+            <div className="post-details"
+            onClick={()=>openModal(post)}>
+              <h3>{post.title}</h3>
               <p>{post.subtitle}</p>
               <p>Address: {post.address}</p>
               <p>City: {post.city}</p>
               <p>Rent: {post.rent}</p>
               <p>Room Type: {post.roomType}</p>
               <p>Area: {post.area} sqft</p>
-              <p>Available From: {post.availableFrom}</p>
+              <p>Available From: {post.availableFrom}</p>              
             </div>
           </div>
         ))}
