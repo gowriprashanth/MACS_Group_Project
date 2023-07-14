@@ -15,7 +15,6 @@ export const PostsDetailsPage = () => {
   const [images, setImages] = useState([]);
   const [foodPreferences, setFoodPreferences] = useState([]);
   const [genderPreferences, setGenderPreferences] = useState([]);
-<<<<<<< HEAD
   const [errMsg, setErrMsg] =useState ('');
   const [success, setSuccess] = useState(false);
   const handleApplySubmit =async () => {
@@ -24,9 +23,6 @@ export const PostsDetailsPage = () => {
         application_id:applicationId,
         status:"Pending"
     }
-=======
-  const navigate = useNavigate();
->>>>>>> develop
 
     fetch("http://localhost:8080/api/applicant/apply", {
         method: "POST",
