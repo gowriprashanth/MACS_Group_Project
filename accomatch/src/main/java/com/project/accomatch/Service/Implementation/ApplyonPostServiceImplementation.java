@@ -26,4 +26,9 @@ public class ApplyonPostServiceImplementation implements ApplyonPostService {
         applyonPostTableOperations.applyOnPost(leaseHolderApplicantModel);
         return "Applied successfully";
     }
+
+    @Override
+    public boolean isApplied(LeaseHolderApplicantModel leaseHolderApplicantModel) {
+        return applyonPostTableOperations.isAlreadyApplied(leaseHolderApplicantModel);
+    }
 }

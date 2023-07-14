@@ -170,11 +170,11 @@ export const HouseSeekerCreateApplication =() =>{
                     
                 />
                 </label>
-                <label>vegen
+                <label>vegan
                 <input 
                     type="checkbox"
-                    id="vegen"
-                    onChange={(e) => foodPreferences.push("vegen")}
+                    id="vegan"
+                    onChange={(e) => foodPreferences.push("vegan")}
                     value={foodPreferences}
                 />
                 </label>
