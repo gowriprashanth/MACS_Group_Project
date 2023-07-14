@@ -5,13 +5,14 @@ import { Home } from './Components/Pages/Home';
 import { Posts } from './Components/Pages/Posts';
 import { PostsDetailsPage } from './Components/Pages/PostsDetailsPage';
 import { Applicants } from './Components/Pages/Applicants';
-import { Contact } from './Components/Pages/Contact';
+import { LeaseHolderPersonlPosts } from './Components/Pages/LeaseHolderPersonlPosts';
 import { Login } from './Login';
 import { Signup } from './Signup';
 import {HouseSeekerCreateApplication} from "./Components/Pages/HouseSeekerCreateApplication";
 import{LeaseHolderCreateApplication} from "./Components/Pages/LeaseHolderCreateApplication";
 import { ForgetPasswordEmail } from './ForgetPasswordEmail';
 import { ForgetPassword } from './ForgetPassword';
+import{ LeaseApplicantView } from './Components/Pages/LeaseApplicantView';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -31,11 +32,12 @@ function App() {
           <Route path="/posts" element={<Posts />} />
           <Route path="/posts/:applicationId" element={<PostsDetailsPage />} />
           <Route path="/applicants" element={<Applicants />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/personalposts/:user_Id" element={<LeaseHolderPersonlPosts />} />
           <Route path="/create" element={<LeaseHolderCreateApplication/>}/>
           <Route path="/createApplicant" element={<HouseSeekerCreateApplication/>}/>
           <Route path="/forgetpassword" element={<ForgetPasswordEmail />} />
           <Route path="/updatepassword" element={<ForgetPassword />} />
+          <Route path="/leaseapplicantview/:user_Id" element={<LeaseApplicantView />} />
         </Routes>
       </div>
     </Router>

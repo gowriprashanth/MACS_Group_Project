@@ -27,7 +27,7 @@ export const Login =() =>{
         e.preventDefault();
         console.log(user,pwd);
         let bodyObj = {
-            username:user,
+            email:user,
             password:pwd
         }
         setUser('');
@@ -43,14 +43,16 @@ export const Login =() =>{
             if(response.status===200){
                 navigate("/posts");
             }
-            return response.text(); // Read the response data as text
+            return response.json(); // Read the response data as text
         })
         .then((data) => {
             console.log(data); // Log the response data
-            sessionStorage.setItem("user_id", data.User_id);
+            console.log(data.User_id);
+            sessionStorage.setItem('user_id', data.User_id);
             sessionStorage.setItem("name", data.Name);
             sessionStorage.setItem("email", data.Email);
             sessionStorage.setItem("type", data.type);
+            console.log(sessionStorage.getItem('user_id'));
             if (data.Status === "Success") {
             setSuccess(true);
             } else {

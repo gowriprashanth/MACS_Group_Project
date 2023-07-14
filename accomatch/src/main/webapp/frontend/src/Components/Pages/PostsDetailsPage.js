@@ -5,7 +5,7 @@ import './PostsDetailsPage.css';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {useNavigate}  from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
-
+import { Link, useNavigate } from 'react-router-dom';
 export const PostsDetailsPage = () => {
 
   const navigate =useNavigate();
@@ -15,6 +15,7 @@ export const PostsDetailsPage = () => {
   const [images, setImages] = useState([]);
   const [foodPreferences, setFoodPreferences] = useState([]);
   const [genderPreferences, setGenderPreferences] = useState([]);
+<<<<<<< HEAD
   const [errMsg, setErrMsg] =useState ('');
   const [success, setSuccess] = useState(false);
   const handleApplySubmit =async () => {
@@ -23,6 +24,9 @@ export const PostsDetailsPage = () => {
         application_id:applicationId,
         status:"Pending"
     }
+=======
+  const navigate = useNavigate();
+>>>>>>> develop
 
     fetch("http://localhost:8080/api/applicant/apply", {
         method: "POST",
@@ -81,7 +85,7 @@ export const PostsDetailsPage = () => {
       try {
         const postResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/post/details/${applicationId}`);
         setPost(postResponse.data);
-
+console.log(postResponse.data)
         const imagesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/images/${applicationId}`);
         setImages(imagesResponse.data);
 
@@ -101,7 +105,9 @@ export const PostsDetailsPage = () => {
   if (!post) {
     return <div>Loading...</div>;
   }
-
+  const handleApplicantClick = (userId) => {
+    navigate(`/leaseapplicantview/${userId}`);
+  };
   return (
     <div className="details-container">
       <div className="details-title">
@@ -174,6 +180,8 @@ export const PostsDetailsPage = () => {
         (<button className="chat-button">Chat</button>)
       }
 
+      {/* Applicant button */}
+      <button onClick={() => handleApplicantClick(post.leaseholderApplicationId)}>Applicant</button>
     </div>
       
   );
