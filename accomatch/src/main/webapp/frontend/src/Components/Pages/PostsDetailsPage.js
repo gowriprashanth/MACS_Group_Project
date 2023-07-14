@@ -4,13 +4,14 @@ import { useParams } from 'react-router-dom';
 import './PostsDetailsPage.css';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
-
+import { Link, useNavigate } from 'react-router-dom';
 export const PostsDetailsPage = () => {
   const { applicationId } = useParams();
   const [post, setPost] = useState(null);
   const [images, setImages] = useState([]);
   const [foodPreferences, setFoodPreferences] = useState([]);
   const [genderPreferences, setGenderPreferences] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPostDetails = async () => {
@@ -18,7 +19,7 @@ export const PostsDetailsPage = () => {
       try {
         const postResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/post/details/${applicationId}`);
         setPost(postResponse.data);
-
+console.log(postResponse.data)
         const imagesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/images/${applicationId}`);
         setImages(imagesResponse.data);
 
@@ -38,7 +39,9 @@ export const PostsDetailsPage = () => {
   if (!post) {
     return <div>Loading...</div>;
   }
-
+  const handleApplicantClick = (userId) => {
+    navigate(`/leaseapplicantview/${userId}`);
+  };
   return (
     <div className="details-container">
       <div className="details-title">
@@ -108,6 +111,9 @@ export const PostsDetailsPage = () => {
 
       {/* Apply button */}
       <button className="apply-button">Apply</button>
+
+      {/* Applicant button */}
+      <button onClick={() => handleApplicantClick(post.leaseholderApplicationId)}>Applicant</button>
     </div>
   );
 };
