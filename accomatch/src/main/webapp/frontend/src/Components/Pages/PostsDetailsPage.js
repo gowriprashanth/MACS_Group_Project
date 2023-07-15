@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import './PostsDetailsPage.css';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import {useNavigate}  from 'react-router-dom';
+
 import { Carousel } from 'react-responsive-carousel';
 import { Link, useNavigate } from 'react-router-dom';
 export const PostsDetailsPage = () => {
