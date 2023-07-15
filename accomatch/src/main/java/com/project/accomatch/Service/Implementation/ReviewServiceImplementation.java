@@ -15,14 +15,22 @@ public class ReviewServiceImplementation implements ReviewService {
         this.reviewRepository = reviewRepository;
     }
 
-    @Override
+    /*@Override
     public Review createReview(Review review) {
         return reviewRepository.save(review);
+    }*/
+
+
+    @Override
+    public List<Review> getAllReviews(int application_id) {
+        return reviewRepository.getAllReviews(application_id);
     }
 
     @Override
-    public List<Review> getAllReviews() {
-        return reviewRepository.findAll();
+    public Review createReview(Review review){
+        Review newReview = new Review(1,2,3,"Gowri",5,"hello");
+        newReview = review;
+        return newReview;
     }
 
     // Implement other methods for retrieving, updating, deleting reviews

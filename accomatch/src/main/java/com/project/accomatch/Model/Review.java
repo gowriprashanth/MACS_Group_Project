@@ -12,10 +12,13 @@ package com.project.accomatch.Model;
 
         private String comment;
 
-        public Review(int ratingId, int userId, int applicationId,int rating, String comment) {
+        private String name;
+
+        public Review(int ratingId, int userId, int applicationId, String name, int rating, String comment) {
             this.ratingId = ratingId;
             this.userId = userId;
             this.applicationId = applicationId;
+            this.name = name;
             this.rating = rating;
             this.comment = comment;
         }
