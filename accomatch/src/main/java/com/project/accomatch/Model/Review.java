@@ -3,24 +3,35 @@ package com.project.accomatch.Model;
 
     public class Review {
 
-        private Long id;
+        private int ratingId;
 
+        private int userId;
+
+        private int applicationId;
         private int rating;
 
         private String comment;
 
-        public Review(Long id, int rating, String comment) {
-            this.id = id;
+        public Review(int ratingId, int userId, int applicationId,int rating, String comment) {
+            this.ratingId = ratingId;
+            this.userId = userId;
+            this.applicationId = applicationId;
             this.rating = rating;
             this.comment = comment;
         }
 
-        public Long getId() {
-            return id;
+        public int getRatingId() {
+            return ratingId;
+        }
+        public int getUserId() {
+            return userId;
+        }
+        public int getApplicationId() {
+            return applicationId;
         }
 
-        public void setId(Long id) {
-            this.id = id;
+        public void setUserId(int id) {
+            this.userId = userId;
         }
 
         public int getRating() {
