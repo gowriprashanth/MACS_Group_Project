@@ -13,6 +13,7 @@ import{LeaseHolderCreateApplication} from "./Components/Pages/LeaseHolderCreateA
 import { ForgetPasswordEmail } from './ForgetPasswordEmail';
 import { ForgetPassword } from './ForgetPassword';
 import{ LeaseApplicantView } from './Components/Pages/LeaseApplicantView';
+import{ ApplicantPosts } from './Components/Pages/ApplicantPosts';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -38,6 +39,7 @@ function App() {
           <Route path="/forgetpassword" element={<ForgetPasswordEmail />} />
           <Route path="/updatepassword" element={<ForgetPassword />} />
           <Route path="/leaseapplicantview/:user_Id" element={<LeaseApplicantView />} />
+          <Route path="/applicantposts/:user_Id" element={<ApplicantPosts />} />
         </Routes>
       </div>
     </Router>
