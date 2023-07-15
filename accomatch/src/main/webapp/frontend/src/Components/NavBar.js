@@ -62,6 +62,17 @@ function NavBar() {
             </li>
             <li className="nav-item">
               <NavLink
+                  exact
+                  to="/allapplicant"
+                  activeClassName="active"
+                  className="nav-links"
+                  onClick={handleClick}
+              >
+                All Applicants
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
                 exact
                 to="/create"
                 activeClassName="active"

@@ -5,10 +5,10 @@ import java.util.Date;
 
 public class HouseSeekerModel {
     private int user_id, housekeeper_application_Id;
-    private String location_city,room_type,other_preferences;
+    private String location_city,room_type,other_preferences,name;
     private Date start_date, created_At, updated_At;
 
-    public HouseSeekerModel(int user_id, String location_city, String room_type, String other_preferences, Date start_date, ArrayList<String> food_preferences, ArrayList<String> gender_preferences) {
+    public HouseSeekerModel(int user_id, String location_city, String room_type, String other_preferences, Date start_date, ArrayList<String> food_preferences, ArrayList<String> gender_preferences, String name) {
         this.user_id = user_id;
         this.location_city = location_city;
         this.room_type = room_type;
@@ -16,6 +16,7 @@ public class HouseSeekerModel {
         this.start_date = start_date;
         this.food_preferences = food_preferences;
         this.gender_preferences = gender_preferences;
+        this.name = name;
     }
 
     private ArrayList<String> food_preferences,gender_preferences;
