@@ -32,9 +32,16 @@ package com.project.accomatch.Model;
         public int getApplicationId() {
             return applicationId;
         }
+        public String getName() {
+            return name;
+        }
 
         public void setUserId(int id) {
             this.userId = userId;
+        }
+
+        public void setUserName(String name) {
+            this.name = name;
         }
 
         public int getRating() {
