@@ -192,9 +192,10 @@ export const PostsDetailsPage = () => {
             <div >
 
                         {reviewResponse.map((review, index) => (
+
                             <div className="preferences-section" key={index}>
+                                    <p> </p>
                                     <p>@{review.name}</p>
-                                    <p></p>
                                     <p>Rating: {review.rating}</p>
                                     <p>Comment: {review.comment}</p>
                                 </div>
