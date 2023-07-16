@@ -3,35 +3,39 @@ package com.project.accomatch.Service.Implementation;
 import com.project.accomatch.Model.Review;
 import com.project.accomatch.Repository.ReviewRepository;
 import com.project.accomatch.Service.ReviewService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ReviewServiceImplementation implements ReviewService {
-    private final ReviewRepository reviewRepository;
+    @Autowired
+    ReviewRepository reviewRepository;
 
-    public ReviewServiceImplementation(ReviewRepository reviewRepository) {
-        this.reviewRepository = reviewRepository;
+    @Value("${username.db.accomatch}")
+    private String username;
+
+    @Value("${password.db.accomatch}")
+    private String password;
+
+    @Value("${Connection.db.accomatch}")
+    private String JDBC;
+
+    @Override
+    public void createReview(Review review) {
+        try {
+            reviewRepository.createReview(review);
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
-
-    /*@Override
-    public Review createReview(Review review) {
-        return reviewRepository.save(review);
-    }*/
-
 
     @Override
     public List<Review> getAllReviews(int application_id) {
         return reviewRepository.getAllReviews(application_id);
     }
 
-    @Override
-    public Review createReview(Review review){
-        Review newReview = new Review(1,2,3,"Gowri",5,"hello");
-        newReview = review;
-        return newReview;
-    }
 
-    // Implement other methods for retrieving, updating, deleting reviews
 }

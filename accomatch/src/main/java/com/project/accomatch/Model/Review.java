@@ -34,7 +34,7 @@ package com.project.accomatch.Model;
         }
 
         public void setUserId(int id) {
-            this.userId = userId;
+            this.userId = id;
         }
 
         public int getRating() {
