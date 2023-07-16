@@ -15,6 +15,7 @@ export const PostsDetailsPage = () => {
   const [images, setImages] = useState([]);
   const [foodPreferences, setFoodPreferences] = useState([]);
   const [genderPreferences, setGenderPreferences] = useState([]);
+  const [reviewResponse, setReviewResponse] = useState([]);
   const [errMsg, setErrMsg] =useState ('');
   const [success, setSuccess] = useState(false);
   const handleApplySubmit =async () => {
@@ -81,7 +82,7 @@ export const PostsDetailsPage = () => {
       try {
         const postResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/post/details/${applicationId}`);
         setPost(postResponse.data);
-console.log(postResponse.data)
+        console.log(postResponse.data)
         const imagesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/images/${applicationId}`);
         setImages(imagesResponse.data);
 
@@ -90,6 +91,12 @@ console.log(postResponse.data)
 
         const genderPreferencesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/gender/${applicationId}`);
         setGenderPreferences(genderPreferencesResponse.data);
+
+
+        const response = await axios.get(`http://localhost:8080/reviews/getListOfAllRatings/${applicationId}`);
+        setReviewResponse(response.data);
+        console.log(response.data)
+
       } catch (error) {
         console.log(error);
       }
@@ -178,7 +185,25 @@ console.log(postResponse.data)
 
       {/* Applicant button */}
       <button onClick={() => handleApplicantClick(post.leaseholderApplicationId)}>Applicant</button>
+
+        <div >
+            <h3>Reviews and Ratings</h3>
+
+            <div >
+
+                        {reviewResponse.map((review, index) => (
+
+                            <div className="preferences-section" key={index}>
+                                    <p> </p>
+                                    <p>@{review.name}</p>
+                                    <p>Rating: {review.rating}</p>
+                                    <p>Comment: {review.comment}</p>
+                                </div>
+                        ))}
+            </div>
+        </div>
+
     </div>
-      
+
   );
 };
