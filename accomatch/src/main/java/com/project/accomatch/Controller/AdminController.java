@@ -13,16 +13,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
+import java.util.HashMap;
 import java.util.List;
 
-@CrossOrigin("http://localhost:3000")
+
 @RestController
+@CrossOrigin("http://localhost:3000")
 @RequestMapping("/admin")
 public class AdminController {
 
 
     @Autowired
     AdminInterface adminInterface;
+
+    @Autowired
+    private LeaseHolderDashboardService dashboardService;
 
     @PostMapping("/admin/verifyone")
     public String verifySingleAd(@RequestBody Posts posts){
@@ -33,8 +38,7 @@ public class AdminController {
     public String verifyAllAd(@RequestBody Posts posts){
         return adminInterface.VerifyAllAd(posts);
     }
-    @Autowired
-    private LeaseHolderDashboardService dashboardService;
+
 
     /**
      * Retrieves the list of posts for Admin.
@@ -51,10 +55,10 @@ public class AdminController {
      * @author Ramandeep kaur
      * @return The list of posts.
      */
-    @GetMapping("/get/list/post/{status}")
-    public List<Posts> getListOfPostsByStatus(int status)
+    @PostMapping("/get/list/postbystatus")
+    public List<Posts> getListOfPostsByStatus(@RequestBody HashMap<String, String> map)
     {
-        return dashboardService.getListOfPostsByStatus(status);
+        return dashboardService.getListOfPostsByStatus(Integer.parseInt(map.get("status")));
     }
 
 }
