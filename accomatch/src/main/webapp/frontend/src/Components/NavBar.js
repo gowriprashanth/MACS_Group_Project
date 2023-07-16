@@ -82,6 +82,17 @@ function NavBar() {
                 Create for houseseeker
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/postsbystatus"
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleClick}
+              >
+                Admin portal
+              </NavLink>
+            </li>
           </ul>
           <div className="nav-icon" onClick={handleClick}>
             <i className={click ? "fas fa-times" : "fas fa-bars"}></i>

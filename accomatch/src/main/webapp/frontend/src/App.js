@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './Components/NavBar';
 import { Home } from './Components/Pages/Home';
 import { Posts } from './Components/Pages/Posts';
+import { PostsByStatus } from './Components/Pages/PostsByStatus';
 import { PostsDetailsPage } from './Components/Pages/PostsDetailsPage';
 import { Applicants } from './Components/Pages/Applicants';
 import { Contact } from './Components/Pages/Contact';
@@ -30,6 +31,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/posts" element={<Posts />} />
           <Route path="/posts/:applicationId" element={<PostsDetailsPage />} />
+          <Route path="/postsbystatus" element ={<PostsByStatus/>}/>
           <Route path="/applicants" element={<Applicants />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/create" element={<LeaseHolderCreateApplication/>}/>
