@@ -18,6 +18,10 @@ public class ApplicantPostFiltering {
 
     @PostMapping("/posts/filter")
     public List<Posts> signUp(@RequestBody Map<String, String> jsonMap){
-        return applicantPostFilterService.filterPost(jsonMap);
+        String[] gender_pref = jsonMap.get("gender_pref").split(",");
+        String[] food_pref = jsonMap.get("food_pref").split(",");
+        String age = jsonMap.get("age");
+        String room_type = jsonMap.get("room_type");
+        return applicantPostFilterService.filterPost(gender_pref, food_pref, age, room_type);
     }
 }

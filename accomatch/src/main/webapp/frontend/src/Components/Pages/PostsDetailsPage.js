@@ -3,22 +3,85 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import './PostsDetailsPage.css';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from 'react-responsive-carousel';
 
+import { Carousel } from 'react-responsive-carousel';
+import { Link, useNavigate } from 'react-router-dom';
 export const PostsDetailsPage = () => {
+
+  const navigate =useNavigate();
   const { applicationId } = useParams();
+  const [alreadyApplied,setAlreadyApplied] = useState(false);
   const [post, setPost] = useState(null);
   const [images, setImages] = useState([]);
   const [foodPreferences, setFoodPreferences] = useState([]);
   const [genderPreferences, setGenderPreferences] = useState([]);
+  const [errMsg, setErrMsg] =useState ('');
+  const [success, setSuccess] = useState(false);
+  const handleApplySubmit =async () => {
+    let bodyObj = {
+        user_id:4,
+        application_id:applicationId,
+        status:"Pending"
+    }
 
+    fetch("http://localhost:8080/api/applicant/apply", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bodyObj),
+    })
+    .then((response) => {
+        console.log(response);
+        if(response.status===200){
+            navigate("/posts");
+        }
+        return response.text(); // Read the response data as text
+    })
+    .then((data) => {
+        console.log(data); // Log the response data
+        if (data === "success") {
+        setSuccess(true);
+        } else {
+        setErrMsg("Login failed. Please try again."); // Set an appropriate error message
+        }
+    })
+    .catch((error) => {
+        setErrMsg("An error occurred. Please try again."); // Set an appropriate error message
+    });
+    }
   useEffect(() => {
+    const isUserAlreadyApplied = async ()=>{
+      let bodyObj = {
+        user_id:4,
+        application_id:applicationId
+    }
+
+    fetch("http://localhost:8080/api/applicant/isApplied", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bodyObj),
+    })
+    .then((response) => {
+        console.log(response);
+        return response.text(); // Read the response data as text
+    })
+    .then((data) => {
+        console.log(data); // Log the response data
+        if (data === "success") {
+        setSuccess(true);
+        } else {
+        setErrMsg("Login failed. Please try again."); // Set an appropriate error message
+        }
+    })
+    .catch((error) => {
+        setErrMsg("An error occurred. Please try again."); // Set an appropriate error message
+    });
+    }
     const fetchPostDetails = async () => {
       console.log(applicationId);
       try {
         const postResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/post/details/${applicationId}`);
         setPost(postResponse.data);
-
+console.log(postResponse.data)
         const imagesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/images/${applicationId}`);
         setImages(imagesResponse.data);
 
@@ -38,7 +101,9 @@ export const PostsDetailsPage = () => {
   if (!post) {
     return <div>Loading...</div>;
   }
-
+  const handleApplicantClick = (userId) => {
+    navigate(`/leaseapplicantview/${userId}`);
+  };
   return (
     <div className="details-container">
       <div className="details-title">
@@ -105,9 +170,15 @@ export const PostsDetailsPage = () => {
           ))}
         </div>
       </div>
-
+      {alreadyApplied ?
       {/* Apply button */}
-      <button className="apply-button">Apply</button>
+        (<button className="apply-button" onClick={()=>handleApplySubmit()}>Apply</button>) : 
+        (<button className="chat-button">Chat</button>)
+      }
+
+      {/* Applicant button */}
+      <button onClick={() => handleApplicantClick(post.leaseholderApplicationId)}>Applicant</button>
     </div>
+      
   );
 };

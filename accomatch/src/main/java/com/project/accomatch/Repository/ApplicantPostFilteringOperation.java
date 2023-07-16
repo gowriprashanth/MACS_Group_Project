@@ -20,74 +20,52 @@ public class ApplicantPostFilteringOperation {
     @Value("${Connection.db.accomatch}")
     private String JDBC;
 
-    public List<Posts> filterPosts(Map<String, String> jsonMap) {
+    public List<Posts> filterPosts(String[] gp, String[] fp, String age, String rt) {
         List<Posts> listOfFilteredPosts = new ArrayList<>();
 
             try (Connection connect = DriverManager.getConnection(JDBC, username, password);
                     Statement statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)){
-                String query = "SELECT leaseholder_ads.* " +
-                        "       FROM leaseholder_ads " +
-                        "       JOIN leaseholder_gender_preferences ON leaseholder_ads.leaseholder_application_id = leaseholder_gender_preferences.application_id " +
-                        "       JOIN leaseholder_food_preferences ON leaseholder_ads.leaseholder_application_id = leaseholder_food_preferences.application_id " +
-                        "       WHERE gender_pref = ? AND food_pref = ?  " +
-                        "       AND (? = '' OR ? >= start_age) " +
-                        "       AND (? = '' OR ? <= end_age)";
+                                String defaultValue = "SELECT distinct leaseholder_ads.* " +
+                        "FROM leaseholder_ads " +
+                        "JOIN leaseholder_gender_preferences ON leaseholder_ads.leaseholder_application_id = leaseholder_gender_preferences.application_id " +
+                        "JOIN leaseholder_food_preferences ON leaseholder_ads.leaseholder_application_id = leaseholder_food_preferences.application_id where " +
+                                        "(" + "room_type = '"+ rt +"' or room_type IS NULL)"+ " and (" +
+                                        age +" >= start_age AND "+age+" <= end_age) and (gender_pref = ";
 
-                PreparedStatement Pstatement = connect.prepareStatement(query);
-                String preferedGender = null;
-                String preferedFood = null;
-                if(Objects.equals(jsonMap.get("Male"), "1") && Objects.equals(jsonMap.get("Female"), "0")){
-                    preferedGender = "Male";
-                }
-                else if(Objects.equals(jsonMap.get("Male"), "0") && Objects.equals(jsonMap.get("Female"), "1")){
-                    preferedGender = "Female";
-                }
-                else if(Objects.equals(jsonMap.get("Male"), "0") && Objects.equals(jsonMap.get("Female"), "0")){
-                    preferedGender = "none";
-                }
-                else if(Objects.equals(jsonMap.get("Male"), null) && Objects.equals(jsonMap.get("Female"), null)){
-                    preferedGender = "none";
-                }
+                StringBuilder stringBuilder = new StringBuilder(defaultValue);
 
-                String ageString = jsonMap.get("age");
-                int age = 0;
-
-                if (!ageString.isEmpty()) {
-                    try {
-                        age = Integer.parseInt(ageString);
-                    } catch (NumberFormatException e) {
-                        ageString="";
+                if (!Objects.equals(gp[0], "")) {
+                    for (String element : gp) {
+                        stringBuilder.append("'").append(element).append("'").append(" OR ").append(" gender_pref = ");
                     }
+                    // Remove the last " OR" from the StringBuilder
+                    stringBuilder.delete(stringBuilder.length() - 18, stringBuilder.length());
+                    stringBuilder.append(")");
                 }
+                else{
+                    stringBuilder.delete(stringBuilder.length() - 19, stringBuilder.length());
+                }
+                    stringBuilder.append(" and (food_pref = ");
 
-                if(Objects.equals(jsonMap.get("Veg"), "1") && Objects.equals(jsonMap.get("NonVeg"), "0")){
-                    preferedFood = "Veg";
-                }
-                else if(Objects.equals(jsonMap.get("Veg"), "0") && Objects.equals(jsonMap.get("NonVeg"), "1")){
-                    preferedFood = "NonVeg";
-                }
-                else if(Objects.equals(jsonMap.get("Veg"), "0") && Objects.equals(jsonMap.get("NonVeg"), "0")){
-                    preferedFood = "none";
-                }
-                else if(Objects.equals(jsonMap.get("Veg"), null) && Objects.equals(jsonMap.get("NonVeg"), null)){
-                    preferedFood = "none";
-                }
 
-                Pstatement.setString(1, preferedGender);
-                Pstatement.setString(2, preferedFood);
-                if(ageString.isEmpty()){
-                    Pstatement.setString(3, ageString);
-                    Pstatement.setString(4, ageString);
-                    Pstatement.setString(5, ageString);
-                    Pstatement.setString(6, ageString);
-                }else{
-                    Pstatement.setInt(3, age);
-                    Pstatement.setInt(4, age);
-                    Pstatement.setInt(5, age);
-                    Pstatement.setInt(6, age);
+                if (!Objects.equals(fp[0], "")) {
+                    for (String element : fp) {
+                        stringBuilder.append("'").append(element).append("'").append(" OR ").append(" food_pref = ");
+                    }
+                    // Remove the last " OR" from the StringBuilder
+                    stringBuilder.delete(stringBuilder.length() - 16, stringBuilder.length());
+                    stringBuilder.append(");");
+                }
+                else{
+                    stringBuilder.delete(stringBuilder.length() - 17, stringBuilder.length());
+                    stringBuilder.append(";");
                 }
 
 
+                String finalString = stringBuilder.toString();
+                System.out.println(finalString);
+
+                PreparedStatement Pstatement = connect.prepareStatement(finalString);
                 ResultSet resultSet = Pstatement.executeQuery();
 
                 while(resultSet.next()){

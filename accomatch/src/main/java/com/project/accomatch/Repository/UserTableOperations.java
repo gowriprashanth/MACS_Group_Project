@@ -83,7 +83,7 @@ public class UserTableOperations {
                 returnMap.put("User_id", rs.getString("user_id"));
                 returnMap.put("Name", rs.getString("name"));
                 int admin = rs.getInt("is_admin");
-                int leaseHolder = rs.getInt("is_holder");
+                int leaseHolder = rs.getInt("is_leaseholder");
                 if(admin == 0 && leaseHolder == 0){
                     returnMap.put("type", "AP");
                 }

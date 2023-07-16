@@ -103,8 +103,9 @@ public class LeaseholderAdsDao {
 
         return post;
     }
-    public Posts getListOfPersonalPosts(int user_id){
-        Posts post = null;
+    public List<Posts> getListOfPersonalPosts(int user_id){
+        List<Posts> listOfPosts = new ArrayList<>();
+
 
         try (Connection connection = DriverManager.getConnection(JDBC, username, password);
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM leaseholder_ads WHERE user_id = ?")) {
@@ -131,9 +132,10 @@ public class LeaseholderAdsDao {
                     Date createdAt = resultSet.getTimestamp("createdAt");
                     Date updatedAt = resultSet.getTimestamp("updatedAt");
 
-                    post = new Posts(leaseholderApplicationId, userId, title, subtitle, address, locationCity, size,
+                    Posts post = new Posts(leaseholderApplicationId, userId, title, subtitle, address, locationCity, size,
                             roomType, document, rent, otherPreferences, startDate, startAge, endAge, isVerified,
                             createdAt, updatedAt);
+                    listOfPosts.add(post);
                 }
             }
 
@@ -142,7 +144,7 @@ public class LeaseholderAdsDao {
             // Handle exception
         }
 
-        return post;
+        return listOfPosts;
     }
 
     /***

@@ -4,7 +4,7 @@ import "./NavBar.css";
 
 function NavBar() {
   const [click, setClick] = useState(false);
-
+  let userid=sessionStorage.getItem('user_id');
   const handleClick = () => setClick(!click);
   return (
     <>
@@ -30,7 +30,7 @@ function NavBar() {
             <li className="nav-item">
               <NavLink
                 exact
-                to="/home"
+                to={"/applicantposts/"+userid}
                 activeClassName="active"
                 className="nav-links"
                 onClick={handleClick}
@@ -52,12 +52,23 @@ function NavBar() {
             <li className="nav-item">
               <NavLink
                 exact
-                to="/contact"
+                to={"/personalposts/"+userid}
                 activeClassName="active"
                 className="nav-links"
                 onClick={handleClick}
               >
-                Activity
+                Personal Posts
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                  exact
+                  to="/allapplicant"
+                  activeClassName="active"
+                  className="nav-links"
+                  onClick={handleClick}
+              >
+                All Applicants
               </NavLink>
             </li>
             <li className="nav-item">

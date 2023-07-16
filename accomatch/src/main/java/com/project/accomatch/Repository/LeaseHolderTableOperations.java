@@ -61,4 +61,28 @@ public class LeaseHolderTableOperations {
             throw new RuntimeException(e);
         }
     }
+    public int getLeaseHolderId(int applicationId){
+        try{
+            Connection connect;
+            Statement statement;
+            // Connect to the database.
+            //getCredentials();
+            connect = DriverManager.getConnection(JDBC, username, password);
+            // Create a statement object.
+            statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            String sql = "SELECT user_id from leaseholder_ads where leaseholder_application_id= ?";
+            PreparedStatement stmt = connect.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            stmt.setInt(1,applicationId);
+            ResultSet rs= stmt.executeQuery();
+            int key=0;
+            if(rs.next()){
+                key=rs.getInt(1);
+            }
+            stmt.close();
+            connect.close();
+            return key;
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
 }
