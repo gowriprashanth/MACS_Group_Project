@@ -21,9 +21,9 @@ public class ReviewController {
          reviewService.createReview(review);
     }
 
-    @GetMapping
+    /*@GetMapping
     public List<Review> getAllReviews() {
         return reviewService.getAllReviews();
-    }
+    }*/
 
 }

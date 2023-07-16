@@ -7,6 +7,6 @@ import java.util.List;
 public interface ReviewService {
     void createReview(Review review);
 
-    List<Review> getAllReviews();
+    List<Review> getAllReviews(int application_id);
     // Other methods for retrieving, updating, deleting reviews
 }

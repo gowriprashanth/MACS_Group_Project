@@ -73,6 +73,17 @@ function NavBar() {
             </li>
             <li className="nav-item">
               <NavLink
+                  exact
+                  to="/rating"
+                  activeClassName="active"
+                  className="nav-links"
+                  onClick={handleClick}
+              >
+                Ratings
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
                 exact
                 to="/create"
                 activeClassName="active"

@@ -33,8 +33,9 @@ public class ReviewServiceImplementation implements ReviewService {
     }
 
     @Override
-    public List<Review> getAllReviews() {
-        return null;
+    public List<Review> getAllReviews(int application_id) {
+        return reviewRepository.getAllReviews(application_id);
     }
+
 
 }
