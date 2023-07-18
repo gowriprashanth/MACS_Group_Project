@@ -1,5 +1,6 @@
 package com.project.accomatch.Repository;
 
+import com.project.accomatch.Exception.DataAccessException;
 import com.project.accomatch.Model.Posts;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
@@ -21,7 +22,7 @@ public class LeaseholderAdsDao {
     @Value("${Connection.db.accomatch}")
     private String JDBC;
 
-    public List<Posts> getListOfPosts() {
+    public List<Posts> getListOfPosts() throws SQLException {
         List<Posts> listOfPosts = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection(JDBC, username, password);
@@ -56,7 +57,7 @@ public class LeaseholderAdsDao {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle exception
+            throw e;
         }
 
         return listOfPosts;
@@ -188,6 +189,8 @@ public class LeaseholderAdsDao {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new DataAccessException("Failed to retrieve the list of posts.", e);
+
         }
 
         return listOfPosts;
