@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -46,6 +48,10 @@ export const PostsDetailsPage = () => {
         }
     })
     .catch((error) => {
+      console.error(error);
+      toast.error('An error occurred while loading posts. Please try again.', {
+        position: toast.POSITION.TOP_RIGHT
+      });
         setErrMsg("An error occurred. Please try again."); // Set an appropriate error message
     });
     }
