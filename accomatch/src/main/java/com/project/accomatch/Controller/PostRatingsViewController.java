@@ -1,10 +1,12 @@
 package com.project.accomatch.Controller;
+import com.project.accomatch.Model.Ratings;
 import com.project.accomatch.Exception.InvalidInputException;
 import com.project.accomatch.Model.Review;
 import com.project.accomatch.Service.Implementation.ReviewServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,5 +21,13 @@ public class PostRatingsViewController {
             throw new InvalidInputException("Invalid application ID provided.");
         }
         return reviewServiceImplementation.getAllReviews(application_id);
+    }
+    @GetMapping("/getAverageRatings/{application_id}")
+    public List<Ratings> getAverageRatings(@PathVariable int application_id){
+        return reviewServiceImplementation.getRatingsAverage(application_id);
+        /*Ratings ratings = reviewServiceImplementation.getRatingsAverage(application_id);
+        List<Ratings> listOfReviews = new ArrayList<>();
+        listOfReviews.add(ratings);
+        return  listOfReviews;*/
     }
 }
