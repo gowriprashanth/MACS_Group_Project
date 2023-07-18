@@ -35,7 +35,12 @@ public class UserController {
         return "Login Successful";
     }
 
-    @PostMapping("/forgotpassword")
+    @GetMapping("/get/{id}")
+    public UserModel getUserInformation(@PathVariable int id){
+        return userservice.getUserInfo(id);
+    }
+
+    @PostMapping("/forgot/password")
     public String forgotPassword(@RequestBody UserModel model){
         try {
             System.out.println(model.getEmail());
@@ -57,12 +62,10 @@ public class UserController {
         }
     }
 
-    @PostMapping("/updatepassword")
+    @PostMapping("/update/password")
     public String updatePassword(@RequestBody UserModel model){
         try {
             model.setEmail(HasherClass.unHashEmail(model.getEmail()));
-            System.out.println(model.getEmail());
-            System.out.println("Unhashed");
             return userservice.ForgotPassword(model);
         }catch(Exception e){
             return e.getMessage();

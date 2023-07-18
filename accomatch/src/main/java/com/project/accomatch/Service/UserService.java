@@ -14,4 +14,6 @@ public interface UserService {
 
         String CheckEmailID(String mailID);
 
+        UserModel getUserInfo(int id);
+
 }
