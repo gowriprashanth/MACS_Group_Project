@@ -24,7 +24,7 @@ public class LeaseHolderDashboardService {
     LeaseHolderGenderTableOperations leaseHolderGenderTableOperations;
     @Autowired
     LeaseHolderImagesTableOperations leaseHolderImagesTableOperations;
-    public List<Posts> getListOfPosts() throws DataAccessException {
+    public List<Posts> getListOfPosts() {
         try {
             return leaseholderAdsDao.getListOfPosts();
         } catch (SQLException e) {

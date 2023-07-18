@@ -48,7 +48,7 @@ public class AdminController {
      * @return The list of posts.
      */
     @GetMapping("/get/list/post")
-    public List<Posts> getListOfPosts() throws SQLException {
+    public List<Posts> getListOfPosts()  {
         return dashboardService.getListOfPosts();
     }
 
