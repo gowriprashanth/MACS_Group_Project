@@ -104,7 +104,10 @@ export const PostsDetailsPage = () => {
         console.log(response.data)
 
       } catch (error) {
-        console.log(error);
+        console.log(error.response.data);
+        toast.error(error.response.data.message, {
+          position: toast.POSITION.TOP_RIGHT
+        });
       }
     };
 

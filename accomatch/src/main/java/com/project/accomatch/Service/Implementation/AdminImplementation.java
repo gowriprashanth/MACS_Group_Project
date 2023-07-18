@@ -20,4 +20,5 @@ public class AdminImplementation implements AdminInterface {
     public String VerifyAllAd(Posts posts) {
         return adminRepository.AllAd(posts);
     }
+
 }
