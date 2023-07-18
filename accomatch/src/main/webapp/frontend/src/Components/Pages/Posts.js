@@ -1,7 +1,11 @@
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import './Posts.css';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
+
+
 
 export const Posts = () => {
   const [posts, setPosts] = useState([]);
@@ -31,6 +35,9 @@ export const Posts = () => {
       setPosts(response.data);
     } catch (error) {
       console.error(error);
+      toast.error('An error occurred while loading posts. Please try again.', {
+        position: toast.POSITION.TOP_RIGHT
+      });
     }
   }
 
@@ -205,6 +212,7 @@ export const Posts = () => {
           </div>
         </div>
       )}
+          
     </div>
   );
 };

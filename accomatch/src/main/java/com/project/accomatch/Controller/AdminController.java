@@ -1,5 +1,6 @@
 package com.project.accomatch.Controller;
 
+import com.project.accomatch.Exception.InvalidPostStatusException;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Service.AdminInterface;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -46,7 +48,7 @@ public class AdminController {
      * @return The list of posts.
      */
     @GetMapping("/get/list/post")
-    public List<Posts> getListOfPosts() {
+    public List<Posts> getListOfPosts() throws SQLException {
         return dashboardService.getListOfPosts();
     }
 
@@ -56,9 +58,14 @@ public class AdminController {
      * @return The list of posts.
      */
     @PostMapping("/get/list/postbystatus")
-    public List<Posts> getListOfPostsByStatus(@RequestBody HashMap<String, String> map)
-    {
-        return dashboardService.getListOfPostsByStatus(Integer.parseInt(map.get("status")));
+    public List<Posts> getListOfPostsByStatus(@RequestBody HashMap<String, String> map) {
+        int status;
+        try {
+            status = Integer.parseInt(map.get("status"));
+        } catch (NumberFormatException e) {
+            throw new InvalidPostStatusException("Invalid post status value");
+        }
+        return dashboardService.getListOfPostsByStatus(status);
     }
 
 }

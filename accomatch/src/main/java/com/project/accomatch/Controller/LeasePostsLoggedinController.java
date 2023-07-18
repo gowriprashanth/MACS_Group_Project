@@ -1,4 +1,5 @@
 package com.project.accomatch.Controller;
+import com.project.accomatch.Exception.InvalidInputException;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Service.Implementation.LeasePostLoggedinService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,9 @@ public class LeasePostsLoggedinController {
     private LeasePostLoggedinService applicantService;
     @GetMapping("/get/list/applicant/{user_id}")
     public List<Posts> getListOfLoggedinPosts(@PathVariable int user_id) {
+        if (user_id <= 0) {
+            throw new InvalidInputException("Invalid application ID provided.");
+        }
         return applicantService.getListOfLoggedinApplicants(user_id);
     }
 

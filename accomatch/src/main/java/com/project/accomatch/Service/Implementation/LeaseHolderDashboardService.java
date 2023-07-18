@@ -1,5 +1,6 @@
 package com.project.accomatch.Service.Implementation;
 
+import com.project.accomatch.Exception.DataAccessException;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Repository.LeaseHolderFoodTableOperations;
 import com.project.accomatch.Repository.LeaseHolderGenderTableOperations;
@@ -8,6 +9,7 @@ import com.project.accomatch.Repository.LeaseholderAdsDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -22,9 +24,14 @@ public class LeaseHolderDashboardService {
     LeaseHolderGenderTableOperations leaseHolderGenderTableOperations;
     @Autowired
     LeaseHolderImagesTableOperations leaseHolderImagesTableOperations;
-    public List<Posts> getListOfPosts() {
-        return leaseholderAdsDao.getListOfPosts();
+    public List<Posts> getListOfPosts() throws DataAccessException {
+        try {
+            return leaseholderAdsDao.getListOfPosts();
+        } catch (SQLException e) {
+            throw new DataAccessException("Failed to retrieve the list of posts.", e);
+        }
     }
+
 
     public List<Posts> getListOfPostsByStatus(int status) {
         return leaseholderAdsDao.getListOfPostsByStatus( status);
