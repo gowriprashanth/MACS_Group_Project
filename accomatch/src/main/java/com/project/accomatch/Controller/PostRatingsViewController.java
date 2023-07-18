@@ -25,9 +25,15 @@ public class PostRatingsViewController {
     @GetMapping("/getAverageRatings/{application_id}")
     public List<Ratings> getAverageRatings(@PathVariable int application_id){
         return reviewServiceImplementation.getRatingsAverage(application_id);
-        /*Ratings ratings = reviewServiceImplementation.getRatingsAverage(application_id);
-        List<Ratings> listOfReviews = new ArrayList<>();
-        listOfReviews.add(ratings);
-        return  listOfReviews;*/
+    }
+
+    @GetMapping("/getAllPostReviews")
+    public List<Review> getAllPostReviews(){
+        return reviewServiceImplementation.getAllPostReviews();
+    }
+
+    @GetMapping("/getAllAverageRatings")
+    public List<Ratings> getAllAverageRatings(){
+        return reviewServiceImplementation.getAllRatingsAverage();
     }
 }

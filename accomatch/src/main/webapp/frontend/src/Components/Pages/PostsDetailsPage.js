@@ -14,6 +14,7 @@ export const PostsDetailsPage = () => {
   const { applicationId } = useParams();
   const [alreadyApplied,setAlreadyApplied] = useState(false);
   const [post, setPost] = useState(null);
+  const [ratings,setRatings] = useState([]);
   const [images, setImages] = useState([]);
   const [foodPreferences, setFoodPreferences] = useState([]);
   const [genderPreferences, setGenderPreferences] = useState([]);
@@ -101,7 +102,11 @@ export const PostsDetailsPage = () => {
 
         const response = await axios.get(`http://localhost:8080/reviews/getListOfAllRatings/${applicationId}`);
         setReviewResponse(response.data);
-        console.log(response.data)
+        console.log(response.data);
+
+          const ratingResponse = await axios.get(`http://localhost:8080/reviews/getAverageRatings/${applicationId}`);
+          setRatings(ratingResponse.data);
+          console.log(ratingResponse.data);
 
       } catch (error) {
         console.log(error.response.data);
@@ -197,6 +202,15 @@ export const PostsDetailsPage = () => {
 
         <div >
             <h3>Reviews and Ratings</h3>
+            <div className="preferences-section">
+                {ratings.map((rate, index) => (
+                    <div className="preferences-section" key={index}>
+                        <div className="preferences-section">
+                            <h3>Average rating: {rate.averageRating}</h3>
+                        </div>
+                    </div>
+                ))}
+            </div>
 
             <div >
 
@@ -211,6 +225,8 @@ export const PostsDetailsPage = () => {
                         ))}
             </div>
         </div>
+
+
 
     </div>
 
