@@ -21,7 +21,7 @@ export function ForgetPassword() {
             Swal.fire("Please Retype the Password correctly")
         }
 
-        axios.post("http://localhost:8080/users/updatepassword",payload)
+        axios.post("http://localhost:8080/users/update/password",payload)
             .then((resp)=>{
                 if(resp.data==="Success"){
                     Swal.fire("Password has been Reset")
@@ -30,6 +30,10 @@ export function ForgetPassword() {
                     Swal.fire("Error Occured")
                 }
             })
+            .catch((error) => {
+                console.log(error);
+                Swal.fire("Please Retype the Password correctly");
+              });
     };
 
 
@@ -42,9 +46,6 @@ export function ForgetPassword() {
             <Card className="text-center">
                 <Card.Body>
                     <Card.Title>Confirm Your Password</Card.Title>
-                    <Card.Text>
-                        Please enter your registered Email ID
-                    </Card.Text>
                     <input type={Text} id="New" placeholder="new Password" />
                     <br/>
                     <br/>

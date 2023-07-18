@@ -176,4 +176,44 @@ public class UserTableOperations {
         }
 
     }
+
+    public UserModel getUserInfo(int id){
+
+        try{
+            Connection connect;
+            Statement statement;
+            ResultSet rs;
+            // Connect to the database.
+            connect = DriverManager.getConnection(JDBC, username, password);
+            // Create a statement object.
+            statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            //statement.execute("use accomatch;");
+            rs = statement.executeQuery("SELECT user_id, email, `name`, password, age, gender, mobile, address, is_admin, is_leaseholder, createdAt, updatedAt FROM user " +
+                    "where user_id = '"+id+"';");
+            UserModel userModel = new UserModel();
+            if(rs.next()){
+                userModel.setUserID(rs.getInt(1));
+                userModel.setEmail(rs.getString(2));
+                userModel.setName(rs.getString(3));
+                userModel.setPassword(rs.getString(4));
+                userModel.setAge(rs.getInt(5));
+                userModel.setGender(rs.getString(6));
+                userModel.setMobile(rs.getString(7));
+                userModel.setAddress(rs.getString(8));
+                userModel.setIs_admin(rs.getInt(9));
+                userModel.setIs_leaseholder(rs.getInt(10));
+            }
+            else{
+                statement.close();
+                connect.close();
+                return new UserModel();
+            }
+            statement.close();
+            connect.close();
+            return userModel;
+        }catch(Exception e){
+            return new UserModel();
+        }
+    }
 }

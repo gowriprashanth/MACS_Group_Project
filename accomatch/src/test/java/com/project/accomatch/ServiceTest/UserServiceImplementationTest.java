@@ -9,6 +9,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -60,14 +63,16 @@ class UserServiceImplementationTest {
         // Create a sample UserModel
         UserModel userModel = new UserModel();
         // Set up any necessary mocks
-        when(userTableOperations.LoginUser(userModel)).thenReturn("Login Successful");
+        Map<String, String> returnMap = new HashMap<>();
+        returnMap.put("Status", "Success");
+        when(userTableOperations.LoginUser(userModel)).thenReturn(returnMap);
 
         // Call the method under test
-        String result = userService.Login(userModel);
+        Map<String,String> result = userService.Login(userModel);
 
         // Verify the expected behavior
         verify(userTableOperations, times(1)).LoginUser(userModel);
-        assertEquals("Login Successful", result);
+        assertEquals("Success", result.get("Status"));
 
     }
 
@@ -76,14 +81,16 @@ class UserServiceImplementationTest {
         // Create a sample UserModel
         UserModel userModel = new UserModel();
         // Set up any necessary mocks
-        when(userTableOperations.LoginUser(userModel)).thenReturn("Error occurred");
+        Map<String, String> returnMap = new HashMap<>();
+        returnMap.put("Status", "Failure");
+        when(userTableOperations.LoginUser(userModel)).thenReturn(returnMap);
 
         // Call the method under test
-        String result = userService.Login(userModel);
+        Map<String,String> result = userService.Login(userModel);
 
         // Verify the expected behavior
         verify(userTableOperations, times(1)).LoginUser(userModel);
-        assertEquals("Error occurred", result);
+        assertEquals("Failure", result.get("Status"));
     }
 
     @Test

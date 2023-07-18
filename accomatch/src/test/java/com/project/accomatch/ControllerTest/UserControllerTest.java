@@ -10,6 +10,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -20,6 +23,7 @@ public class UserControllerTest {
     UserService userService;
     @Mock
     MailSenderClass mailSenderClass;
+
 
     @InjectMocks
     UserController usercontroller;
@@ -43,29 +47,34 @@ public class UserControllerTest {
         assertEquals(usercontroller.signUp(userModel), "Error occurred");
         verify(userService, times(1)).SignUp(userModel);
     }
-//    @Test
-//    public void testLoginSuccess() {
-//        when(userService.Login(any(UserModel.class))).thenReturn("Login Successful");
-//        UserModel userModel = new UserModel();
-//        assertEquals(usercontroller.login(userModel), "Login Successful");
-//        verify(userService, times(1)).Login(userModel);
-//    }
+    @Test
+    public void testLoginSuccess() {
+        Map<String, String> returnMap = new HashMap<>();
+        returnMap.put("Status", "Success");
+        when(userService.Login(any(UserModel.class))).thenReturn(returnMap);
+        UserModel userModel = new UserModel();
+        Map<String, String> result = usercontroller.login(userModel);
+        assertEquals("Success", result.get("Status"));
+        verify(userService, times(1)).Login(userModel);
+    }
 
-//    @Test
-//    public void testLoginFailure() {
-//        when(userService.Login(any(UserModel.class))).thenReturn("User not found");
-//        UserModel userModel = new UserModel();
-//        assertEquals(usercontroller.login(userModel), "User not found");
-//        verify(userService, times(1)).Login(userModel);
-//    }
-
+    @Test
+    public void testLoginFailure() {
+        Map<String, String> returnMap = new HashMap<>();
+        returnMap.put("Status", "Failure");
+        when(userService.Login(any(UserModel.class))).thenReturn(returnMap);
+        UserModel userModel = new UserModel();
+        Map<String, String> result = usercontroller.login(userModel);
+        assertEquals("Failure", result.get("Status"));
+        verify(userService, times(1)).Login(userModel);
+    }
 
     @Test
     void forgotPassword_whenEmailExists_shouldReturnMailSent() {
         UserModel userModel = mock(UserModel.class);
         when(userModel.getEmail()).thenReturn("abcd");
         doNothing().when(mailSenderClass).sendEmail(anyString(), anyString(), anyString());
-        when(userService.CheckEmailID(anyString())).thenReturn("ID exists");
+        when(userService.CheckEmailID(anyString())).thenReturn("Success");
         assertEquals(usercontroller.forgotPassword(userModel), "Mail Sent");
     }
 
@@ -78,11 +87,12 @@ public class UserControllerTest {
         assertEquals(usercontroller.forgotPassword(userModel), "ID doesnt Exist");
     }
     @Test
-    void updatePassword_whenCalled_shouldReturnResultFromService() throws Exception {
-        when(userService.ForgotPassword(any(UserModel.class))).thenReturn("Password Updated");
-        UserModel userModel = new UserModel();
-        assertEquals(usercontroller.updatePassword(userModel), "Password Updated");
-        verify(userService, times(1)).ForgotPassword(userModel);
+    void updatePassword_whenCalled_shouldReturnResultFromService() {
+            when(userService.ForgotPassword(any(UserModel.class))).thenReturn("Password Updated");
+            UserModel userModel = new UserModel();
+            assertEquals(usercontroller.updatePassword(userModel), "Password Updated");
+            verify(userService, times(1)).ForgotPassword(userModel);
     }
+
 }
 

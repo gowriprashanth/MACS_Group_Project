@@ -33,6 +33,11 @@ public class UserServiceImplementation implements UserService {
         return userTableOperations.CheckMailID(mailID);
     }
 
+    @Override
+    public UserModel getUserInfo(int id) {
+        return userTableOperations.getUserInfo(id);
+    }
+
 }
 
 
