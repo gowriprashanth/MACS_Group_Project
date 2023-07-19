@@ -1,8 +1,15 @@
 package com.project.accomatch.Service.Implementation;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.accomatch.Model.UserModel;
 import com.project.accomatch.Repository.UserTableOperations;
 import com.project.accomatch.Service.UserService;
+
+import com.project.accomatch.config.JwtUtil;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +27,17 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public Map<String, String> Login(UserModel usermodel) {
-        return userTableOperations.LoginUser(usermodel);
+        Map<String,String> map =userTableOperations.LoginUser(usermodel);
+        String token="";
+       try{ if (map != null && map.get("Status").equals("Success")) {
+           token = JwtUtil.generateToken(usermodel.getEmail());
+       }
+        map.put("token",token);
+        return map;}
+       catch(Exception e){
+           System.out.print(e);
+       }
+       return map;
     }
 
     @Override
