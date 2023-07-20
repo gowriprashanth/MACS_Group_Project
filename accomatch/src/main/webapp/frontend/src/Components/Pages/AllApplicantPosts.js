@@ -26,13 +26,20 @@ export const AllApplicantPosts = () => {
 
     const loadPosts = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/houseSeeker/getListOfAllApplicantPosts");
-            console.log(response.data);
-            setPosts(response.data);
+          const authToken = sessionStorage.getItem("token"); //  authentication token
+          
+          const response = await axios.get("http://localhost:8080/houseSeeker/getListOfAllApplicantPosts", {
+            headers: {
+              Authorization: `Bearer ${authToken}` // authentication token in the headers
+            }
+          });
+          console.log(response.data);
+          setPosts(response.data);
         } catch (error) {
-            console.error(error);
+          console.error(error);
         }
-    }
+      };
+      
 
     const handleDetailsClick = (postId) => {
         navigate(`/posts/${postId}`);
