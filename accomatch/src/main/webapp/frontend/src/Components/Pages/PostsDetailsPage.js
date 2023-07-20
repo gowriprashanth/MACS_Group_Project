@@ -64,57 +64,86 @@ export const PostsDetailsPage = () => {
     }
 
     fetch("http://localhost:8080/api/applicant/isApplied", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(bodyObj),
-    })
-    .then((response) => {
-        console.log(response);
-        return response.text(); // Read the response data as text
-    })
-    .then((data) => {
-        console.log(data); // Log the response data
-        if (data === "success") {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${sessionStorage.getItem("token")}` // Include the authentication token in the headers
+    },
+    body: JSON.stringify(bodyObj),
+})
+.then((response) => {
+    console.log(response);
+    return response.json(); // Read the response data as JSON
+})
+.then((data) => {
+    console.log(data); // Log the response data
+    if (data === "success") {
         setSuccess(true);
-        } else {
+    } else {
         setErrMsg("Login failed. Please try again."); // Set an appropriate error message
-        }
-    })
-    .catch((error) => {
-        setErrMsg("An error occurred. Please try again."); // Set an appropriate error message
-    });
     }
-    const fetchPostDetails = async () => {
-      console.log(applicationId);
-      try {
-        const postResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/post/details/${applicationId}`);
-        setPost(postResponse.data);
-        console.log(postResponse.data)
-        const imagesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/images/${applicationId}`);
-        setImages(imagesResponse.data);
+})
+.catch((error) => {
+    setErrMsg("An error occurred. Please try again."); // Set an appropriate error message
+});
+ }
+ const fetchPostDetails = async () => {
+  console.log(applicationId);
+  try {
+    const authToken = sessionStorage.getItem("token"); // Retrieve the authentication token from sessionStorage
 
-        const foodPreferencesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/food/${applicationId}`);
-        setFoodPreferences(foodPreferencesResponse.data);
-
-        const genderPreferencesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/gender/${applicationId}`);
-        setGenderPreferences(genderPreferencesResponse.data);
-
-
-        const response = await axios.get(`http://localhost:8080/reviews/getListOfAllRatings/${applicationId}`);
-        setReviewResponse(response.data);
-        console.log(response.data);
-
-          const ratingResponse = await axios.get(`http://localhost:8080/reviews/getAverageRatings/${applicationId}`);
-          setRatings(ratingResponse.data);
-          console.log(ratingResponse.data);
-
-      } catch (error) {
-        console.log(error.response.data);
-        toast.error(error.response.data.message, {
-          position: toast.POSITION.TOP_RIGHT
-        });
+    const postResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/post/details/${applicationId}`, {
+      headers: {
+        'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
       }
-    };
+    });
+    setPost(postResponse.data);
+    console.log(postResponse.data);
+
+    const imagesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/images/${applicationId}`, {
+      headers: {
+        'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
+      }
+    });
+    setImages(imagesResponse.data);
+
+    const foodPreferencesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/food/${applicationId}`, {
+      headers: {
+        'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
+      }
+    });
+    setFoodPreferences(foodPreferencesResponse.data);
+
+    const genderPreferencesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/gender/${applicationId}`, {
+      headers: {
+        'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
+      }
+    });
+    setGenderPreferences(genderPreferencesResponse.data);
+
+    const response = await axios.get(`http://localhost:8080/reviews/getListOfAllRatings/${applicationId}`, {
+      headers: {
+        'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
+      }
+    });
+    setReviewResponse(response.data);
+    console.log(response.data);
+
+    const ratingResponse = await axios.get(`http://localhost:8080/reviews/getAverageRatings/${applicationId}`, {
+      headers: {
+        'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
+      }
+    });
+    setRatings(ratingResponse.data);
+    console.log(ratingResponse.data);
+  } catch (error) {
+    console.log(error.response.data);
+    toast.error(error.response.data.message, {
+      position: toast.POSITION.TOP_RIGHT
+    });
+  }
+};
+
 
     fetchPostDetails();
   }, [applicationId]);

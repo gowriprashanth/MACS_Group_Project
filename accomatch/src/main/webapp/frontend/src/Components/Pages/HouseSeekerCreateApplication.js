@@ -43,9 +43,12 @@ export const HouseSeekerCreateApplication =() =>{
 
         fetch("http://localhost:8080/houseSeeker/create", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(bodyObj),
-        })
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${sessionStorage.getItem("token")}` // Include the authentication token in the headers
+            },
+            body: JSON.stringify(bodyObj)
+          })
         .then((response) => {
             console.log(response);
             if(response.status===200){
