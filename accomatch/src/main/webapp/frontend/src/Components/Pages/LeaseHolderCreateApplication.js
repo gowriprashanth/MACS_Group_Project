@@ -47,7 +47,7 @@ export const LeaseHolderCreateApplication =() =>{
     const handleLoginSubmit =async (e) => {
         e.preventDefault();
         let bodyObj = {
-            user_id:1,
+            user_id:sessionStorage.getItem("user_id"),
             title,
             subtitle,
             address,
@@ -67,9 +67,11 @@ export const LeaseHolderCreateApplication =() =>{
 
         fetch("http://localhost:8080/leaseHolder/create", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(bodyObj),
-        })
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(bodyObj)
+          })
         .then((response) => {
             console.log(response);
             if(response.status===200){
@@ -79,11 +81,6 @@ export const LeaseHolderCreateApplication =() =>{
         })
         .then((data) => {
             console.log(data); // Log the response data
-            if (data === "success") {
-            setSuccess(true);
-            } else {
-            setErrMsg("Login failed. Please try again."); // Set an appropriate error message
-            }
         })
         .catch((error) => {
             setErrMsg("An error occurred. Please try again."); // Set an appropriate error message

@@ -32,7 +32,7 @@ export const HouseSeekerCreateApplication =() =>{
     const handleLoginSubmit =async (e) => {
         e.preventDefault();
         let bodyObj = {
-            user_id:1,
+            user_id:sessionStorage.getItem("user_id"),
             location_city:location,
             room_type:roomType,
             other_preferences:otherPreferences,
@@ -43,9 +43,12 @@ export const HouseSeekerCreateApplication =() =>{
 
         fetch("http://localhost:8080/houseSeeker/create", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(bodyObj),
-        })
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${sessionStorage.getItem("token")}` // Include the authentication token in the headers
+            },
+            body: JSON.stringify(bodyObj)
+          })
         .then((response) => {
             console.log(response);
             if(response.status===200){
