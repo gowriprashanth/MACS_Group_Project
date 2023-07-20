@@ -8,6 +8,7 @@ public class HouseSeekerModel {
     private String location_city,room_type,other_preferences,name;
     private Date start_date, created_At, updated_At;
 
+    public HouseSeekerModel(){}
     public HouseSeekerModel(int user_id, String location_city, String room_type, String other_preferences, Date start_date, ArrayList<String> food_preferences, ArrayList<String> gender_preferences, String name) {
         this.user_id = user_id;
         this.location_city = location_city;

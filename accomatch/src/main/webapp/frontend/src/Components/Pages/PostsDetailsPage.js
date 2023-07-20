@@ -23,14 +23,15 @@ export const PostsDetailsPage = () => {
   const [success, setSuccess] = useState(false);
   const handleApplySubmit =async () => {
     let bodyObj = {
-        user_id:4,
+        user_id:sessionStorage.getItem("user_id"),
         application_id:applicationId,
         status:"Pending"
     }
 
     fetch("http://localhost:8080/api/applicant/apply", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+        "Authorization": `Bearer ${sessionStorage.getItem("token")}`}, // Include the authentication token in the headers
         body: JSON.stringify(bodyObj),
     })
     .then((response) => {
@@ -59,10 +60,10 @@ export const PostsDetailsPage = () => {
   useEffect(() => {
     const isUserAlreadyApplied = async ()=>{
       let bodyObj = {
-        user_id:4,
+        user_id:sessionStorage.getItem("user_id"),
         application_id:applicationId
     }
-
+    // setAlreadyApplied(await isUserAlreadyApplied());
     fetch("http://localhost:8080/api/applicant/isApplied", {
     method: "POST",
     headers: {
@@ -70,6 +71,7 @@ export const PostsDetailsPage = () => {
         "Authorization": `Bearer ${sessionStorage.getItem("token")}` // Include the authentication token in the headers
     },
     body: JSON.stringify(bodyObj),
+    
 })
 .then((response) => {
     console.log(response);
@@ -86,6 +88,7 @@ export const PostsDetailsPage = () => {
 .catch((error) => {
     setErrMsg("An error occurred. Please try again."); // Set an appropriate error message
 });
+setAlreadyApplied(await isUserAlreadyApplied());
  }
  const fetchPostDetails = async () => {
   console.log(applicationId);
@@ -133,7 +136,9 @@ export const PostsDetailsPage = () => {
       headers: {
         'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
       }
-    });
+    }
+    );
+    // setAlreadyApplied(await isUserAlreadyApplied());
     setRatings(ratingResponse.data);
     console.log(ratingResponse.data);
   } catch (error) {
@@ -222,8 +227,8 @@ export const PostsDetailsPage = () => {
       </div>
       {alreadyApplied ?
       {/* Apply button */}
-        (<button className="apply-button" onClick={()=>handleApplySubmit()}>Apply</button>) : 
-        (<button className="chat-button">Chat</button>)
+      (<button className="chat-button">Chat</button>):
+        (<button className="apply-button" onClick={()=>handleApplySubmit()}>Apply</button>) 
       }
 
       {/* Applicant button */}

@@ -47,7 +47,7 @@ export const LeaseHolderCreateApplication =() =>{
     const handleLoginSubmit =async (e) => {
         e.preventDefault();
         let bodyObj = {
-            user_id:1,
+            user_id:sessionStorage.getItem("user_id"),
             title,
             subtitle,
             address,

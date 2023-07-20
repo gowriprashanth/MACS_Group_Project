@@ -32,7 +32,7 @@ export const HouseSeekerCreateApplication =() =>{
     const handleLoginSubmit =async (e) => {
         e.preventDefault();
         let bodyObj = {
-            user_id:1,
+            user_id:sessionStorage.getItem("user_id"),
             location_city:location,
             room_type:roomType,
             other_preferences:otherPreferences,
