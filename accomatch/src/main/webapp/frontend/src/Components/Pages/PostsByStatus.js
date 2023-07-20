@@ -1,15 +1,11 @@
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import './Posts.css';
-import {  useNavigate } from 'react-router-dom';
+import './PostsByStatus.css';
+import { Link, useNavigate } from 'react-router-dom';
 
-
-
-export const Posts = () => {
+export const PostsByStatus = () => {
+    console.log("in")
   const [posts, setPosts] = useState([]);
-  const [ratings,setRatings] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -22,7 +18,8 @@ export const Posts = () => {
       vegetarian: false,
       nonVegetarian: false,
     },
-    age: ''
+    age: '',
+    status: ''
   });
   const navigate = useNavigate();
   
@@ -32,22 +29,12 @@ export const Posts = () => {
 
   const loadPosts = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/leaseowner/dashboard/get/list/post");
+      const response = await axios.get("http://localhost:8080/admin/get/list/post");
       setPosts(response.data);
-      console.log(response.data);
-
-      const ratingResponse = await axios.get("http://localhost:8080/reviews/getAllAverageRatings");
-      setRatings(ratingResponse.data);
-      console.log(ratingResponse.data);
-
     } catch (error) {
       console.error(error);
-      toast.error('An error occurred while loading posts. Please try again.', {
-        position: toast.POSITION.TOP_RIGHT
-      });
     }
   }
-
 
   const handleDetailsClick = (postId) => {
     navigate(`/posts/${postId}`);
@@ -84,22 +71,26 @@ export const Posts = () => {
     }));
   };
 
+  const handleStatusChange = (event) => {
+    const { value } = event.target;
+    setFilter(prevFilter => ({
+      ...prevFilter,
+      status: value
+    }));
+  };
+
   const handleFilterSubmit = async (event) => {
     event.preventDefault();
-  
-    const genderValue = filter.gender.male ? 1 : 0;
-    const foodValue = filter.food.vegetarian ? 1 : 0;
-    const ageValue = filter.age;
-  
     try {
-      const response = await axios.post("http://localhost:8080/applicant/posts/filter", {
-        Male: genderValue,
-        Female: filter.gender.female ? 1 : 0,
-        Veg: foodValue,
-        NonVeg: filter.food.nonVegetarian ? 1 : 0,
-        age: ageValue
+      if(filter.status!==""){
+      const response = await axios.post("http://localhost:8080/admin/get/list/postbystatus", {
+        status: filter.status
       });
       setPosts(response.data);
+    }else{
+        const response = await axios.get("http://localhost:8080/admin/get/list/post")
+        setPosts(response.data);
+      } 
     } catch (error) {
       console.error(error);
     }
@@ -114,6 +105,7 @@ export const Posts = () => {
   };
 
   return (
+    
     <div className="dashboard-container">
       <button onClick={toggleFilterOptions}>Filter</button>
       <div className={`filter-container ${isFilterOpen ? 'open' : ''}`}>
@@ -125,75 +117,30 @@ export const Posts = () => {
         </div>
         <form onSubmit={handleFilterSubmit}>
           <div className="filter-content">
-            <div className="filter-row">
-              <label>Gender:</label>
-              <div className="checkbox-group">
-                <div>
-                  <input
-                    type="checkbox"
-                    name="gender-male"
-                    checked={filter.gender.male}
-                    onChange={handleCheckboxChange}
-                  />
-                  <label>Male</label>
-                </div>
-                <div>
-                  <input
-                    type="checkbox"
-                    name="gender-female"
-                    checked={filter.gender.female}
-                    onChange={handleCheckboxChange}
-                  />
-                  <label>Female</label>
-                </div>
-              </div>
-            </div>
-            <div className="filter-row">
-              <label>Food:</label>
-              <div className="checkbox-group">
-                <div>
-                  <input
-                    type="checkbox"
-                    name="food-vegetarian"
-                    checked={filter.food.vegetarian}
-                    onChange={handleCheckboxChange}
-                  />
-                  <label>Vegetarian</label>
-                </div>
-                <div>
-                  <input
-                    type="checkbox"
-                    name="food-nonVegetarian"
-                    checked={filter.food.nonVegetarian}
-                    onChange={handleCheckboxChange}
-                  />
-                  <label>Non Vegetarian</label>
-                </div>
-              </div>
-            </div>
-            <div className="filter-row">
-              <label>Age:</label>
-              <input
-                type="number"
-                name="age"
-                value={filter.age}
-                onChange={handleAgeChange}
-              />
-            </div>
+          <div className="filter-row">
+          <label>Status:</label>
+          <select
+            name="status"
+            value={filter.status}
+            onChange={handleStatusChange}>
+            <option value="">All</option>
+            <option value="0">Pending</option>
+            <option value="1">Approved</option>
+            <option value="-1">Rejected</option>
+          </select>
+        </div>
           </div>
           <button type="submit">Apply Filter</button>
         </form>
       </div>
-      <div className="container">
       <div className="post-list">
         {posts.map((post, index) => (
           <div className="post" key={index}>
             <div className="post-image">
               <img src={post.document} alt={`Post ${post.title}`} />
             </div>
-            <div className="post-details"
-            onClick={()=>openModal(post)}>
-              <h3>{post.title}</h3>
+            <div className="post-details">
+              <h3 onClick={() => openModal(post)}>{post.title}</h3>
               <p>{post.subtitle}</p>
               <p>Address: {post.address}</p>
               <p>City: {post.city}</p>
@@ -221,22 +168,6 @@ export const Posts = () => {
           </div>
         </div>
       )}
-
-      <div className="post-list">
-        {ratings.map((rate, index) => (
-            <div className="post" key={index}>
-              <div className="rating-details">
-                <h3>Average Rating: {rate.averageRating}*</h3>
-                <p>5 star: {rate.count5Ratings}</p>
-                <p>4 star: {rate.count4Ratings}</p>
-                <p>3 star: {rate.count3Ratings}</p>
-                <p>2 star: {rate.count2Ratings}</p>
-                <p>1 star: {rate.count1Ratings}</p>
-              </div>
-            </div>
-        ))}
-      </div>
-      </div >
     </div>
-);
+  );
 };

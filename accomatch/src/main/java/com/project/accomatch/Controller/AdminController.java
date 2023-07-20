@@ -1,40 +1,47 @@
 package com.project.accomatch.Controller;
 
-import com.project.accomatch.Model.Posts;
+import com.project.accomatch.Exception.InvalidPostStatusException;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Service.AdminInterface;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import com.project.accomatch.Service.Implementation.LeaseHolderDashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-
+import java.util.HashMap;
 import java.util.List;
 
-@CrossOrigin("http://localhost:3000")
+
 @RestController
+@CrossOrigin("http://localhost:3000")
 @RequestMapping("/admin")
 public class AdminController {
 
 
     @Autowired
     AdminInterface adminInterface;
+    @Autowired
+    private LeaseHolderDashboardService dashboardService;
 
-    @PostMapping("/admin/verifyone")
+    /**
+     * Verifies a single ad
+     * @author Yogish Honnadevipura Gopalakrishna
+     * @return Success if verified or else Error
+     */
+    @PostMapping("/verify/one")
     public String verifySingleAd(@RequestBody Posts posts){
-        return adminInterface. VerifyOneAd(posts);
+        return adminInterface.VerifyOneAd(posts);
     }
 
-    @PostMapping("/admin/verifyall")
+    /**
+     * Verifies all unverified ads
+     * @author Yogish Honnadevipura Gopalakrishna
+     * @return Success if verified all or else Error
+     */
+    @PostMapping("/verify/all")
     public String verifyAllAd(@RequestBody Posts posts){
         return adminInterface.VerifyAllAd(posts);
     }
-    @Autowired
-    private LeaseHolderDashboardService dashboardService;
+
 
     /**
      * Retrieves the list of posts for Admin.
@@ -42,7 +49,7 @@ public class AdminController {
      * @return The list of posts.
      */
     @GetMapping("/get/list/post")
-    public List<Posts> getListOfPosts() {
+    public List<Posts> getListOfPosts()  {
         return dashboardService.getListOfPosts();
     }
 
@@ -51,9 +58,14 @@ public class AdminController {
      * @author Ramandeep kaur
      * @return The list of posts.
      */
-    @GetMapping("/get/list/post/{status}")
-    public List<Posts> getListOfPostsByStatus(int status)
-    {
+    @PostMapping("/get/list/postbystatus")
+    public List<Posts> getListOfPostsByStatus(@RequestBody HashMap<String, String> map) {
+        int status;
+        try {
+            status = Integer.parseInt(map.get("status"));
+        } catch (NumberFormatException e) {
+            throw new InvalidPostStatusException("Invalid post status value");
+        }
         return dashboardService.getListOfPostsByStatus(status);
     }
 

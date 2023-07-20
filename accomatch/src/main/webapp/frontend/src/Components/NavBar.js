@@ -30,7 +30,7 @@ function NavBar() {
             <li className="nav-item">
               <NavLink
                 exact
-                to="/home"
+                to={"/applicantposts/"+userid}
                 activeClassName="active"
                 className="nav-links"
                 onClick={handleClick}
@@ -62,6 +62,28 @@ function NavBar() {
             </li>
             <li className="nav-item">
               <NavLink
+                  exact
+                  to="/allapplicant"
+                  activeClassName="active"
+                  className="nav-links"
+                  onClick={handleClick}
+              >
+                All Applicants
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                  exact
+                  to="/rating"
+                  activeClassName="active"
+                  className="nav-links"
+                  onClick={handleClick}
+              >
+                Ratings
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
                 exact
                 to="/create"
                 activeClassName="active"
@@ -80,6 +102,17 @@ function NavBar() {
                 onClick={handleClick}
               >
                 Create for houseseeker
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/postsbystatus"
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleClick}
+              >
+                Admin portal
               </NavLink>
             </li>
           </ul>

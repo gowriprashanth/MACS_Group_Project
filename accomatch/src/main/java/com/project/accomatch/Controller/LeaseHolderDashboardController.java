@@ -5,12 +5,15 @@
  */
 package com.project.accomatch.Controller;
 
+import com.project.accomatch.Exception.DataAccessException;
+import com.project.accomatch.Exception.InvalidInputException;
 import com.project.accomatch.Model.PostDetails;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Service.Implementation.LeaseHolderDashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @RestController
@@ -39,6 +42,10 @@ public class LeaseHolderDashboardController {
      */
     @GetMapping("/get/post/details/{applicationId}")
     public Posts getPostDetails(@PathVariable int applicationId) {
+        if (applicationId <= 0) {
+            throw new InvalidInputException("Invalid application ID provided.");
+        }
+
         return dashboardService.getPostByApplicationId(applicationId);
 
     }
@@ -51,6 +58,9 @@ public class LeaseHolderDashboardController {
      */
     @GetMapping("/get/list/images/{applicationId}")
     public List<String> getListOfImages(@PathVariable int applicationId) {
+        if (applicationId <= 0) {
+            throw new InvalidInputException("Invalid application ID provided.");
+        }
         return dashboardService.getListOfImagesByApplicationId(applicationId);
     }
 
@@ -62,6 +72,9 @@ public class LeaseHolderDashboardController {
      */
     @GetMapping("/get/list/food/{applicationId}")
     public List<String> getListOfFoodPreferences(@PathVariable int applicationId) {
+        if (applicationId <= 0) {
+            throw new InvalidInputException("Invalid application ID provided.");
+        }
         return dashboardService.getListOfFoodPreferencesByApplicationId(applicationId);
     }
 
@@ -73,15 +86,12 @@ public class LeaseHolderDashboardController {
      */
     @GetMapping("/get/list/gender/{applicationId}")
     public List<String> getListOfGenderPreferences(@PathVariable int applicationId) {
+        if (applicationId <= 0) {
+            throw new InvalidInputException("Invalid application ID provided.");
+        }
         return dashboardService.getListOfgenderPreferencesByApplicationId(applicationId);
     }
 /*
-    *//**
-     * Retrieves the details of a post based on the application ID.
-     * @author Ramandeep Kaur
-     * @param applicationId The application ID.
-     * @return The post details.
-     *//*
     @GetMapping("/get/post/details/{applicationId}")
     public PostDetails getPostDetailss(@PathVariable int applicationId) {
         Posts post = dashboardService.getPostByApplicationId(applicationId);
@@ -94,6 +104,9 @@ public class LeaseHolderDashboardController {
 
     @GetMapping("/get/list/getListOfPersonalPosts/{user_Id}")
     public List<Posts> getListOfPersonalPosts(@PathVariable int user_Id) {
+        if (user_Id <= 0) {
+            throw new InvalidInputException("Invalid application ID provided.");
+        }
         return dashboardService.getListOfPersonalPosts(user_Id);
     }
 

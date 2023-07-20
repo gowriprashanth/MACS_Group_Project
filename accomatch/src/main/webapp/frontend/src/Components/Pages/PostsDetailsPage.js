@@ -1,8 +1,11 @@
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import './PostsDetailsPage.css';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+
 import { Carousel } from 'react-responsive-carousel';
 import { Link, useNavigate } from 'react-router-dom';
 export const PostsDetailsPage = () => {
@@ -11,9 +14,11 @@ export const PostsDetailsPage = () => {
   const { applicationId } = useParams();
   const [alreadyApplied,setAlreadyApplied] = useState(false);
   const [post, setPost] = useState(null);
+  const [ratings,setRatings] = useState([]);
   const [images, setImages] = useState([]);
   const [foodPreferences, setFoodPreferences] = useState([]);
   const [genderPreferences, setGenderPreferences] = useState([]);
+  const [reviewResponse, setReviewResponse] = useState([]);
   const [errMsg, setErrMsg] =useState ('');
   const [success, setSuccess] = useState(false);
   const handleApplySubmit =async () => {
@@ -44,6 +49,10 @@ export const PostsDetailsPage = () => {
         }
     })
     .catch((error) => {
+      console.error(error);
+      toast.error('An error occurred while loading posts. Please try again.', {
+        position: toast.POSITION.TOP_RIGHT
+      });
         setErrMsg("An error occurred. Please try again."); // Set an appropriate error message
     });
     }
@@ -80,7 +89,7 @@ export const PostsDetailsPage = () => {
       try {
         const postResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/post/details/${applicationId}`);
         setPost(postResponse.data);
-console.log(postResponse.data)
+        console.log(postResponse.data)
         const imagesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/images/${applicationId}`);
         setImages(imagesResponse.data);
 
@@ -89,8 +98,21 @@ console.log(postResponse.data)
 
         const genderPreferencesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/gender/${applicationId}`);
         setGenderPreferences(genderPreferencesResponse.data);
+
+
+        const response = await axios.get(`http://localhost:8080/reviews/getListOfAllRatings/${applicationId}`);
+        setReviewResponse(response.data);
+        console.log(response.data);
+
+          const ratingResponse = await axios.get(`http://localhost:8080/reviews/getAverageRatings/${applicationId}`);
+          setRatings(ratingResponse.data);
+          console.log(ratingResponse.data);
+
       } catch (error) {
-        console.log(error);
+        console.log(error.response.data);
+        toast.error(error.response.data.message, {
+          position: toast.POSITION.TOP_RIGHT
+        });
       }
     };
 
@@ -177,7 +199,36 @@ console.log(postResponse.data)
 
       {/* Applicant button */}
       <button onClick={() => handleApplicantClick(post.leaseholderApplicationId)}>Applicant</button>
+
+        <div >
+            <h3>Reviews and Ratings</h3>
+            <div className="preferences-section">
+                {ratings.map((rate, index) => (
+                    <div className="preferences-section" key={index}>
+                        <div className="preferences-section">
+                            <h3>Average rating: {rate.averageRating}</h3>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <div >
+
+                        {reviewResponse.map((review, index) => (
+
+                            <div className="preferences-section" key={index}>
+                                    <p> </p>
+                                    <p>@{review.name}</p>
+                                    <p>Rating: {review.rating}</p>
+                                    <p>Comment: {review.comment}</p>
+                                </div>
+                        ))}
+            </div>
+        </div>
+
+
+
     </div>
-      
+
   );
 };

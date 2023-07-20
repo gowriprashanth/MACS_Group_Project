@@ -62,19 +62,19 @@ public class HouseSeekerTableOperations {
         List<HouseSeekerModel> listOfApplicantPosts = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(JDBC, username, password);
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM houseseeker_ads")) {
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM user u inner join houseseeker_ads h on u.user_id=h.user_id")) {
 
             while (resultSet.next()) {
-                int housekeeperApplicationId = resultSet.getInt("houseseeker_application_id");
-                int userId = resultSet.getInt("user_id");
-                String locationCity = resultSet.getString("location_city");
-                String otherPreferences = resultSet.getString("other_preferences");
-                String roomType = resultSet.getString("room_type");
-                java.util.Date startDate = resultSet.getDate("start_date");
-                java.util.Date createdAt = resultSet.getTimestamp("createdAt");
-                java.util.Date updatedAt = resultSet.getTimestamp("updatedAt");
+                int housekeeperApplicationId = resultSet.getInt("h.houseseeker_application_id");
+                int userId = resultSet.getInt("h.user_id");
+                String locationCity = resultSet.getString("h.location_city");
+                String otherPreferences = resultSet.getString("h.other_preferences");
+                String roomType = resultSet.getString("h.room_type");
+                String name = resultSet.getString("u.name");
+                java.util.Date startDate = resultSet.getDate("h.start_date");
 
-                HouseSeekerModel houseSeekerModel = new HouseSeekerModel(housekeeperApplicationId, userId, locationCity, otherPreferences, roomType, startDate, createdAt, updatedAt);
+                HouseSeekerModel houseSeekerModel = new HouseSeekerModel( userId,  locationCity,  roomType,  otherPreferences,
+                        startDate,  null,  null,  name);
 
                 listOfApplicantPosts.add(houseSeekerModel);
             }
