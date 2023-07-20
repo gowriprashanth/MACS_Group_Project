@@ -29,9 +29,10 @@ public class ChatController {
         }
     }
 
-    @GetMapping("/getMessages")
-    public ArrayList<ChatMessageModel> getMessages(@PathVariable int room_id){
+    @PostMapping("/get")
+    public ArrayList<ChatMessageModel> getMessages(@RequestBody Map<String,Object> requestBody){
         try{
+            int room_id = (Integer) requestBody.get("room_id");
             System.out.println(room_id);
             return chatService.getMessages(room_id);
         } catch (Exception e){

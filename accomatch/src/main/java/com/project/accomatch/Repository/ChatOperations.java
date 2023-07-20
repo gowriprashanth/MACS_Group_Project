@@ -32,7 +32,7 @@ public class ChatOperations {
             preparedStatement.setInt(2,chatMessageModel.getUser_id());
             preparedStatement.setString(3,chatMessageModel.getMessage());
             preparedStatement.setTimestamp(4,chatMessageModel.getTime());
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
             return "Success";
         }catch (Exception e){
             throw new RuntimeException(e);
@@ -50,7 +50,7 @@ public class ChatOperations {
             String sql = "SELECT * FROM chat WHERE room_id = ? ORDER BY time DESC";
             PreparedStatement preparedStatement = connect.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1,room_id);
-            preparedStatement.executeUpdate();
+            preparedStatement.executeQuery();
             ResultSet resultSet= preparedStatement.getResultSet();
             ArrayList<ChatMessageModel> allMessages = new ArrayList<>();
             while (resultSet.next()){
