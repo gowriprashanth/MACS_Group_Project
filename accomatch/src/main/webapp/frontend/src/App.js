@@ -14,6 +14,7 @@ import { HouseSeekerCreateApplication } from './Components/Pages/HouseSeekerCrea
 import { LeaseHolderCreateApplication } from './Components/Pages/LeaseHolderCreateApplication';
 import { ForgetPasswordEmail } from './ForgetPasswordEmail';
 import { ForgetPassword } from './ForgetPassword';
+import { ChatModel } from './Components/Pages/ChatModel';
 import { LeaseApplicantView } from './Components/Pages/LeaseApplicantView';
 import { ApplicantPosts } from './Components/Pages/ApplicantPosts';
 import { Rating } from './Components/Pages/Rating';
@@ -53,6 +54,7 @@ function App() {
             <Route path="/forgetpassword" element={<ForgetPasswordEmail />} />
             <Route path="/updatepassword" element={<ForgetPassword />} />
             <Route path="/leaseapplicantview/:user_Id" element={<LeaseApplicantView />} />
+            <Route path='/chat' element={<ChatModel/>}/>
             <Route path="/applicantposts/:user_Id" element={<ApplicantPosts />} />
             <Route path="/userprofile/:user_Id" element={<UserProfile/>}/>
           </Routes>
