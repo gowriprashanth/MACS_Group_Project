@@ -58,8 +58,6 @@ public class UserServiceImplementation implements UserService {
 
         if (currentUser != null) {
              authToken = jwtService.generateToken(currentUser);
-            String encryptedPassword = passwordEncoder.encode(usermodel.getPassword());
-            usermodel.setPassword(encryptedPassword);
         }
 
            // map= userTableOperations.LoginUser(usermodel);
@@ -78,6 +76,8 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public String ForgotPassword(UserModel usermodel) {
+
+        usermodel.setPassword(passwordEncoder.encode(usermodel.getPassword()));
         return userTableOperations.ForgotPassword(usermodel);
     }
 

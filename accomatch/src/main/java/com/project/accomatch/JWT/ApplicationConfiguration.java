@@ -1,6 +1,5 @@
 package com.project.accomatch.JWT;
 
-import com.project.accomatch.Repository.UserTableOperations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,14 +12,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.sql.SQLException;
-
 @Configuration
-public class ApplicationConfig {
+public class ApplicationConfiguration {
     private final CustomUserDetailsService userDetailsService;
 
     @Autowired
-    public ApplicationConfig(CustomUserDetailsService userDetailsService) {
+    public ApplicationConfiguration(CustomUserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 
@@ -30,7 +27,14 @@ public class ApplicationConfig {
             return (UserDetails) this.userDetailsService.loadUserByUsername(username);
         };
     }
-
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
+    }
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -39,13 +43,4 @@ public class ApplicationConfig {
         return authProvider;
     }
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 }
