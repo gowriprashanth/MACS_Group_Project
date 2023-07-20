@@ -48,11 +48,11 @@ function App() {
             <Route path="/allapplicant" element={<AllApplicantPosts />} />
             <Route path="/create" element={<LeaseHolderCreateApplication />} />
             <Route path="/createApplicant" element={<HouseSeekerCreateApplication />} />
-            <Route path="/rating" element={<Rating />} />
             <Route path="/forgetpassword" element={<ForgetPasswordEmail />} />
             <Route path="/updatepassword" element={<ForgetPassword />} />
             <Route path="/leaseapplicantview/:user_Id" element={<LeaseApplicantView />} />
             <Route path="/applicantposts/:user_Id" element={<ApplicantPosts />} />
+            <Route path="/ratingform/:applicationId" element={<Rating />} />
           </Routes>
         </ErrorBoundary>
       </div>

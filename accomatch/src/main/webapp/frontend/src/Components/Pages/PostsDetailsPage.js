@@ -8,9 +8,10 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import { Carousel } from 'react-responsive-carousel';
 import { Link, useNavigate } from 'react-router-dom';
-export const PostsDetailsPage = () => {
 
+export const PostsDetailsPage = () => {
   const navigate =useNavigate();
+
   const { applicationId } = useParams();
   const [alreadyApplied,setAlreadyApplied] = useState(false);
   const [post, setPost] = useState(null);
@@ -21,6 +22,9 @@ export const PostsDetailsPage = () => {
   const [reviewResponse, setReviewResponse] = useState([]);
   const [errMsg, setErrMsg] =useState ('');
   const [success, setSuccess] = useState(false);
+  const handleReviewClick =()=>{
+      navigate(`/ratingform/${applicationId}`)
+  }
   const handleApplySubmit =async () => {
     let bodyObj = {
         user_id:4,
@@ -198,9 +202,11 @@ export const PostsDetailsPage = () => {
       }
 
       {/* Applicant button */}
-      <button onClick={() => handleApplicantClick(post.leaseholderApplicationId)}>Applicant</button>
-
+      {/*<button onClick={() => handleApplicantClick(post.leaseholderApplicationId)}>Applicant</button>*/}
+      {/*/!* Review button *!/*/}
+      <button onClick={() => handleReviewClick(post.application_id)}>Review the post</button>
         <div >
+
             <h3>Reviews and Ratings</h3>
             <div className="preferences-section">
                 {ratings.map((rate, index) => (

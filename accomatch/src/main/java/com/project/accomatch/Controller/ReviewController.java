@@ -18,7 +18,9 @@ public class ReviewController {
 
     @PostMapping("/createReview")
     public void createReview(@RequestBody Review review) {
-         reviewService.createReview(review);
+        int user_id = review.getUserId();
+        int application_id = review.getApplicationId();
+        reviewService.createReview(review);
     }
 
     /*@GetMapping
