@@ -11,8 +11,10 @@ import com.project.accomatch.Model.PostDetails;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Service.Implementation.LeaseHolderDashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -29,7 +31,12 @@ public class LeaseHolderDashboardController {
      * @return The list of posts.
      */
     @GetMapping("/get/list/post")
-    public List<Posts> getListOfPosts() {
+    public List<Posts> getListOfPosts(Authentication authentication) {
+        // Get the currently authenticated user details
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        // Access the user details as needed
+        String username = userDetails.getUsername();
         return dashboardService.getListOfPosts();
     }
 
@@ -41,7 +48,7 @@ public class LeaseHolderDashboardController {
      * @return The post details.
      */
     @GetMapping("/get/post/details/{applicationId}")
-    public Posts getPostDetails(@PathVariable int applicationId) {
+    public Posts getPostDetails(@PathVariable int applicationId,Authentication authentication) {
         if (applicationId <= 0) {
             throw new InvalidInputException("Invalid application ID provided.");
         }
