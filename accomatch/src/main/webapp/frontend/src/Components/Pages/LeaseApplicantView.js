@@ -17,7 +17,11 @@ export const LeaseApplicantView = () => {
     useEffect(() => {
         const fetchApplicantDetails = async () => {
             try {
-                const postResponse = await axios.get(`http://localhost:8080/api/leaseowner/applicant/get/list/applicant/${user_Id}`);
+                const authToken = sessionStorage.getItem("token");
+                const postResponse = await axios.get(`http://localhost:8080/api/leaseowner/applicant/get/list/applicant/${user_Id}`
+                    , {
+                        headers: {
+                            Authorization: `Bearer ${authToken}`}});
                 setPosts(postResponse.data);
             } catch (error) {
                 console.log(error);
