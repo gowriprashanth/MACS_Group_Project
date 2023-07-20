@@ -1,9 +1,11 @@
 package com.project.accomatch.Controller;
 
 import com.project.accomatch.HasherClass;
+import com.project.accomatch.LoggerPack.LoggerClass;
 import com.project.accomatch.Model.UserModel;
 import com.project.accomatch.Service.Implementation.MailSenderClass;
 import com.project.accomatch.Service.UserService;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +15,10 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-
     @Autowired
     private UserService userservice;
 
+    Logger logger = LoggerClass.getLogger();
     @Autowired
     private MailSenderClass mailSender;
 
@@ -27,6 +29,7 @@ public class UserController {
 
     @PostMapping("/login")
     public Map<String, String> login(@RequestBody UserModel model){
+       logger.info("Login controller activated");
        return userservice.Login(model);
     }
 
