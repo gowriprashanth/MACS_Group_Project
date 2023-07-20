@@ -19,12 +19,12 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
+public class SecurityConfiguration extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
     private final JwtFilter jwtFilter;
     private final AuthenticationProvider authProvider;
 
     @Autowired
-    public SecurityConfig(JwtFilter jwtFilter, AuthenticationProvider authProvider) {
+    public SecurityConfiguration(JwtFilter jwtFilter, AuthenticationProvider authProvider) {
         this.jwtFilter = jwtFilter;
         this.authProvider = authProvider;
     }
