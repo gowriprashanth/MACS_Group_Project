@@ -32,19 +32,8 @@ public class ChatOperations {
             preparedStatement.setInt(2,chatMessageModel.getUser_id());
             preparedStatement.setString(3,chatMessageModel.getMessage());
             preparedStatement.setTimestamp(4,chatMessageModel.getTime());
-            preparedStatement.executeUpdate();
-            ResultSet resultSet=preparedStatement.getResultSet();
-            boolean isMessageSent=false;
-            if(resultSet.next()) {
-                isMessageSent=true;
-            }
-            preparedStatement.close();
-            connect.close();
-            if(isMessageSent){
-                return "Success";
-            } else {
-                return "Something went wrong";
-            }
+            preparedStatement.executeQuery();
+            return "Success";
         }catch (Exception e){
             throw new RuntimeException(e);
         }

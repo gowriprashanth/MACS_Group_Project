@@ -32,6 +32,7 @@ public class ChatController {
     @GetMapping("/getMessages")
     public ArrayList<ChatMessageModel> getMessages(@PathVariable int room_id){
         try{
+            System.out.println(room_id);
             return chatService.getMessages(room_id);
         } catch (Exception e){
             throw new RuntimeException(e.getMessage());
