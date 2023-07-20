@@ -20,6 +20,7 @@ import { Rating } from './Components/Pages/Rating';
 import { ToastContainer } from 'react-toastify';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorPage from './Components/Pages/ErrorPage';
+import { UserProfile } from './Components/Pages/UserProfile';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -53,6 +54,7 @@ function App() {
             <Route path="/updatepassword" element={<ForgetPassword />} />
             <Route path="/leaseapplicantview/:user_Id" element={<LeaseApplicantView />} />
             <Route path="/applicantposts/:user_Id" element={<ApplicantPosts />} />
+            <Route path="/userprofile/:user_Id" element={<UserProfile/>}/>
           </Routes>
         </ErrorBoundary>
       </div>
