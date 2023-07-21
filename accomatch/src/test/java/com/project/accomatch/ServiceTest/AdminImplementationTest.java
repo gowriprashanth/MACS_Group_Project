@@ -1,7 +1,7 @@
 package com.project.accomatch.ServiceTest;
 
 import com.project.accomatch.Model.Posts;
-import com.project.accomatch.Repository.AdminRepository;
+import com.project.accomatch.Repository.Implementation.AdminRepository;
 import com.project.accomatch.Service.Implementation.AdminImplementation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

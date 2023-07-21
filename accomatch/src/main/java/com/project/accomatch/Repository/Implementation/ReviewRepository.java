@@ -1,7 +1,8 @@
-package com.project.accomatch.Repository;
+package com.project.accomatch.Repository.Implementation;
 
 import com.project.accomatch.Model.Applicant;
 import com.project.accomatch.Model.Review;
+import com.project.accomatch.Repository.ReviewRepositoryInterface;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class ReviewRepository {
+public class ReviewRepository implements ReviewRepositoryInterface {
 
     @Value("${username.db.accomatch}")
     private String username;

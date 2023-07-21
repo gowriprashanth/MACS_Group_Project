@@ -1,6 +1,6 @@
 package com.project.accomatch.Service.Implementation;
 import com.project.accomatch.Model.Posts;
-import com.project.accomatch.Repository.LeasePostsLoggedinRepository;
+import com.project.accomatch.Repository.Implementation.LeasePostsLoggedinRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
