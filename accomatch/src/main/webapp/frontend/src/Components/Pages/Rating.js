@@ -39,6 +39,30 @@ export const Rating = () => {
             });
     };
 
+    const handleSubmitReview = () => {
+        const newReview = { rating, comment };
+        // Add code to submit the review to the backend API
+        // For example, using Axios:
+        const authToken = sessionStorage.getItem("token"); // Replace with the actual authentication token
+        
+        axios.post('/api/reviews', newReview, {
+          headers: {
+            Authorization: `Bearer ${authToken}` // Include the authentication token in the headers
+          }
+        })
+          .then((response) => {
+            // Update the reviews state with the newly submitted review
+            setReviews([...reviews, response.data]);
+            // Clear the rating and comment inputs
+            setRating(0);
+            setComment('');
+          })
+          .catch((error) => {
+            console.error('Error submitting review:', error);
+          });
+      };
+      
+
     return (
         <div>
             <h2>Reviews</h2>

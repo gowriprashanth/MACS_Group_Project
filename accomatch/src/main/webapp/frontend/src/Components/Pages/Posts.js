@@ -32,14 +32,25 @@ export const Posts = () => {
 
   const loadPosts = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/leaseowner/dashboard/get/list/post");
-      setPosts(response.data);
-      console.log(response.data);
-
-      const ratingResponse = await axios.get("http://localhost:8080/reviews/getAllAverageRatings");
+      const authToken = sessionStorage.getItem("token"); //  authentication token
+  
+      const postResponse = await axios.get("http://localhost:8080/api/leaseowner/dashboard/get/list/post", {
+        headers: {
+          'Authorization': `Bearer ${authToken}` // Include the authentication token in the headers
+        }
+      });
+  
+      setPosts(postResponse.data);
+      console.log(postResponse.data);
+  
+      const ratingResponse = await axios.get("http://localhost:8080/reviews/getAllAverageRatings", {
+        headers: {
+          'Authorization': `Bearer ${authToken}` // Include the authentication token in the headers
+        }
+      });
+  
       setRatings(ratingResponse.data);
       console.log(ratingResponse.data);
-
     } catch (error) {
       console.error(error);
       toast.error('An error occurred while loading posts. Please try again.', {
@@ -47,6 +58,7 @@ export const Posts = () => {
       });
     }
   }
+  
 
 
   const handleDetailsClick = (postId) => {
@@ -92,19 +104,25 @@ export const Posts = () => {
     const ageValue = filter.age;
   
     try {
+      const authToken = sessionStorage.getItem("token"); // Replace with the actual authentication token
+  
       const response = await axios.post("http://localhost:8080/applicant/posts/filter", {
         Male: genderValue,
         Female: filter.gender.female ? 1 : 0,
         Veg: foodValue,
         NonVeg: filter.food.nonVegetarian ? 1 : 0,
         age: ageValue
+      }, {
+        headers: {
+          'Authorization': `Bearer ${authToken}` // Include the authentication token in the headers
+        }
       });
       setPosts(response.data);
     } catch (error) {
       console.error(error);
     }
   };
-
+  
   const toggleFilter = () => {
     setIsFilterOpen(prevValue => !prevValue);
   };
