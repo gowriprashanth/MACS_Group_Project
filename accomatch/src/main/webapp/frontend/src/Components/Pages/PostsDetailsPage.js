@@ -236,7 +236,7 @@ setAlreadyApplied(await isUserAlreadyApplied());
       }
 
       {/* Applicant button */}
-      {/*<button onClick={() => handleApplicantClick(post.leaseholderApplicationId)}>Applicant</button>*/}
+      <button onClick={() => handleApplicantClick(post.leaseholderApplicationId)}>Applicant</button>*
       {/*/!* Review button *!/*/}
       <button onClick={() => handleReviewClick(post.application_id)}>Review the post</button>
         <div >
