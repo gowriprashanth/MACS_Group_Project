@@ -1,7 +1,7 @@
 package com.project.accomatch.ServiceTest;
 
 import com.project.accomatch.Model.UserModel;
-import com.project.accomatch.Repository.UserTableOperations;
+import com.project.accomatch.Repository.Implementation.UserTableOperations;
 import com.project.accomatch.Service.Implementation.UserServiceImplementation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

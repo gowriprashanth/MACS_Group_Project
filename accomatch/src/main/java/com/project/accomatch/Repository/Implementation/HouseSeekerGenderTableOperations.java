@@ -1,13 +1,14 @@
-package com.project.accomatch.Repository;
+package com.project.accomatch.Repository.Implementation;
 
 import com.project.accomatch.Model.HouseSeekerModel;
+import com.project.accomatch.Repository.HouseSeekerGenderTableOperationsInterface;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 
 @Repository
-public class HouseSeekerGenderTableOperations {
+public class HouseSeekerGenderTableOperations implements HouseSeekerGenderTableOperationsInterface {
     @Value("${username.db.accomatch}")
     private String username;
 

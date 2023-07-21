@@ -1,7 +1,8 @@
-package com.project.accomatch.Repository;
+package com.project.accomatch.Repository.Implementation;
 
 import com.project.accomatch.Model.HouseSeekerModel;
 import com.project.accomatch.Model.Posts;
+import com.project.accomatch.Repository.HouseSeekerTableOperationsInterface;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +12,7 @@ import java.util.List;
 
 
 @Repository
-public class HouseSeekerTableOperations {
+public class HouseSeekerTableOperations implements HouseSeekerTableOperationsInterface {
     @Value("${username.db.accomatch}")
     private String username;
 

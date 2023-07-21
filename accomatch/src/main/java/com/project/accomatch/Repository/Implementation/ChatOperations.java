@@ -1,6 +1,7 @@
-package com.project.accomatch.Repository;
+package com.project.accomatch.Repository.Implementation;
 
 import com.project.accomatch.Model.ChatMessageModel;
+import com.project.accomatch.Repository.ChatOperationsInterface;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -8,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 @Repository
-public class ChatOperations {
+public class ChatOperations implements ChatOperationsInterface {
     @Value("${username.db.accomatch}")
     private String username;
 

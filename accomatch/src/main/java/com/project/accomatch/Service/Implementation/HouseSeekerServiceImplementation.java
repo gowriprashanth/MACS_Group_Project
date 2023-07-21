@@ -1,7 +1,9 @@
 package com.project.accomatch.Service.Implementation;
 
 import com.project.accomatch.Model.HouseSeekerModel;
-import com.project.accomatch.Repository.*;
+import com.project.accomatch.Repository.Implementation.HouseSeekerFoodTableOperations;
+import com.project.accomatch.Repository.Implementation.HouseSeekerGenderTableOperations;
+import com.project.accomatch.Repository.Implementation.HouseSeekerTableOperations;
 import com.project.accomatch.Service.HouseSeekerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

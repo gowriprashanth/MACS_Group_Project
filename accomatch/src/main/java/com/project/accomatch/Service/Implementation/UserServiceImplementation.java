@@ -2,11 +2,10 @@ package com.project.accomatch.Service.Implementation;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.accomatch.JWT.CustomUserDetails;
 import com.project.accomatch.JWT.CustomUserDetailsService;
 import com.project.accomatch.JWT.JwtService;
 import com.project.accomatch.Model.UserModel;
-import com.project.accomatch.Repository.UserTableOperations;
+import com.project.accomatch.Repository.Implementation.UserTableOperations;
 import com.project.accomatch.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,5 +1,6 @@
-package com.project.accomatch.Repository;
+package com.project.accomatch.Repository.Implementation;
 import com.project.accomatch.Model.Applicant;
+import com.project.accomatch.Repository.LeaseApplicationRepositoryInterface;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -8,7 +9,7 @@ import java.sql.*;
 import java.util.*;
 
 @Repository
-public class LeaseApplicationRepository {
+public class LeaseApplicationRepository implements LeaseApplicationRepositoryInterface {
     @Value("${username.db.accomatch}")
     private String username;
 

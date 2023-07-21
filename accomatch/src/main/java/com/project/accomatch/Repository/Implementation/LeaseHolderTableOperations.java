@@ -1,13 +1,14 @@
-package com.project.accomatch.Repository;
+package com.project.accomatch.Repository.Implementation;
 
 //import com.project.accomatch.Credentials;
 import com.project.accomatch.Model.LeaseHolderModel;
+import com.project.accomatch.Repository.LeaseHolderTableOperationsInterface;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import java.sql.*;
 
 @Repository
-public class LeaseHolderTableOperations {
+public class LeaseHolderTableOperations implements LeaseHolderTableOperationsInterface {
     @Value("${username.db.accomatch}")
     private String username;
 

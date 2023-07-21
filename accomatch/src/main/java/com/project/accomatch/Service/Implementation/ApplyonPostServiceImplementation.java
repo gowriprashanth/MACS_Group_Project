@@ -2,9 +2,9 @@ package com.project.accomatch.Service.Implementation;
 
 import com.project.accomatch.Model.ChatRoomModel;
 import com.project.accomatch.Model.LeaseHolderApplicantModel;
-import com.project.accomatch.Repository.ApplyonPostTableOperations;
-import com.project.accomatch.Repository.ChatRoomOperations;
-import com.project.accomatch.Repository.LeaseHolderTableOperations;
+import com.project.accomatch.Repository.Implementation.ApplyonPostTableOperations;
+import com.project.accomatch.Repository.Implementation.ChatRoomOperations;
+import com.project.accomatch.Repository.Implementation.LeaseHolderTableOperations;
 import com.project.accomatch.Service.ApplyonPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,7 @@
-package com.project.accomatch.Repository;
+package com.project.accomatch.Repository.Implementation;
 
 import com.project.accomatch.Model.Posts;
+import com.project.accomatch.Repository.ApplicantPostFIlteringOerationInterface;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -9,7 +10,7 @@ import java.util.Date;
 import java.util.*;
 
 @Repository
-public class ApplicantPostFilteringOperation {
+public class ApplicantPostFilteringOperation implements ApplicantPostFIlteringOerationInterface {
 
     @Value("${username.db.accomatch}")
     private String username;

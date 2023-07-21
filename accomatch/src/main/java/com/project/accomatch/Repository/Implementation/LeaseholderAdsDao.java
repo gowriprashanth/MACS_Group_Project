@@ -1,7 +1,8 @@
-package com.project.accomatch.Repository;
+package com.project.accomatch.Repository.Implementation;
 
 import com.project.accomatch.Exception.DataAccessException;
 import com.project.accomatch.Model.Posts;
+import com.project.accomatch.Repository.LeaseholderAdsDaoInterface;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public class LeaseholderAdsDao {
+public class LeaseholderAdsDao implements LeaseholderAdsDaoInterface {
 
     @Value("${username.db.accomatch}")
     private String username;
