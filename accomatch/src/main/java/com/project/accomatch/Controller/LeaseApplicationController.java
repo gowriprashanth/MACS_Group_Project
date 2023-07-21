@@ -1,7 +1,8 @@
 package com.project.accomatch.Controller;
 import com.project.accomatch.Exception.InvalidInputException;
 import com.project.accomatch.Model.Applicant;
-import com.project.accomatch.Service.Implementation.LeaseApplicationService;
+import com.project.accomatch.Service.Implementation.LeaseApplicationImplementation;
+import com.project.accomatch.Service.LeaseApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
