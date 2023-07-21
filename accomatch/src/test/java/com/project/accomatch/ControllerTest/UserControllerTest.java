@@ -24,7 +24,6 @@ public class UserControllerTest {
     @Mock
     MailSenderClass mailSenderClass;
 
-
     @InjectMocks
     UserController usercontroller;
     @BeforeEach
@@ -79,7 +78,7 @@ public class UserControllerTest {
     }
 
     @Test
-    void forgotPassword_whenEmailDoesNotExist_shouldReturnErrorMessage() throws Exception {
+    void forgotPassword_whenEmailDoesNotExist_shouldReturnErrorMessage() {
         UserModel userModel = mock(UserModel.class);
         when(userModel.getEmail()).thenReturn("abcd");
         doNothing().when(mailSenderClass).sendEmail(anyString(), anyString(), anyString());
@@ -88,10 +87,19 @@ public class UserControllerTest {
     }
     @Test
     void updatePassword_whenCalled_shouldReturnResultFromService() {
-            when(userService.ForgotPassword(any(UserModel.class))).thenReturn("Password Updated");
-            UserModel userModel = new UserModel();
-            assertEquals(usercontroller.updatePassword(userModel), "Password Updated");
-            verify(userService, times(1)).ForgotPassword(userModel);
+        when(userService.ForgotPassword(any(UserModel.class))).thenReturn("Password Updated");
+        UserModel userModel = mock(UserModel.class);
+        assertEquals(usercontroller.updatePassword(userModel), "Password Updated");
+        verify(userService, times(1)).ForgotPassword(userModel);
+    }
+
+    @Test
+    public void getUserInfoTest(){
+        int testData = 1;
+        UserModel userModel = new UserModel();
+        when(userService.getUserInfo(anyInt())).thenReturn(userModel);
+        assertEquals(userModel, usercontroller.getUserInformation(testData));
+        verify(userService, times(1)).getUserInfo(testData);
     }
 
 }

@@ -1,0 +1,7 @@
+2023-07-20 15:29:53.064 [main] INFO  c.p.accomatch.LoggerPack.LoggerClass - Login controller activated
+2023-07-20 15:29:53.208 [main] INFO  c.p.accomatch.LoggerPack.LoggerClass - Login controller activated
+2023-07-20 15:29:53.489 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.project.accomatch.AccomatchApplicationTests]: AccomatchApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-07-20 15:29:53.651 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.project.accomatch.AccomatchApplication for test class com.project.accomatch.AccomatchApplicationTests
+2023-07-20 15:29:54.014 [main] INFO  c.p.a.AccomatchApplicationTests - Starting AccomatchApplicationTests using Java 20.0.1 with PID 21700 (started by hg15y in C:\Users\hg15y\OneDrive\Desktop\MACS\ASDC\Accomatch_Backend\accomatch)
+2023-07-20 15:29:54.015 [main] INFO  c.p.a.AccomatchApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2023-07-20 15:29:55.462 [main] INFO  c.p.a.AccomatchApplicationTests - Started AccomatchApplicationTests in 1.673 seconds (process running for 4.835)

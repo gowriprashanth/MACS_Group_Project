@@ -1,6 +1,8 @@
 package com.project.accomatch.Repository;
 
+import com.project.accomatch.LoggerPack.LoggerClass;
 import com.project.accomatch.Model.UserModel;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +16,8 @@ import java.util.Map;
 
 @Repository
 public class UserTableOperations {
+
+    Logger logger = LoggerClass.getLogger();
 
     @Value("${username.db.accomatch}")
     private String username;
@@ -30,6 +34,7 @@ public class UserTableOperations {
             Statement statement;
             // Connect to the database.
             connect = DriverManager.getConnection(JDBC, username, password);
+            logger.info("Connection Opened");
             // Create a statement object.
             statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
@@ -58,10 +63,13 @@ public class UserTableOperations {
 
             stmt.close();
             statement.close();
+            logger.info("Connection Closed");
             connect.close();
+            logger.info("User '{}' signed up successfully.", model.getUserID());
             return "Success";
 
         }catch(Exception e){
+            logger.error("Failed signing up attempt for '{}'.", model.getUserID());
             return "Error";
         }
 
@@ -77,6 +85,7 @@ public class UserTableOperations {
             ResultSet rs;
             // Connect to the database.
             connect = DriverManager.getConnection(JDBC, username, password);
+            logger.info("Connection Opened");
             // Create a statement object.
             statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
@@ -105,20 +114,25 @@ public class UserTableOperations {
                 rs.close();
                 statement.close();
                 connect.close();
+                logger.info("Connection Closed");
+                logger.info("User '{}' logged in successfully.", model.getEmail());
                 return returnMap;
             }
             else{
                 rs.close();
                 statement.close();
                 connect.close();
+                logger.info("Connection Closed");
                 Map<String, String > returnMap = new HashMap<>();
                 returnMap.put("Status", "Fail");
+                logger.debug("Failed login attempt for '{}' with provided password.", model.getEmail());
                 return returnMap;
             }
 
         }catch(Exception e){
             Map<String, String > returnMap = new HashMap<>();
             returnMap.put("Status", e.getMessage());
+            logger.error("User '{}' failed to login due to an error.", model.getEmail());
             return returnMap;
         }
 
