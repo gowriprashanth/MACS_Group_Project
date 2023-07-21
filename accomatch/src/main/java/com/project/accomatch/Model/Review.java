@@ -26,22 +26,25 @@ package com.project.accomatch.Model;
         public int getRatingId() {
             return ratingId;
         }
+
+        public void setRatingId(int ratingId) {
+            this.ratingId = ratingId;
+        }
+
         public int getUserId() {
             return userId;
         }
+
+        public void setUserId(int userId) {
+            this.userId = userId;
+        }
+
         public int getApplicationId() {
             return applicationId;
         }
-        public String getName() {
-            return name;
-        }
 
-        public void setUserId(int id) {
-            this.userId = id;
-        }
-
-        public void setUserName(String name) {
-            this.name = name;
+        public void setApplicationId(int applicationId) {
+            this.applicationId = applicationId;
         }
 
         public int getRating() {
@@ -60,6 +63,13 @@ package com.project.accomatch.Model;
             this.comment = comment;
         }
 
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
     }
 
 

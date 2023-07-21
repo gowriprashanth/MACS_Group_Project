@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import { useParams , useNavigate } from 'react-router-dom';
 export const Rating = () => {
+    const navigate = useNavigate();
+    const { applicationId } = useParams();
     const [reviews, setReviews] = useState([]);
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
@@ -12,6 +14,29 @@ export const Rating = () => {
 
     const handleCommentChange = (event) => {
         setComment(event.target.value);
+    };
+
+    const handleReviewClick = () => {
+        const userId = sessionStorage.getItem('user_id');
+        const payload= {
+            "userId":userId,
+            "applicationId":applicationId,
+            "rating": rating,//document.getElementById("ratingNumber"),
+            "comment": comment//document.getElementById("comment")
+        }
+
+        axios.post("http://localhost:8080/api/reviews/createReview", payload)
+            .then((response) => {
+                // Update the reviews state with the newly submitted review
+
+                setReviews([...reviews, response.data]);
+                // Clear the rating and comment inputs
+                console.log("Review added successfully.");
+                navigate(`/posts/${applicationId}`);
+            })
+            .catch((error) => {
+                console.log("Error submitting review:", error);
+            });
     };
 
     const handleSubmitReview = () => {
@@ -48,13 +73,13 @@ export const Rating = () => {
                 <h3>Add a Review</h3>
                 <div>
                     <label>Rating:</label>
-                    <input type="number" min={1} max={5} value={rating} onChange={handleRatingChange} />
+                    <input type="number" id="ratingNumber" min={1} max={5} value={rating} onChange={handleRatingChange} />
                 </div>
                 <div>
                     <label>Comment:</label>
-                    <textarea value={comment} onChange={handleCommentChange} />
+                    <textarea value={comment} id="comment" onChange={handleCommentChange} />
                 </div>
-                <button onClick={handleSubmitReview}>Submit Review</button>
+                <button onClick={handleReviewClick}>Submit Review</button>
             </div>
         </div>
     );
