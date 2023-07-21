@@ -73,8 +73,7 @@ public class HouseSeekerTableOperations {
                 String name = resultSet.getString("u.name");
                 java.util.Date startDate = resultSet.getDate("h.start_date");
 
-                HouseSeekerModel houseSeekerModel = new HouseSeekerModel( userId,  locationCity,  roomType,  otherPreferences,
-                        startDate,  null,  null,  name);
+                HouseSeekerModel houseSeekerModel = HouseSeekerModel.builder(userId,locationCity,roomType,startDate).housekeeperApplicationId(housekeeperApplicationId).otherPreferences(otherPreferences).name(name).build();
 
                 listOfApplicantPosts.add(houseSeekerModel);
             }

@@ -33,14 +33,7 @@ public class HouseSeekerController {
             Date start_date = sdf.parse(start_dateStr);
             ArrayList<String> food_preferences = (ArrayList<String>) requestBody.get("food_preferences");
             ArrayList<String> gender_preferences = (ArrayList<String>) requestBody.get("gender_preferences");
-            HouseSeekerModel houseSeekerModel = new HouseSeekerModel();
-            houseSeekerModel.setUser_id(user_id);
-            houseSeekerModel.setLocation_city(location_city);
-            houseSeekerModel.setRoom_type(room_type);
-            houseSeekerModel.setStart_date(start_date);
-            houseSeekerModel.setOther_preferences(other_preferences);
-            houseSeekerModel.setFood_preferences(food_preferences);
-            houseSeekerModel.setGender_preferences(gender_preferences);
+            HouseSeekerModel houseSeekerModel =  HouseSeekerModel.builder(user_id,location_city,room_type,start_date).otherPreferences(other_preferences).foodPreferences(food_preferences).genderPreferences(gender_preferences).build();
             return houseSeekerService.createAD(houseSeekerModel);
         } catch (Exception e){
             return e.getMessage();
