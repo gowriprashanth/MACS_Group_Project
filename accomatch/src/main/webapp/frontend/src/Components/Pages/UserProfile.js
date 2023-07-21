@@ -40,7 +40,10 @@ export const UserProfile = () => {
                             <p>Gender: {users.gender}</p>
                             <p>Mobile: {users.mobile}</p>
                             <p>Address: {users.address}</p>
-                            
+                            <p>
+                                <span className="line"><a href="/forgetpassword">Reset Password</a>
+                                </span>
+                            </p>
                         </div>
         </div>
 
