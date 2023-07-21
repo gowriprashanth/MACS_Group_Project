@@ -151,3 +151,19 @@ io.jsonwebtoken.ExpiredJwtException: JWT expired at 2023-07-21T19:36:35Z. Curren
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:1623)
 2023-07-21 16:40:53.305 [http-nio-8080-exec-8] INFO  c.p.accomatch.LoggerPack.LoggerClass - Login controller activated
+2023-07-21 16:53:38.564 [main] INFO  c.p.accomatch.AccomatchApplication - Starting AccomatchApplication using Java 20.0.1 with PID 20444 (C:\Users\AVuser\git\Accomatch_application\accomatch\target\classes started by AVuser in C:\Users\AVuser\git\Accomatch_application\accomatch)
+2023-07-21 16:53:38.567 [main] INFO  c.p.accomatch.AccomatchApplication - No active profile set, falling back to 1 default profile: "default"
+2023-07-21 16:53:40.665 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-07-21 16:53:40.678 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2023-07-21 16:53:40.679 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-07-21 16:53:40.679 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-07-21 16:53:40.794 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-07-21 16:53:40.795 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2137 ms
+2023-07-21 16:53:41.420 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7e8279e5, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2b53840a, org.springframework.security.web.context.SecurityContextHolderFilter@3ece79fe, org.springframework.security.web.header.HeaderWriterFilter@800d065, org.springframework.web.filter.CorsFilter@3caafa67, org.springframework.security.web.authentication.logout.LogoutFilter@2d5a1588, com.project.accomatch.JWT.JwtFilter@14998e21, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1e01b133, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@78da899f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3e546734, org.springframework.security.web.session.SessionManagementFilter@2ac519dc, org.springframework.security.web.access.ExceptionTranslationFilter@11381415, org.springframework.security.web.access.intercept.AuthorizationFilter@58f2466c]
+2023-07-21 16:53:41.575 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2023-07-21 16:53:41.597 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-21 16:53:41.607 [main] INFO  c.p.accomatch.AccomatchApplication - Started AccomatchApplication in 3.634 seconds (process running for 5.58)
+2023-07-21 16:53:50.175 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-21 16:53:50.175 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-07-21 16:53:50.176 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2023-07-21 16:53:50.345 [http-nio-8080-exec-2] INFO  c.p.accomatch.LoggerPack.LoggerClass - Login controller activated
