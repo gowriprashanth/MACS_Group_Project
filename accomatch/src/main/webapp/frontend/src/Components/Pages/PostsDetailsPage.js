@@ -8,28 +8,34 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import { Carousel } from 'react-responsive-carousel';
 import { Link, useNavigate } from 'react-router-dom';
-export const PostsDetailsPage = () => {
 
+export const PostsDetailsPage = () => {
   const navigate =useNavigate();
+
   const { applicationId } = useParams();
   const [alreadyApplied,setAlreadyApplied] = useState(false);
   const [post, setPost] = useState(null);
+  const [ratings,setRatings] = useState([]);
   const [images, setImages] = useState([]);
   const [foodPreferences, setFoodPreferences] = useState([]);
   const [genderPreferences, setGenderPreferences] = useState([]);
   const [reviewResponse, setReviewResponse] = useState([]);
   const [errMsg, setErrMsg] =useState ('');
   const [success, setSuccess] = useState(false);
+  const handleReviewClick =()=>{
+      navigate(`/ratingform/${applicationId}`)
+  }
   const handleApplySubmit =async () => {
     let bodyObj = {
-        user_id:4,
+        user_id:sessionStorage.getItem("user_id"),
         application_id:applicationId,
         status:"Pending"
     }
 
     fetch("http://localhost:8080/api/applicant/apply", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+        "Authorization": `Bearer ${sessionStorage.getItem("token")}`}, // Include the authentication token in the headers
         body: JSON.stringify(bodyObj),
     })
     .then((response) => {
@@ -58,55 +64,95 @@ export const PostsDetailsPage = () => {
   useEffect(() => {
     const isUserAlreadyApplied = async ()=>{
       let bodyObj = {
-        user_id:4,
+        user_id:sessionStorage.getItem("user_id"),
         application_id:applicationId
     }
-
+    // setAlreadyApplied(await isUserAlreadyApplied());
     fetch("http://localhost:8080/api/applicant/isApplied", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(bodyObj),
-    })
-    .then((response) => {
-        console.log(response);
-        return response.text(); // Read the response data as text
-    })
-    .then((data) => {
-        console.log(data); // Log the response data
-        if (data === "success") {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${sessionStorage.getItem("token")}` // Include the authentication token in the headers
+    },
+    body: JSON.stringify(bodyObj),
+    
+})
+.then((response) => {
+    console.log(response);
+    return response.json(); // Read the response data as JSON
+})
+.then((data) => {
+    console.log(data); // Log the response data
+    if (data === "success") {
         setSuccess(true);
-        } else {
+    } else {
         setErrMsg("Login failed. Please try again."); // Set an appropriate error message
-        }
-    })
-    .catch((error) => {
-        setErrMsg("An error occurred. Please try again."); // Set an appropriate error message
-    });
     }
-    const fetchPostDetails = async () => {
-      console.log(applicationId);
-      try {
-        const postResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/post/details/${applicationId}`);
-        setPost(postResponse.data);
-        console.log(postResponse.data)
-        const imagesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/images/${applicationId}`);
-        setImages(imagesResponse.data);
+})
+.catch((error) => {
+    setErrMsg("An error occurred. Please try again."); // Set an appropriate error message
+});
+setAlreadyApplied(await isUserAlreadyApplied());
+ }
+ const fetchPostDetails = async () => {
+  console.log(applicationId);
+  try {
+    const authToken = sessionStorage.getItem("token"); // Retrieve the authentication token from sessionStorage
 
-        const foodPreferencesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/food/${applicationId}`);
-        setFoodPreferences(foodPreferencesResponse.data);
-
-        const genderPreferencesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/gender/${applicationId}`);
-        setGenderPreferences(genderPreferencesResponse.data);
-
-
-        const response = await axios.get(`http://localhost:8080/reviews/getListOfAllRatings/${applicationId}`);
-        setReviewResponse(response.data);
-        console.log(response.data)
-
-      } catch (error) {
-        console.log(error);
+    const postResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/post/details/${applicationId}`, {
+      headers: {
+        'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
       }
-    };
+    });
+    setPost(postResponse.data);
+    console.log(postResponse.data);
+
+    const imagesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/images/${applicationId}`, {
+      headers: {
+        'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
+      }
+    });
+    setImages(imagesResponse.data);
+
+    const foodPreferencesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/food/${applicationId}`, {
+      headers: {
+        'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
+      }
+    });
+    setFoodPreferences(foodPreferencesResponse.data);
+
+    const genderPreferencesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/gender/${applicationId}`, {
+      headers: {
+        'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
+      }
+    });
+    setGenderPreferences(genderPreferencesResponse.data);
+
+    const response = await axios.get(`http://localhost:8080/reviews/getListOfAllRatings/${applicationId}`, {
+      headers: {
+        'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
+      }
+    });
+    setReviewResponse(response.data);
+    console.log(response.data);
+
+    const ratingResponse = await axios.get(`http://localhost:8080/reviews/getAverageRatings/${applicationId}`, {
+      headers: {
+        'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
+      }
+    }
+    );
+    // setAlreadyApplied(await isUserAlreadyApplied());
+    setRatings(ratingResponse.data);
+    console.log(ratingResponse.data);
+  } catch (error) {
+    console.log(error.response.data);
+    toast.error(error.response.data.message, {
+      position: toast.POSITION.TOP_RIGHT
+    });
+  }
+};
+
 
     fetchPostDetails();
   }, [applicationId]);
@@ -185,15 +231,26 @@ export const PostsDetailsPage = () => {
       </div>
       {alreadyApplied ?
       {/* Apply button */}
-        (<button className="apply-button" onClick={()=>handleApplySubmit()}>Apply</button>) : 
-        (<button className="chat-button">Chat</button>)
+      (<button className="chat-button">Chat</button>):
+        (<button className="apply-button" onClick={()=>handleApplySubmit()}>Apply</button>) 
       }
 
       {/* Applicant button */}
-      <button onClick={() => handleApplicantClick(post.leaseholderApplicationId)}>Applicant</button>
-
+      {/*<button onClick={() => handleApplicantClick(post.leaseholderApplicationId)}>Applicant</button>*/}
+      {/*/!* Review button *!/*/}
+      <button onClick={() => handleReviewClick(post.application_id)}>Review the post</button>
         <div >
+
             <h3>Reviews and Ratings</h3>
+            <div className="preferences-section">
+                {ratings.map((rate, index) => (
+                    <div className="preferences-section" key={index}>
+                        <div className="preferences-section">
+                            <h3>Average rating: {rate.averageRating}</h3>
+                        </div>
+                    </div>
+                ))}
+            </div>
 
             <div >
 
@@ -208,6 +265,8 @@ export const PostsDetailsPage = () => {
                         ))}
             </div>
         </div>
+
+
 
     </div>
 

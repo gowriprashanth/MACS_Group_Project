@@ -28,8 +28,10 @@ public class ApplyonPostController {
     @PostMapping("/isApplied")
     public boolean isUserApplied(@RequestBody Map<String,Object> requestBody){
         try{
-            int user_id = (Integer) requestBody.get("user_id");
-            int application_id = (Integer) requestBody.get("application_id");
+            String user_idStr = (String) requestBody.get("user_id");
+            int user_id = Integer.parseInt(user_idStr);
+            String application_idStr = (String) requestBody.get("application_id");
+            int application_id = Integer.parseInt(application_idStr);
             LeaseHolderApplicantModel leaseHolderApplicantModel = new LeaseHolderApplicantModel();
             leaseHolderApplicantModel.setUser_id(user_id);
             leaseHolderApplicantModel.setApplication_id(application_id);

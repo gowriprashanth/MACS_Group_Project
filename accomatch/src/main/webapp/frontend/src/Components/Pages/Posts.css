@@ -110,3 +110,26 @@
   display: flex;
   gap: 10px;
 }
+
+.ratings {
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 20px;
+
+}
+
+.container {
+  display: flex; /* Set display to flex */
+  justify-content: space-between; /* Align items horizontally with space between */
+  /* Add any additional styling properties as needed */
+}
+
+.rating-list {
+  flex: 1; /* Take up available space */
+  display: flex;
+  flex-direction: column;
+  /* Add any additional styling properties as needed */
+}

@@ -29,12 +29,19 @@ export const PostsByStatus = () => {
 
   const loadPosts = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/admin/get/list/post");
+      const authToken = sessionStorage.getItem("token"); // authentication token
+      
+      const response = await axios.get("http://localhost:8080/admin/get/list/post", {
+        headers: {
+          Authorization: `Bearer ${authToken}` //  authentication token in the headers
+        }
+      });
       setPosts(response.data);
     } catch (error) {
       console.error(error);
     }
-  }
+  };
+  
 
   const handleDetailsClick = (postId) => {
     navigate(`/posts/${postId}`);
@@ -82,20 +89,34 @@ export const PostsByStatus = () => {
   const handleFilterSubmit = async (event) => {
     event.preventDefault();
     try {
-      if(filter.status!==""){
-      const response = await axios.post("http://localhost:8080/admin/get/list/postbystatus", {
-        status: filter.status
-      });
-      setPosts(response.data);
-    }else{
-        const response = await axios.get("http://localhost:8080/admin/get/list/post")
+      const authToken = sessionStorage.getItem("token"); //  authentication token
+      
+      if (filter.status !== "") {
+        const response = await axios.post(
+          "http://localhost:8080/admin/get/list/postbystatus",
+          {
+            status: filter.status
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${authToken}` // authentication token in the headers
+            }
+          }
+        );
         setPosts(response.data);
-      } 
+      } else {
+        const response = await axios.get("http://localhost:8080/admin/get/list/post", {
+          headers: {
+            Authorization: `Bearer ${authToken}` // authentication token in the headers
+          }
+        });
+        setPosts(response.data);
+      }
     } catch (error) {
       console.error(error);
     }
   };
-
+  
   const toggleFilter = () => {
     setIsFilterOpen(prevValue => !prevValue);
   };

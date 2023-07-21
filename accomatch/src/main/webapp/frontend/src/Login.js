@@ -40,23 +40,38 @@ export const Login =() =>{
         })
         .then((response) => {
             console.log(response);
-            if(response.status===200){
-                navigate("/posts");
-            }
-            return response.json(); // Read the response data as text
+           
+            return response.json(); // Read the response data as json
         })
         .then((data) => {
             console.log(data); // Log the response data
+        
+            const userDetailsString = data.userDetails;
+            const userDetails = JSON.parse(userDetailsString);
+        
+            console.log(userDetails); // Output the parsed userDetails object
+        
+            // Access additional data from the userDetails object
+            const email = userDetails.additionalData.Email;
+            const userId = userDetails.additionalData.User_id;
+            const name = userDetails.additionalData.Name;
+            const type= userDetails.additionalData.Type;
+            const status=userDetails.additionalData.Status;;
+            const token = data.token;
             console.log(data.User_id);
-            sessionStorage.setItem('user_id', data.User_id);
-            sessionStorage.setItem("name", data.Name);
-            sessionStorage.setItem("email", data.Email);
-            sessionStorage.setItem("type", data.type);
+            sessionStorage.setItem('user_id', userId);
+            sessionStorage.setItem("name", name);
+            sessionStorage.setItem("email", email);
+            sessionStorage.setItem("type", type);
+            sessionStorage.setItem("token", token);
             console.log(sessionStorage.getItem('user_id'));
-            if (data.Status === "Success") {
+            if (status === "Success") {
             setSuccess(true);
             } else {
             setErrMsg("Login failed. Please try again."); // Set an appropriate error message
+            }
+            if(status==="Success"){
+                navigate("/posts");
             }
         })
         .catch((error) => {

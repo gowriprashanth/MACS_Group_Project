@@ -9,6 +9,7 @@ import {  useNavigate } from 'react-router-dom';
 
 export const Posts = () => {
   const [posts, setPosts] = useState([]);
+  const [ratings,setRatings] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -31,8 +32,25 @@ export const Posts = () => {
 
   const loadPosts = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/leaseowner/dashboard/get/list/post");
-      setPosts(response.data);
+      const authToken = sessionStorage.getItem("token"); //  authentication token
+  
+      const postResponse = await axios.get("http://localhost:8080/api/leaseowner/dashboard/get/list/post", {
+        headers: {
+          'Authorization': `Bearer ${authToken}` // Include the authentication token in the headers
+        }
+      });
+  
+      setPosts(postResponse.data);
+      console.log(postResponse.data);
+  
+      const ratingResponse = await axios.get("http://localhost:8080/reviews/getAllAverageRatings", {
+        headers: {
+          'Authorization': `Bearer ${authToken}` // Include the authentication token in the headers
+        }
+      });
+  
+      setRatings(ratingResponse.data);
+      console.log(ratingResponse.data);
     } catch (error) {
       console.error(error);
       toast.error('An error occurred while loading posts. Please try again.', {
@@ -40,6 +58,8 @@ export const Posts = () => {
       });
     }
   }
+  
+
 
   const handleDetailsClick = (postId) => {
     navigate(`/posts/${postId}`);
@@ -84,19 +104,25 @@ export const Posts = () => {
     const ageValue = filter.age;
   
     try {
+      const authToken = sessionStorage.getItem("token"); // Replace with the actual authentication token
+  
       const response = await axios.post("http://localhost:8080/applicant/posts/filter", {
         Male: genderValue,
         Female: filter.gender.female ? 1 : 0,
         Veg: foodValue,
         NonVeg: filter.food.nonVegetarian ? 1 : 0,
         age: ageValue
+      }, {
+        headers: {
+          'Authorization': `Bearer ${authToken}` // Include the authentication token in the headers
+        }
       });
       setPosts(response.data);
     } catch (error) {
       console.error(error);
     }
   };
-
+  
   const toggleFilter = () => {
     setIsFilterOpen(prevValue => !prevValue);
   };
@@ -176,6 +202,7 @@ export const Posts = () => {
           <button type="submit">Apply Filter</button>
         </form>
       </div>
+      <div className="container">
       <div className="post-list">
         {posts.map((post, index) => (
           <div className="post" key={index}>
@@ -191,7 +218,7 @@ export const Posts = () => {
               <p>Rent: {post.rent}</p>
               <p>Room Type: {post.roomType}</p>
               <p>Area: {post.area} sqft</p>
-              <p>Available From: {post.availableFrom}</p>              
+              <p>Available From: {post.availableFrom}</p>
             </div>
           </div>
         ))}
@@ -212,7 +239,22 @@ export const Posts = () => {
           </div>
         </div>
       )}
-          
+
+      <div className="post-list">
+        {ratings.map((rate, index) => (
+            <div className="post" key={index}>
+              <div className="rating-details">
+                <h3>Average Rating: {rate.averageRating}*</h3>
+                <p>5 star: {rate.count5Ratings}</p>
+                <p>4 star: {rate.count4Ratings}</p>
+                <p>3 star: {rate.count3Ratings}</p>
+                <p>2 star: {rate.count2Ratings}</p>
+                <p>1 star: {rate.count1Ratings}</p>
+              </div>
+            </div>
+        ))}
+      </div>
+      </div >
     </div>
-  );
+);
 };

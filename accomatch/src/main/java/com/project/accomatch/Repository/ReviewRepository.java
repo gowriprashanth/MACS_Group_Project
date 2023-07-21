@@ -79,4 +79,35 @@ public class ReviewRepository {
             }
             return listOfReviews;
         }
+
+    public List<Review> getAllPostReviews() {
+        List<Review> listOfReviews = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(JDBC, username, password);
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(
+                     "SELECT u.name, u.user_id, rt.application_id, rt.rating_id, rt.rating, rt.review, rt.rating FROM user u JOIN rating_table rt ON u.user_id = rt.user_id"
+
+             )) {
+            //statement.setInt(1,application_id);
+            //ResultSet resultSet= statement.executeQuery();
+            while (resultSet.next()) {
+                //int applicationId = resultSet.getInt("application_id");
+                int userId = resultSet.getInt("user_id");
+                int applicationId = resultSet.getInt("application_id");
+                int ratingId = resultSet.getInt("rating_id");
+                int rating = resultSet.getInt("rating");
+                String comment = resultSet.getString("review");
+                String name = resultSet.getString("name");
+
+                Review reviews = new Review(ratingId, userId, applicationId, name, rating, comment);
+
+                listOfReviews.add(reviews);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listOfReviews;
+    }
     }
