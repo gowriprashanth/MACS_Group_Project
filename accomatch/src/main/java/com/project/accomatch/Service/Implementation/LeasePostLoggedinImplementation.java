@@ -1,11 +1,12 @@
 package com.project.accomatch.Service.Implementation;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Repository.Implementation.LeasePostsLoggedinRepository;
+import com.project.accomatch.Service.LeasePostLoggedinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
-public class LeasePostLoggedinService {
+public class LeasePostLoggedinImplementation implements LeasePostLoggedinService {
 
     @Autowired
     LeasePostsLoggedinRepository leasePostsLoggedinRepository;
