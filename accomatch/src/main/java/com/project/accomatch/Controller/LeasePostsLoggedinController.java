@@ -1,7 +1,8 @@
 package com.project.accomatch.Controller;
+
 import com.project.accomatch.Exception.InvalidInputException;
 import com.project.accomatch.Model.Posts;
-import com.project.accomatch.Service.Implementation.LeasePostLoggedinService;
+import com.project.accomatch.Service.LeasePostsLoggedinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 @RequestMapping("/api/leaseowner/loggedinapplicant")
 public class LeasePostsLoggedinController {
     @Autowired
-    private LeasePostLoggedinService applicantService;
+    private LeasePostsLoggedinService applicantService;
     @GetMapping("/get/list/applicant/{user_id}")
     public List<Posts> getListOfLoggedinPosts(@PathVariable int user_id) {
         if (user_id <= 0) {
