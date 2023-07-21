@@ -1,7 +1,8 @@
-package com.project.accomatch.Repository;
+package com.project.accomatch.Repository.Implementation;
 
-//import com.project.accomatch.Credentials;
+//mport com.project.accomatch.Credentials;
 import com.project.accomatch.Model.LeaseHolderModel;
+import com.project.accomatch.Repository.LeaseHolderFoodTableOperationsInterface;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class LeaseHolderImagesTableOperations {
+public class LeaseHolderFoodTableOperations implements LeaseHolderFoodTableOperationsInterface {
     @Value("${username.db.accomatch}")
     private String username;
 
@@ -19,7 +20,7 @@ public class LeaseHolderImagesTableOperations {
 
     @Value("${Connection.db.accomatch}")
     private String JDBC;
-    public boolean addImages(LeaseHolderModel leaseHolderModel,int leaseholder_application_id){
+    public boolean createFoodReferences(LeaseHolderModel leaseHolderModel,int leaseholder_application_id){
         try {
             Connection connect;
             Statement statement;
@@ -30,12 +31,12 @@ public class LeaseHolderImagesTableOperations {
             statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
          //   statement.execute("use accomatch;");
-            String sql = "INSERT INTO leaseholder_images (application_id,image_link)"+
+            String sql = "INSERT INTO leaseholder_food_preferences (application_id,food_pref)"+
                     "VALUES (?,?)";
             PreparedStatement stmt = connect.prepareStatement(sql);
-            for(String image_link :leaseHolderModel.getImages()){
+            for(String food_preference :leaseHolderModel.getFood_preferences()){
                 stmt.setInt(1,leaseholder_application_id);
-                stmt.setString(2,image_link);
+                stmt.setString(2,food_preference);
                 stmt.addBatch();
             }
             stmt.executeBatch();
@@ -47,8 +48,8 @@ public class LeaseHolderImagesTableOperations {
         }
     }
 
-    public List<String> getImagesByApplicationId(int applicationId) {
-        List<String> images = new ArrayList<>();
+    public List<String> getFoodPreferencesByApplicationId(int applicationId) {
+        List<String> foodPreferences = new ArrayList<>();
 
         try {
             Connection connect;
@@ -62,17 +63,17 @@ public class LeaseHolderImagesTableOperations {
 
             statement.execute("USE CSCI5308_4_DEVINT;");
 
-            // Query to fetch images based on the application ID
-            String sql = "SELECT image_link FROM leaseholder_images WHERE application_id = ?";
+            // Query to fetch food preferences based on the application ID
+            String sql = "SELECT food_pref FROM leaseholder_food_preferences WHERE application_id = ?";
             PreparedStatement stmt = connect.prepareStatement(sql);
             stmt.setInt(1, applicationId);
 
             ResultSet rs = stmt.executeQuery();
 
-            // Fetch images and add them to the list
+            // Fetch food preferences and add them to the list
             while (rs.next()) {
-                String imageLink = rs.getString("image_link");
-                images.add(imageLink);
+                String foodPref = rs.getString("food_pref");
+                foodPreferences.add(foodPref);
             }
 
             rs.close();
@@ -82,8 +83,6 @@ public class LeaseHolderImagesTableOperations {
             throw new RuntimeException(e);
         }
 
-        return images;
+        return foodPreferences;
     }
-
 }
-

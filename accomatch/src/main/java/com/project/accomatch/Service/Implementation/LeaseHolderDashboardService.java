@@ -2,10 +2,10 @@ package com.project.accomatch.Service.Implementation;
 
 import com.project.accomatch.Exception.DataAccessException;
 import com.project.accomatch.Model.Posts;
-import com.project.accomatch.Repository.LeaseHolderFoodTableOperations;
-import com.project.accomatch.Repository.LeaseHolderGenderTableOperations;
-import com.project.accomatch.Repository.LeaseHolderImagesTableOperations;
-import com.project.accomatch.Repository.LeaseholderAdsDao;
+import com.project.accomatch.Repository.Implementation.LeaseHolderFoodTableOperations;
+import com.project.accomatch.Repository.Implementation.LeaseHolderGenderTableOperations;
+import com.project.accomatch.Repository.Implementation.LeaseHolderImagesTableOperations;
+import com.project.accomatch.Repository.Implementation.LeaseholderAdsDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.project.accomatch.ServiceTest;
 
-import com.project.accomatch.Repository.ApplicantPostFilteringOperation;
+import com.project.accomatch.Repository.Implementation.ApplicantPostFilteringOperation;
 import com.project.accomatch.Service.Implementation.ApplicantPostFilterImplementation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

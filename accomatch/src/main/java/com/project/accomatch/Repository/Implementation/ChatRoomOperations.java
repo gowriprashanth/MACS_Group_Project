@@ -1,13 +1,14 @@
-package com.project.accomatch.Repository;
+package com.project.accomatch.Repository.Implementation;
 
-import com.project.accomatch.Model.HouseSeekerModel;
+import com.project.accomatch.Model.ChatRoomModel;
+import com.project.accomatch.Repository.ChatRoomOperationsInterface;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 
 @Repository
-public class HouseSeekerFoodTableOperations {
+public class ChatRoomOperations implements ChatRoomOperationsInterface {
     @Value("${username.db.accomatch}")
     private String username;
 
@@ -16,8 +17,8 @@ public class HouseSeekerFoodTableOperations {
 
     @Value("${Connection.db.accomatch}")
     private String JDBC;
-    public boolean createFoodReferences(HouseSeekerModel houseSeekerModel, int houseseeker_application_id) {
-        try {
+    public int createChatRoom(ChatRoomModel chatRoomModel){
+        try{
             Connection connect;
             Statement statement;
             // Connect to the database.
@@ -27,18 +28,21 @@ public class HouseSeekerFoodTableOperations {
             statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
             //   statement.execute("use accomatch;");
-            String sql = "INSERT INTO houseseeker_food_preferences (application_id,food_pref)"+
+            String sql = "INSERT INTO room (user_1_id,user_2_id)"+
                     "VALUES (?,?)";
-            PreparedStatement stmt = connect.prepareStatement(sql);
-            for(String food_preference :houseSeekerModel.getFood_preferences()){
-                stmt.setInt(1,houseseeker_application_id);
-                stmt.setString(2,food_preference);
-                stmt.addBatch();
+            PreparedStatement stmt = connect.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            stmt.setInt(1,chatRoomModel.getUser_1_id());
+            stmt.setInt(2,chatRoomModel.getUser_2_id());
+            stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys();
+            int key = 0;
+            if (rs.next()) {
+                key = rs. getInt(1);
+                // Use the generated key as needed
             }
-            stmt.executeBatch();
             stmt.close();
             connect.close();
-            return true;
+            return key;
         } catch (Exception e){
             throw new RuntimeException(e);
         }
