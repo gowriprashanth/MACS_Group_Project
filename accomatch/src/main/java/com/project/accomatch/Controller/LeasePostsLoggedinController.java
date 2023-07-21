@@ -1,8 +1,7 @@
 package com.project.accomatch.Controller;
 import com.project.accomatch.Exception.InvalidInputException;
 import com.project.accomatch.Model.Posts;
-import com.project.accomatch.Service.Implementation.LeasePostLoggedinImplementation;
-import com.project.accomatch.Service.LeasePostLoggedinService;
+import com.project.accomatch.Service.Implementation.LeasePostLoggedinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;

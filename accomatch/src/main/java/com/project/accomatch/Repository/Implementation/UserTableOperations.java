@@ -1,7 +1,8 @@
-package com.project.accomatch.Repository;
+package com.project.accomatch.Repository.Implementation;
 
 import com.project.accomatch.LoggerPack.LoggerClass;
 import com.project.accomatch.Model.UserModel;
+import com.project.accomatch.Repository.UserTableOperationsInterface;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class UserTableOperations {
+public class UserTableOperations implements UserTableOperationsInterface {
 
     Logger logger = LoggerClass.getLogger();
 
