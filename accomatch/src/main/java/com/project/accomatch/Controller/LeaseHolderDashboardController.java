@@ -5,17 +5,14 @@
  */
 package com.project.accomatch.Controller;
 
-import com.project.accomatch.Exception.DataAccessException;
 import com.project.accomatch.Exception.InvalidInputException;
-import com.project.accomatch.Model.PostDetails;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Service.Implementation.LeaseHolderDashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import java.sql.SQLException;
+
 import java.util.List;
 
 @RestController
