@@ -1,8 +1,6 @@
 package com.project.accomatch.Controller;
 
-import com.project.accomatch.Model.Applicant;
-import com.project.accomatch.Model.HouseSeekerModel;
-import com.project.accomatch.Model.Posts;
+import com.project.accomatch.Model.HouseSeeker.HouseSeekerModel;
 import com.project.accomatch.Service.HouseSeekerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

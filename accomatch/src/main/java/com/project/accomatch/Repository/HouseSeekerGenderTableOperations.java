@@ -1,6 +1,6 @@
 package com.project.accomatch.Repository;
 
-import com.project.accomatch.Model.HouseSeekerModel;
+import com.project.accomatch.Model.HouseSeeker.HouseSeekerModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 

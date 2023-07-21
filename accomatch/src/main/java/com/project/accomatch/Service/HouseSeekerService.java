@@ -1,6 +1,6 @@
 package com.project.accomatch.Service;
 
-import com.project.accomatch.Model.HouseSeekerModel;
+import com.project.accomatch.Model.HouseSeeker.HouseSeekerModel;
 
 
 import java.util.List;

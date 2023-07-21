@@ -1,6 +1,6 @@
 package com.project.accomatch.Service.Implementation;
 
-import com.project.accomatch.Model.HouseSeekerModel;
+import com.project.accomatch.Model.HouseSeeker.HouseSeekerModel;
 import com.project.accomatch.Repository.*;
 import com.project.accomatch.Service.HouseSeekerService;
 import org.springframework.beans.factory.annotation.Autowired;
