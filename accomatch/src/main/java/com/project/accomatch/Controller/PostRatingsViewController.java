@@ -24,6 +24,9 @@ public class PostRatingsViewController {
     }
     @GetMapping("/getAverageRatings/{application_id}")
     public List<Ratings> getAverageRatings(@PathVariable int application_id){
+        if (application_id <= 0) {
+            throw new InvalidInputException("Invalid application ID provided.");
+        }
         return reviewServiceImplementation.getRatingsAverage(application_id);
     }
 

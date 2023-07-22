@@ -1,9 +1,11 @@
 package com.project.accomatch.Repository.Implementation;
 
 import com.project.accomatch.Exception.DataAccessException;
+import com.project.accomatch.LoggerPack.LoggerClass;
 import com.project.accomatch.Model.Applicant;
 import com.project.accomatch.Model.Review;
 import com.project.accomatch.Repository.ReviewRepositoryInterface;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -24,6 +26,8 @@ public class ReviewRepository implements ReviewRepositoryInterface {
 
     @Value("${Connection.db.accomatch}")
     private String JDBC;
+
+    Logger logger = LoggerClass.getLogger();
 
     public int createReview(Review review) {
         try {
@@ -78,6 +82,7 @@ public class ReviewRepository implements ReviewRepositoryInterface {
 
             } catch (SQLException e) {
                 e.printStackTrace();
+                logger.error(e.getMessage());
                 throw new DataAccessException("Failed to retrieve the reviews.", e);
             }
             return listOfReviews;
