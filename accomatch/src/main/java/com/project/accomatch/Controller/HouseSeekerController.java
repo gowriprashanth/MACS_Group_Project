@@ -28,7 +28,6 @@ public class HouseSeekerController {
     @PostMapping("/create")
     public String createAD(@RequestBody Map<String, Object> requestBody){
         try {
-
             return createApplicationService.createAD(requestBody);
         } catch (Exception e){
             return e.getMessage();

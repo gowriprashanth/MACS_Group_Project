@@ -1,7 +1,7 @@
 package com.project.accomatch.Service.Implementation;
 
 import com.project.accomatch.Model.Posts;
-import com.project.accomatch.Repository.ApplicantPostFilteringOperation;
+import com.project.accomatch.Repository.Implementation.ApplicantPostFilteringOperation;
 import com.project.accomatch.Service.ApplicantPostFilterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

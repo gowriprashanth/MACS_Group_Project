@@ -1,7 +1,9 @@
 package com.project.accomatch.Service.Implementation;
 
 import com.project.accomatch.Model.HouseSeekerModel;
-import com.project.accomatch.Repository.*;
+import com.project.accomatch.Repository.Implementation.HouseSeekerFoodTableOperations;
+import com.project.accomatch.Repository.Implementation.HouseSeekerGenderTableOperations;
+import com.project.accomatch.Repository.Implementation.HouseSeekerTableOperations;
 import com.project.accomatch.Service.HouseSeekerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,14 +35,8 @@ public class HouseSeekerServiceImplementation implements HouseSeekerService {
             Date start_date = sdf.parse(start_dateStr);
             ArrayList<String> food_preferences = (ArrayList<String>) requestBody.get("food_preferences");
             ArrayList<String> gender_preferences = (ArrayList<String>) requestBody.get("gender_preferences");
-            HouseSeekerModel houseSeekerModel = new HouseSeekerModel();
-            houseSeekerModel.setUser_id(user_id);
-            houseSeekerModel.setLocation_city(location_city);
-            houseSeekerModel.setRoom_type(room_type);
-            houseSeekerModel.setStart_date(start_date);
-            houseSeekerModel.setOther_preferences(other_preferences);
-            houseSeekerModel.setFood_preferences(food_preferences);
-            houseSeekerModel.setGender_preferences(gender_preferences);
+            HouseSeekerModel houseSeekerModel =  HouseSeekerModel.builder(user_id,location_city,room_type,start_date).otherPreferences(other_preferences).foodPreferences(food_preferences).genderPreferences(gender_preferences).build();
+
             int houseseeker_application_id = houseSeekerTableOperations.createAD(houseSeekerModel);
             boolean isFoodPreferencesAdded = houseSeekerFoodTableOperations.createFoodReferences(houseSeekerModel,houseseeker_application_id);
             boolean isGenderPreferencesAdded = houseSeekerGenderTableOperations.createGenderReferences(houseSeekerModel,houseseeker_application_id);

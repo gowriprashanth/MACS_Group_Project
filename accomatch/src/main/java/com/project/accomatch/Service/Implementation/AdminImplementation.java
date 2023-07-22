@@ -1,7 +1,7 @@
 package com.project.accomatch.Service.Implementation;
 
 import com.project.accomatch.Model.Posts;
-import com.project.accomatch.Repository.AdminRepository;
+import com.project.accomatch.Repository.Implementation.AdminRepository;
 import com.project.accomatch.Service.AdminInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
