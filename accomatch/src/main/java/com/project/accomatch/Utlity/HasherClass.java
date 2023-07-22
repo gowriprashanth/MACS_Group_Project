@@ -7,7 +7,15 @@ import java.util.Base64;
 
 public class HasherClass {
 
+    /** Secret key used for encryption and decryption*/
     private static final String SECRET_KEY = "ThisIsASecretKey";
+
+    /**
+     * Encrypts an email address using AES encryption.
+     * @author Yogish Honnadevipura Gopalakrishna
+     * @param email The email address to be encrypted.
+     * @return The encrypted email address as a Base64-encoded string.
+     */
     public static String hashEmail(String email) {
         try {
             SecretKeySpec secretKey = new SecretKeySpec(SECRET_KEY.getBytes(StandardCharsets.UTF_8), "AES");
@@ -19,6 +27,13 @@ public class HasherClass {
             return e.getMessage();
         }
     }
+
+    /**
+     * Decrypts an encrypted email address using AES decryption.
+     * @author Yogish Honnadevipura Gopalakrishna
+     * @param encryptedText The encrypted email address as a Base64-encoded string.
+     * @return The decrypted email address as a plain text string.
+     */
     public static String unHashEmail(String encryptedText) {
         try {
             SecretKeySpec secretKey = new SecretKeySpec(SECRET_KEY.getBytes(StandardCharsets.UTF_8), "AES");
