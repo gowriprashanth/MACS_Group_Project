@@ -16,8 +16,12 @@ export const LeaseHolderPersonlPosts = () => {
 
     useEffect(() => {
         const fetchPostDetails = async () => {
+            const authToken = sessionStorage.getItem("token"); // Replace with the actual authentication token
             try {
-                const postResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/getListOfPersonalPosts/${user_Id}`);
+                const postResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/getListOfPersonalPosts/${user_Id}`,{ 
+                    headers : {
+                        Authorization: `Bearer ${authToken}`} // Include the authentication token in the headers
+                      });
                 setPosts(postResponse.data);
             } catch (error) {
                 console.log(error);

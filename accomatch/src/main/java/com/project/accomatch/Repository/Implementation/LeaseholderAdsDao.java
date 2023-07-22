@@ -115,7 +115,7 @@ public class LeaseholderAdsDao implements LeaseholderAdsDaoInterface {
             statement.setInt(1, user_id);
 
             try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
+                while (resultSet.next()) {
                     int leaseholderApplicationId = resultSet.getInt("leaseholder_application_id");
                     int userId = resultSet.getInt("user_id");
                     String title = resultSet.getString("title");
