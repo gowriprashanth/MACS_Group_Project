@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public class LeaseholderAdsDao {
+public class LeaseholderAdsDao implements LeaseHolderDashboardInterface {
 
     @Value("${username.db.accomatch}")
     private String username;

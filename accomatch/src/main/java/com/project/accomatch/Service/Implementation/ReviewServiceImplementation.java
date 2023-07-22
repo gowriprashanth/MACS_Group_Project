@@ -4,6 +4,7 @@ import com.project.accomatch.Exception.DataAccessException;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Model.Ratings;
 import com.project.accomatch.Model.Review;
+import com.project.accomatch.Repository.LeaseHolderDashboardInterface;
 import com.project.accomatch.Repository.LeaseholderAdsDao;
 import com.project.accomatch.Repository.ReviewRepository;
 import com.project.accomatch.Service.ReviewService;
@@ -20,7 +21,7 @@ public class ReviewServiceImplementation implements ReviewService {
     @Autowired
     ReviewRepository reviewRepository;
     @Autowired
-    LeaseholderAdsDao leaseholderAdsDao;
+    LeaseHolderDashboardInterface leaseholderAdsDao;
 
     @Value("${username.db.accomatch}")
     private String username;

@@ -17,12 +17,19 @@ export const LeaseHolderPersonlPosts = () => {
     useEffect(() => {
         const fetchPostDetails = async () => {
             try {
-                const postResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/getListOfPersonalPosts/${user_Id}`);
-                setPosts(postResponse.data);
+              const authToken = sessionStorage.getItem("token"); //  authentication token
+              
+              const postResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/getListOfPersonalPosts/${user_Id}`, {
+                headers: {
+                  Authorization: `Bearer ${authToken}` // authentication token in the headers
+                }
+              });
+              setPosts(postResponse.data);
             } catch (error) {
-                console.log(error);
+              console.error(error);
             }
-        };
+          };
+          
 
         fetchPostDetails().then(r => console.log("Axios error coming"));
     }, [user_Id]);
@@ -40,10 +47,6 @@ export const LeaseHolderPersonlPosts = () => {
         setIsModalOpen(false);
     }
 
-    const apply = () => {
-        // Handle apply logic here
-        closeModal();
-    }
 
     return (
         <div className="dashboard-container">

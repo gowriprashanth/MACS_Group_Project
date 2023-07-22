@@ -38,10 +38,11 @@ export const HouseSeekerCreateApplication =() =>{
             other_preferences:otherPreferences,
             start_date:startDate,
             food_preferences:foodPreferences,
-            gender_preferences:genderPreferences
+            gender_preferences:genderPreferences,
+            type:'AP'
         }
 
-        fetch("http://localhost:8080/houseSeeker/create", {
+        fetch("http://localhost:8080/application/create", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -49,13 +50,6 @@ export const HouseSeekerCreateApplication =() =>{
             },
             body: JSON.stringify(bodyObj)
           })
-        .then((response) => {
-            console.log(response);
-            if(response.status===200){
-                navigate("/posts");
-            }
-            return response.text(); // Read the response data as text
-        })
         .then((data) => {
             console.log(data); // Log the response data
             if (data === "success") {
