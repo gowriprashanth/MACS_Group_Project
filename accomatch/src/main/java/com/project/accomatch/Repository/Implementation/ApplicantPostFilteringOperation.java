@@ -1,7 +1,9 @@
 package com.project.accomatch.Repository.Implementation;
 
+import com.project.accomatch.LoggerPack.LoggerClass;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Repository.ApplicantPostFIlteringOerationInterface;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +14,7 @@ import java.util.*;
 @Repository
 public class ApplicantPostFilteringOperation implements ApplicantPostFIlteringOerationInterface {
 
+    Logger logger = LoggerClass.getLogger();
     @Value("${username.db.accomatch}")
     private String username;
 
@@ -21,6 +24,17 @@ public class ApplicantPostFilteringOperation implements ApplicantPostFIlteringOe
     @Value("${Connection.db.accomatch}")
     private String JDBC;
 
+
+
+    /**
+     * Filters and retrieves a list of Posts based on applicant preferences.
+     * @author Yogish Honnadevipura Gopalakrishna
+     * @param gp   An array of gender preferences selected by the applicant.
+     * @param fp   An array of food preferences selected by the applicant.
+     * @param age  The age preference of the applicant.
+     * @param rt   The room type preference of the applicant.
+     * @return A list of Posts that match the applicant's preferences.
+     */
     public List<Posts> filterPosts(String[] gp, String[] fp, String age, String rt) {
         List<Posts> listOfFilteredPosts = new ArrayList<>();
 
@@ -95,51 +109,11 @@ public class ApplicantPostFilteringOperation implements ApplicantPostFIlteringOe
                     listOfFilteredPosts.add(post);
 
                 }
-//                String defaultValue = "SELECT leaseholder_ads.* " +
-//                        "FROM leaseholder_ads " +
-//                        "JOIN leaseholder_gender_preferences ON leaseholder_ads.leaseholder_application_id = leaseholder_gender_preferences.application_id " +
-//                        "JOIN leaseholder_food_preferences ON leaseholder_ads.leaseholder_application_id = leaseholder_food_preferences.application_id where (" +
-//                        "room_type = 'sharing' or room_type IS NULL) and (gender_pref = ";
-//                String[] array = {"element1", "element2", "element3"};
-//
-//                StringBuilder stringBuilder = new StringBuilder(defaultValue);
-//
-//                if (array.length > 0) {
-//                    for (String element : array) {
-//                        stringBuilder.append(element).append(" OR ").append(" gender_pref = ");
-//                    }
-//                    // Remove the last " OR" from the StringBuilder
-//                    stringBuilder.delete(stringBuilder.length() - 19, stringBuilder.length());
-//                    stringBuilder.append(" or gender_pref is null) ");
-//                }
-//                if(array.length == 0){
-//                    stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
-//                    stringBuilder.append("is null)");
-//                }
-//                    stringBuilder.append(" and (food_pref = ");
-//
-//
-//                if (array.length > 0) {
-//                    for (String element : array) {
-//                        stringBuilder.append(element).append(" OR ").append(" food_pref = ");
-//                    }
-//                    // Remove the last " OR" from the StringBuilder
-//                    stringBuilder.delete(stringBuilder.length() - 17, stringBuilder.length());
-//                    stringBuilder.append(" or gender_pref is null);");
-//                }
-//                if(array.length == 0){
-//                    stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
-//                    stringBuilder.append("is null);");
-//                }
-//
-//
-//                String finalString = stringBuilder.toString();
-//
-//                System.out.println(finalString);
             } catch (SQLException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
+                System.out.println(e.getMessage());
             }
-
+            logger.info("Returning the filtered posts");
             return listOfFilteredPosts;
     }
 }

@@ -1,18 +1,15 @@
 package com.project.accomatch.Repository.Implementation;
 
+import com.project.accomatch.Exception.InvalidInputException;
 import com.project.accomatch.LoggerPack.LoggerClass;
 import com.project.accomatch.Model.UserModel;
 import com.project.accomatch.Repository.UserTableOperationsInterface;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -28,9 +25,19 @@ public class UserTableOperations implements UserTableOperationsInterface {
 
     @Value("${Connection.db.accomatch}")
     private String JDBC;
+
+    /**
+     * Signs up a new user and stores the user information in the database.
+     * @author Yogish Honnadevipura Gopalakrishna
+     * @param model The UserModel object containing the user information to be stored in the database.
+     * @return A string message indicating the status of the signup process ("Success" or "Error").
+     */
     public String signUpUser(UserModel model){
 
         try{
+            if(model == null){
+                throw new InvalidInputException("Usermodel is null");
+            }
             Connection connect;
             Statement statement;
             // Connect to the database.
@@ -69,7 +76,11 @@ public class UserTableOperations implements UserTableOperationsInterface {
             logger.info("User '{}' signed up successfully.", model.getUserID());
             return "Success";
 
-        }catch(Exception e){
+        }catch (InvalidInputException e){
+            logger.error("Cannot pass a null input");
+            return "Error";
+        }
+        catch(Exception e){
             logger.error("Failed signing up attempt for '{}'.", model.getUserID());
             return "Error";
         }
@@ -78,9 +89,18 @@ public class UserTableOperations implements UserTableOperationsInterface {
 
     }
 
+    /**
+     * Logs in a user by checking their email and password against the database.
+     * @author Yogish Honnadevipura Gopalakrishna
+     * @param model The UserModel object containing the user's email and password for login.
+     * @return A map containing user-related data and login status ("Success" or "Fail").
+     */
     public Map<String, String> LoginUser(UserModel model){
 
         try{
+            if(model == null){
+                throw new InvalidInputException("Usermodel is null");
+            }
             Connection connect;
             Statement statement;
             ResultSet rs;
@@ -130,7 +150,13 @@ public class UserTableOperations implements UserTableOperationsInterface {
                 return returnMap;
             }
 
-        }catch(Exception e){
+        }catch (InvalidInputException e){
+            Map<String, String > returnMap = new HashMap<>();
+            returnMap.put("Status", e.getMessage());
+            logger.error("Cannot pass a null input");
+            return returnMap;
+        }
+        catch(Exception e){
             Map<String, String > returnMap = new HashMap<>();
             returnMap.put("Status", e.getMessage());
             logger.error("User '{}' failed to login due to an error.", model.getEmail());
@@ -139,6 +165,12 @@ public class UserTableOperations implements UserTableOperationsInterface {
 
     }
 
+    /**
+     * Checks if the provided email exists in the user table of the database.
+     * @author Yogish Honnadevipura Gopalakrishna
+     * @param Mail The email to be checked for existence.
+     * @return A string message indicating the result of the email check ("Success" or "Fail").
+     */
     public String CheckMailID(String Mail){
 
         try{
@@ -156,20 +188,29 @@ public class UserTableOperations implements UserTableOperationsInterface {
             if(rs.next()){
                 statement.close();
                 connect.close();
+                logger.info("Checking Mail iD :Mail ID present in DB");
                 return "Success";
             }
             else{
                 statement.close();
                 connect.close();
+                logger.info("Checking Mail iD :Mail ID absent in DB");
                 return "Fail";
             }
 
         }catch(Exception e){
+            logger.error(e.getMessage());
             return "Error";
         }
 
     }
 
+    /**
+     * Updates the user's password in the database after a password reset request.
+     * @author Yogish Honnadevipura Gopalakrishna
+     * @param model The UserModel object containing the user's email and new password.
+     * @return A string message indicating the status of the password update process ("Success" or "Error").
+     */
     public String ForgotPassword(UserModel model){
 
         try{
@@ -189,13 +230,21 @@ public class UserTableOperations implements UserTableOperationsInterface {
             stmt.executeUpdate();
             statement.close();
             connect.close();
+            logger.info("Password updated");
             return "Success";
         }catch(Exception e){
+            logger.error(e.getMessage());
             return "Error";
         }
 
     }
 
+    /**
+     * Retrieves user information from the database based on the user's ID.
+     * @author Yogish Honnadevipura Gopalakrishna
+     * @param id The ID of the user whose information is to be retrieved.
+     * @return The UserModel object containing the user information, or an empty UserModel object if not found.
+     */
     public UserModel getUserInfo(int id){
 
         try{
@@ -210,6 +259,7 @@ public class UserTableOperations implements UserTableOperationsInterface {
             //statement.execute("use accomatch;");
             rs = statement.executeQuery("SELECT user_id, email, `name`, password, age, gender, mobile, address, is_admin, is_leaseholder, createdAt, updatedAt FROM user " +
                     "where user_id = '"+id+"';");
+            logger.info("Getting user Details");
             UserModel userModel = new UserModel();
             if(rs.next()){
                 userModel.setUserID(rs.getInt(1));
@@ -226,12 +276,14 @@ public class UserTableOperations implements UserTableOperationsInterface {
             else{
                 statement.close();
                 connect.close();
+                logger.debug("User not present to get details");
                 return new UserModel();
             }
             statement.close();
             connect.close();
             return userModel;
         }catch(Exception e){
+            logger.error(e.getMessage());
             return new UserModel();
         }
     }

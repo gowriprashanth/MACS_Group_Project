@@ -1,9 +1,11 @@
 package com.project.accomatch.Controller;
 
 import com.project.accomatch.Exception.InvalidPostStatusException;
+import com.project.accomatch.LoggerPack.LoggerClass;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Service.AdminInterface;
 import com.project.accomatch.Service.Implementation.LeaseHolderDashboardService;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,7 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
 
+    Logger logger = LoggerClass.getLogger();
 
     @Autowired
     AdminInterface adminInterface;
@@ -29,6 +32,7 @@ public class AdminController {
      */
     @PostMapping("/verify/one")
     public String verifySingleAd(@RequestBody Posts posts){
+        logger.info("single Ad verification controller active");
         return adminInterface.VerifyOneAd(posts);
     }
 
@@ -39,6 +43,7 @@ public class AdminController {
      */
     @PostMapping("/verify/all")
     public String verifyAllAd(@RequestBody Posts posts){
+        logger.info("All Ad verification controller active");
         return adminInterface.VerifyAllAd(posts);
     }
 
