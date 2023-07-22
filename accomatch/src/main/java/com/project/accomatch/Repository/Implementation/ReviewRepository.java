@@ -1,5 +1,6 @@
 package com.project.accomatch.Repository.Implementation;
 
+import com.project.accomatch.Exception.DataAccessException;
 import com.project.accomatch.Model.Applicant;
 import com.project.accomatch.Model.Review;
 import com.project.accomatch.Repository.ReviewRepositoryInterface;
@@ -46,8 +47,9 @@ public class ReviewRepository implements ReviewRepositoryInterface {
             stmt.close();
             connect.close();
             return rs;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Failed to retrieve the reviews.", e);
         }
     }
         public List<Review> getAllReviews(int application_id) {
@@ -76,7 +78,7 @@ public class ReviewRepository implements ReviewRepositoryInterface {
 
             } catch (SQLException e) {
                 e.printStackTrace();
-                // Handle exception
+                throw new DataAccessException("Failed to retrieve the reviews.", e);
             }
             return listOfReviews;
         }

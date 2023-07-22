@@ -1,4 +1,5 @@
 package com.project.accomatch.Repository.Implementation;
+import com.project.accomatch.Exception.DataAccessException;
 import com.project.accomatch.Model.Applicant;
 import com.project.accomatch.Repository.LeaseApplicationRepositoryInterface;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,7 +45,7 @@ public class LeaseApplicationRepository implements LeaseApplicationRepositoryInt
 
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle exception
+            throw new DataAccessException("Failed to retrieve the reviews.", e);
         }
 
         return listOfApplicants;

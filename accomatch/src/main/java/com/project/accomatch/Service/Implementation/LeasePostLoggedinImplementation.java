@@ -1,4 +1,5 @@
 package com.project.accomatch.Service.Implementation;
+import com.project.accomatch.Exception.ResourceNotFoundException;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Repository.Implementation.LeasePostsLoggedinRepository;
 import com.project.accomatch.Service.LeasePostsLoggedinService;
@@ -11,6 +12,11 @@ public class LeasePostLoggedinImplementation implements LeasePostsLoggedinServic
     @Autowired
     LeasePostsLoggedinRepository leasePostsLoggedinRepository;
     public List<Posts> getListOfLoggedinApplicants(int application_id) {
-        return leasePostsLoggedinRepository.getListOfLoggedinApplicant(application_id);
+        try {
+            return leasePostsLoggedinRepository.getListOfLoggedinApplicant(application_id);
+        }
+        catch (Exception e){
+            throw new ResourceNotFoundException("Failed to retrieve the list of Applicants.");
+        }
     }
 }
