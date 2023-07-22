@@ -1,6 +1,7 @@
 package com.project.accomatch.Service.Implementation;
 
 import com.project.accomatch.Exception.DataAccessException;
+import com.project.accomatch.Exception.ResourceNotFoundException;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Model.Ratings;
 import com.project.accomatch.Model.Review;
@@ -55,12 +56,13 @@ public class ReviewServiceImplementation implements ReviewService {
         try {
             return reviewRepository.getAllPostReviews();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ResourceNotFoundException("Failed to retrieve the list of Applicants.");
         }
     }
 
     @Override
     public List<Ratings> getRatingsAverage(int application_id) {
+        try{
         int count5Ratings = 0;
         int count4Ratings = 0;
         int count3Ratings = 0;
@@ -102,6 +104,11 @@ public class ReviewServiceImplementation implements ReviewService {
 
         listOfRatings.add(ratings);
         return listOfRatings;
+        }
+        catch (Exception e){
+            throw new ResourceNotFoundException("Failed to retrieve the list of Applicants.");
+        }
+
     }
 
     public List<Ratings> getAllRatingsAverage() {
