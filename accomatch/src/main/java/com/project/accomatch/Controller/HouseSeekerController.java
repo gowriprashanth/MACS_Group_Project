@@ -4,6 +4,8 @@ import com.project.accomatch.Model.Applicant;
 import com.project.accomatch.Model.HouseSeekerModel;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Service.HouseSeekerService;
+import com.project.accomatch.Service.Implementation.CreateApplicationFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,9 @@ import java.util.*;
 public class HouseSeekerController {
     @Autowired
     private HouseSeekerService houseSeekerService;
+    @Autowired
+    private CreateApplicationFactory createApplicationService;
+
     @GetMapping("/getListOfAllApplicantPosts")
     public List<HouseSeekerModel> getListOfAllApplicantPosts(){
         return houseSeekerService.getListOfAllApplicantPosts();
@@ -23,18 +28,7 @@ public class HouseSeekerController {
     @PostMapping("/create")
     public String createAD(@RequestBody Map<String, Object> requestBody){
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String user_idStr = (String) requestBody.get("user_id");
-            int user_id = Integer.parseInt(user_idStr);
-            String location_city = (String) requestBody.get("location_city");
-            String room_type = (String) requestBody.get("room_type");
-            String other_preferences = (String) requestBody.get("other_preferences");
-            String start_dateStr = (String) requestBody.get("start_date");
-            Date start_date = sdf.parse(start_dateStr);
-            ArrayList<String> food_preferences = (ArrayList<String>) requestBody.get("food_preferences");
-            ArrayList<String> gender_preferences = (ArrayList<String>) requestBody.get("gender_preferences");
-            HouseSeekerModel houseSeekerModel =  HouseSeekerModel.builder(user_id,location_city,room_type,start_date).otherPreferences(other_preferences).foodPreferences(food_preferences).genderPreferences(gender_preferences).build();
-            return houseSeekerService.createAD(houseSeekerModel);
+            return createApplicationService.createAD(requestBody);
         } catch (Exception e){
             return e.getMessage();
         }

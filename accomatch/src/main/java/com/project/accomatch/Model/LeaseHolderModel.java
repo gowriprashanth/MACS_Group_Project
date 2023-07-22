@@ -146,11 +146,10 @@ public class LeaseHolderModel {
         return start_date;
     }
 
-    public void setStart_date(String start_date) throws ParseException {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yy");
-        this.start_date = simpleDateFormat.parse(start_date);
+    public void setStart_date(Date start_date) {
+        this.start_date=start_date;
     }
-
+    public LeaseHolderModel(){}
 
     public LeaseHolderModel(int user_id, int size, String title, String subtitle, String address, String location_city, String room_type, String document, String other_preferences, double rent, int start_age, int end_age, String start_date, ArrayList<String> food_preferences, ArrayList<String> images, ArrayList<String> gender_preferences) throws ParseException {
         this.user_id = user_id;
