@@ -27,7 +27,8 @@ export const LeaseHolderCreateApplication =() =>{
     const [images]=useState([]);
     const [errMsg, setErrMsg] =useState ('');
     const [success, setSuccess] = useState(false);
-
+    const authToken = sessionStorage.getItem("token"); //  authentication token
+             
     useEffect(() =>{
         userRef.current.focus();
     },[])
@@ -62,13 +63,15 @@ export const LeaseHolderCreateApplication =() =>{
             end_age:endAge,
             food_preferences:foodPreferences,
             gender_preferences:genderPreferences,
-            images:['https://unsplash.com/photos/e616t35Vbeg']
+            images:['https://unsplash.com/photos/e616t35Vbeg'],
+            type:'LH'
         }
 
-        fetch("http://localhost:8080/leaseHolder/create", {
+        fetch("http://localhost:8080/application/create", {
             method: "POST",
             headers: {
-              "Content-Type": "application/json"
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${authToken}` 
             },
             body: JSON.stringify(bodyObj)
           })

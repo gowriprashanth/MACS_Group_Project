@@ -4,8 +4,13 @@ import com.project.accomatch.Exception.DataAccessException;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Model.Ratings;
 import com.project.accomatch.Model.Review;
+
+import com.project.accomatch.Repository.LeaseHolderDashboardInterface;
+
 import com.project.accomatch.Repository.Implementation.LeaseholderAdsDao;
 import com.project.accomatch.Repository.Implementation.ReviewRepository;
+
+import com.project.accomatch.Repository.LeaseholderAdsDaoInterface;
 import com.project.accomatch.Service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,7 +25,7 @@ public class ReviewServiceImplementation implements ReviewService {
     @Autowired
     ReviewRepository reviewRepository;
     @Autowired
-    LeaseholderAdsDao leaseholderAdsDao;
+    LeaseholderAdsDaoInterface leaseholderAdsDao;
 
     @Value("${username.db.accomatch}")
     private String username;
