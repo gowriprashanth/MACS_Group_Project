@@ -1,8 +1,10 @@
 package com.project.accomatch.Repository.Implementation;
 
 import com.project.accomatch.Exception.DataAccessException;
+import com.project.accomatch.LoggerPack.LoggerClass;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Repository.LeaseholderAdsDaoInterface;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +15,7 @@ import java.util.List;
 
 @Repository
 public class LeaseholderAdsDao implements LeaseholderAdsDaoInterface {
+    Logger logger = LoggerClass.getLogger();
 
     @Value("${username.db.accomatch}")
     private String username;
@@ -58,7 +61,8 @@ public class LeaseholderAdsDao implements LeaseholderAdsDaoInterface {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            throw e;
+            logger.error(e.getMessage());
+            throw new DataAccessException("Failed to retrieve the list of posts.", e);
         }
 
         return listOfPosts;
@@ -100,7 +104,8 @@ public class LeaseholderAdsDao implements LeaseholderAdsDaoInterface {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle exception
+            logger.error(e.getMessage());
+            throw new DataAccessException("Failed to retrieve the list of posts.", e);
         }
 
         return post;
@@ -148,7 +153,8 @@ public class LeaseholderAdsDao implements LeaseholderAdsDaoInterface {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle exception
+            logger.error(e.getMessage());
+            throw new DataAccessException("Failed to retrieve the list of posts.", e);
         }
 
         return listOfPosts;
@@ -195,6 +201,7 @@ public class LeaseholderAdsDao implements LeaseholderAdsDaoInterface {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
             throw new DataAccessException("Failed to retrieve the list of posts.", e);
 
         }
