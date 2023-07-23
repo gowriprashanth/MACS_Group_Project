@@ -25,9 +25,9 @@ import java.util.List;
 @Service
 public class ReviewServiceImplementation implements ReviewService {
     @Autowired
-    ReviewRepository reviewRepository;
+    public ReviewRepository reviewRepository;
     @Autowired
-    LeaseholderAdsDaoInterface leaseholderAdsDao;
+    public LeaseholderAdsDaoInterface leaseholderAdsDao;
 
     @Value("${username.db.accomatch}")
     private String username;
