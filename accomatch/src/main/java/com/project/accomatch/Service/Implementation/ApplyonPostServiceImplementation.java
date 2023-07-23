@@ -60,8 +60,7 @@ public class ApplyonPostServiceImplementation implements ApplyonPostService {
             return applyonPostTableOperations.isAlreadyApplied(leaseHolderApplicantModel);
         } catch (Exception e) {
             String errorMessage = "Error while checking application status: " + e.getMessage();
-            // Log the error using your logging framework, e.g., SLF4J
-            // logger.error(errorMessage, e);
+            logger.error(errorMessage, e);
             throw new ApplicationException(errorMessage, e);
         }
     }

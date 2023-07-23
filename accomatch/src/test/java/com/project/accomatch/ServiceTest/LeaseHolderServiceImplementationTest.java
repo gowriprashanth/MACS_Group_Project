@@ -54,10 +54,10 @@ public class LeaseHolderServiceImplementationTest {
         requestBody.put("document", "Sample Document");
         requestBody.put("other_preferences", "Sample Preferences");
         requestBody.put("rent", 1000.0);
-        requestBody.put("is_verified", 0); // You can set the default value here if needed
+        requestBody.put("is_verified", 0);
         requestBody.put("start_age", 18);
         requestBody.put("end_age", 30);
-        requestBody.put("start_date", "2023-07-01"); // Sample date in the format "yyyy-MM-dd"
+        requestBody.put("start_date", "2023-07-01");
         requestBody.put("food_preferences", new ArrayList());
         requestBody.put("images",  new ArrayList());
         requestBody.put("gender_preferences",  new ArrayList());
@@ -87,7 +87,6 @@ public class LeaseHolderServiceImplementationTest {
     void testCreateAD_InvalidInput() throws Exception {
         // Arrange
         Map<String, Object> requestBody = new HashMap<>();
-        // Set up the requestBody with invalid values or missing required fields...
 
         // Act & Assert
         assertThrows(RuntimeException.class, () -> leaseHolderService.createAD(requestBody));
@@ -98,8 +97,7 @@ public class LeaseHolderServiceImplementationTest {
     void testCreateAD_Exception() {
         // Arrange
         Map<String, Object> requestBody = new HashMap<>();
-        // Set up the requestBody with valid values...
-
+       
         // Mock the leaseHolderTableOperations.createAD method to throw an exception
         when(leaseHolderTableOperations.createAD(any(LeaseHolderModel.class))).thenThrow(new RuntimeException());
 

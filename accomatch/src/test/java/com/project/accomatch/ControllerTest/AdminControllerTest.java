@@ -69,7 +69,7 @@ public class AdminControllerTest {
     @Test
     void testGetListOfPosts_Success() {
         // Arrange
-        List<Posts> expectedPostsList = Arrays.asList(new Posts(/* post parameters */));
+        List<Posts> expectedPostsList = Arrays.asList(new Posts());
         when(dashboardService.getListOfPosts()).thenReturn(expectedPostsList);
 
         // Act
@@ -86,7 +86,7 @@ public class AdminControllerTest {
         int status = 1;
         HashMap<String, String> map = new HashMap<>();
         map.put("status", Integer.toString(status));
-        List<Posts> expectedPostsList = Arrays.asList(new Posts(/* post parameters */));
+        List<Posts> expectedPostsList = Arrays.asList(new Posts());
         when(dashboardService.getListOfPostsByStatus(status)).thenReturn(expectedPostsList);
 
         // Act
