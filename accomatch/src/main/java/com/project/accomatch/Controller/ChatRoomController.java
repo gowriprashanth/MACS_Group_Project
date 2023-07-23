@@ -13,13 +13,13 @@ import java.util.Map;
 public class ChatRoomController {
     @Autowired
     private ChatRoomService chatRoomService;
-    @PostMapping("/getRoomId/")
+    @PostMapping("/getRoomId")
     public int getRoomId(@RequestBody Map<String,Object> requestBody){
         int user_id = (Integer) requestBody.get("user_id");
         int application_id = (Integer) requestBody.get("application_id");
         if (application_id <= 0 || user_id<=0) {
             throw new InvalidInputException("Invalid application ID provided.");
         }
-        return chatRoomService.getRoomId(application_id,application_id);
+        return chatRoomService.getRoomId(application_id,user_id);
     }
 }

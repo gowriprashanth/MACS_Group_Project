@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 import {w3cwebsocket as WebSocket} from "websocket";
-export const ChatModel = () => {
+export const ChatModel = (props) => {
   const [message, setMessage] = useState('');
   const [messages,setMessages] = useState([]);
   const [receivedMessage, setReceivedMessage] = useState('');
   const [connection, setConnection] = useState(null);
+  const {roomId}=useParams();
 
   useEffect(() => {
-    const ws = new WebSocket('ws://localhost:8080/chat/1'); // Replace with your WebSocket server URL
+    const ws = new WebSocket('ws://localhost:8080/chat/'+roomId); // Replace with your WebSocket server URL
     setConnection(ws);
 
     ws.onopen = () => {

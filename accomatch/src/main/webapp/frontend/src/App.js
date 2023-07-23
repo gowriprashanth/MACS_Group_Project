@@ -53,7 +53,7 @@ function App() {
             <Route path="/forgetpassword" element={<ForgetPasswordEmail />} />
             <Route path="/updatepassword" element={<ForgetPassword />} />
             <Route path="/leaseapplicantview/:user_Id" element={<LeaseApplicantView />} />
-            <Route path='/chat' element={<ChatModel/>}/>
+            <Route path='/chat/:roomId' element={<ChatModel/>}/>
             <Route path="/applicantposts/:user_Id" element={<ApplicantPosts />} />
             <Route path="/ratingform/:applicationId" element={<Rating />} />
             <Route path="/userprofile/:user_Id" element={<UserProfile/>}/>

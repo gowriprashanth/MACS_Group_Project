@@ -22,8 +22,46 @@ export const PostsDetailsPage = () => {
   const [reviewResponse, setReviewResponse] = useState([]);
   const [errMsg, setErrMsg] =useState ('');
   const [success, setSuccess] = useState(false);
+  const [roomId,setRoomId]=useState();
   const handleReviewClick =()=>{
       navigate(`/ratingform/${applicationId}`)
+  }
+  const handleChatSubmit=async ()=>{
+    let bodyObj={
+      user_id : Number(sessionStorage.getItem("user_id")),
+      application_id : Number(applicationId)
+    }
+    fetch(`/api/room/getRoomId`,{
+      method:"POST",
+      headers: { "Content-Type": "application/json",
+      "Authorization": `Bearer ${sessionStorage.getItem("token")}`}, // Include the authentication token in the headers
+      body: JSON.stringify(bodyObj),
+    }).then((response) => {
+      console.log(response);
+      if(response.status===200){
+      }
+      return response.text(); // Read the response data as text
+    })
+    .then((data) => {
+      console.log(data); // Log the response data
+      setRoomId(data);
+      navigate(`/chat/${data}`,{
+      roomId:data
+      });
+      if (data === "success") {
+      setSuccess(true);
+      } else {
+      setErrMsg("Login failed. Please try again."); // Set an appropriate error message
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      toast.error('An error occurred while loading posts. Please try again.', {
+      position: toast.POSITION.TOP_RIGHT
+    });
+      setErrMsg("An error occurred. Please try again."); // Set an appropriate error message
+    });
+
   }
   const handleApplySubmit =async () => {
     let bodyObj = {
@@ -62,39 +100,7 @@ export const PostsDetailsPage = () => {
     });
     }
   useEffect(() => {
-    const isUserAlreadyApplied = async ()=>{
-      let bodyObj = {
-        user_id:sessionStorage.getItem("user_id"),
-        application_id:applicationId
-    }
-    // setAlreadyApplied(await isUserAlreadyApplied());
-    fetch("/api/applicant/isApplied", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${sessionStorage.getItem("token")}` // Include the authentication token in the headers
-    },
-    body: JSON.stringify(bodyObj),
-    
-})
-.then((response) => {
-    console.log(response);
-    return response.json(); // Read the response data as JSON
-})
-.then((data) => {
-    console.log(data); // Log the response data
-    if (data === "success") {
-        setSuccess(true);
-    } else {
-        setErrMsg("Login failed. Please try again."); // Set an appropriate error message
-    }
-})
-.catch((error) => {
-    setErrMsg("An error occurred. Please try again."); // Set an appropriate error message
-});
-setAlreadyApplied(await isUserAlreadyApplied());
- }
- const fetchPostDetails = async () => {
+  const fetchPostDetails = async () => {
   console.log(applicationId);
   try {
     const authToken = sessionStorage.getItem("token"); // Retrieve the authentication token from sessionStorage
@@ -106,7 +112,14 @@ setAlreadyApplied(await isUserAlreadyApplied());
     });
     setPost(postResponse.data);
     console.log(postResponse.data);
-
+    const isUserApplied = await axios.post(`/api/applicant/isApplied`,{
+      user_id:sessionStorage.getItem("user_id"),
+      application_id:applicationId
+    },{
+      headers: {
+        'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
+    }});
+    setAlreadyApplied(isUserApplied.data);
     const imagesResponse = await axios.get(`/api/leaseholder/dashboard/get/list/images/${applicationId}`, {
       headers: {
         'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
@@ -230,8 +243,7 @@ setAlreadyApplied(await isUserAlreadyApplied());
         </div>
       </div>
       {alreadyApplied ?
-      {/* Apply button */}
-      (<button className="chat-button">Chat</button>):
+      (<button className="chat-button" onClick={()=>handleChatSubmit()}>Chat</button>):
         (<button className="apply-button" onClick={()=>handleApplySubmit()}>Apply</button>) 
       }
 
