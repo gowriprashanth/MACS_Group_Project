@@ -1,10 +1,14 @@
 package com.project.accomatch.Service.Implementation;
 
+import com.project.accomatch.Exception.ApplicantNotFound;
+import com.project.accomatch.Exception.PostCreationException;
+import com.project.accomatch.LoggerPack.LoggerClass;
 import com.project.accomatch.Model.HouseSeekerModel;
 import com.project.accomatch.Repository.Implementation.HouseSeekerFoodTableOperations;
 import com.project.accomatch.Repository.Implementation.HouseSeekerGenderTableOperations;
 import com.project.accomatch.Repository.Implementation.HouseSeekerTableOperations;
 import com.project.accomatch.Service.HouseSeekerService;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +24,7 @@ public class HouseSeekerServiceImplementation implements HouseSeekerService {
     private final HouseSeekerFoodTableOperations houseSeekerFoodTableOperations;
     private final HouseSeekerGenderTableOperations houseSeekerGenderTableOperations;
 
+    Logger logger = LoggerClass.getLogger();
     @Autowired
     public HouseSeekerServiceImplementation(
             HouseSeekerTableOperations houseSeekerTableOperations,
@@ -50,7 +55,8 @@ public class HouseSeekerServiceImplementation implements HouseSeekerService {
 
             return "Success";
         } catch (Exception e){
-            throw new RuntimeException(e);
+            logger.error("Error during post creation: {}", e.getMessage(), e);
+            throw new PostCreationException("Error during post creation.", e);
         }
     }
 
@@ -60,7 +66,8 @@ public class HouseSeekerServiceImplementation implements HouseSeekerService {
 
             return houseSeekerTableOperations.getListOfAllApplicantPosts();
         } catch (Exception e){
-            throw new RuntimeException(e);
+            logger.error("Error during retrieving applicants: {}", e.getMessage(), e);
+            throw new ApplicantNotFound("Error during retrieving applicants.");
         }
     }
 }
