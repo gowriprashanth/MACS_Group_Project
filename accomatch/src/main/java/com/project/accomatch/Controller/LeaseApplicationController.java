@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/api/leaseowner/applicant")
 public class LeaseApplicationController {
     @Autowired
-    private LeaseApplicationService applicantService;
+    public LeaseApplicationService applicantService;
 
     Logger logger = LoggerClass.getLogger();
     @GetMapping("/get/list/applicant/{application_id}")
