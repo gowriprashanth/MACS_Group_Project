@@ -105,9 +105,14 @@ public class LeaseholderAdsDao implements LeaseholderAdsDaoInterface {
 
         return post;
     }
+    /**
+     * Gives list of personal posts for a specific user based on their user ID.
+     * @auther Dhrumil Vimalbhai Gosaliya
+     * @param user_id of the user for whom to get personal posts.
+     * @return list of Posts shows the personal posts of the user.
+     */
     public List<Posts> getListOfPersonalPosts(int user_id){
         List<Posts> listOfPosts = new ArrayList<>();
-
 
         try (Connection connection = DriverManager.getConnection(JDBC, username, password);
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM leaseholder_ads WHERE user_id = ?")) {
