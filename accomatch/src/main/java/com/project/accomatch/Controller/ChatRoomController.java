@@ -13,6 +13,13 @@ import java.util.Map;
 public class ChatRoomController {
     @Autowired
     private ChatRoomService chatRoomService;
+
+    /**
+     * API to get RoomId on the basis of userId and applicationId
+     * @author -- Bhargav Kanodiya
+     * @param requestBody-- Body of the api
+     * @return -- roomId on the basis of given arguments
+     */
     @PostMapping("/getRoomId")
     public int getRoomId(@RequestBody Map<String,Object> requestBody){
         int user_id = (Integer) requestBody.get("user_id");

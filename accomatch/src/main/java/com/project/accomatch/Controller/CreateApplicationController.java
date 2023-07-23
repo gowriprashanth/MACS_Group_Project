@@ -16,6 +16,12 @@ public class CreateApplicationController {
     private CreateApplicationFactory createApplicationService;
     Logger logger = LoggerClass.getLogger();
 
+    /**
+     * Creating Applications
+     * @author Bhargav Kanodiya / Ramandeep kaur
+     * @param requestBody-- body of parameters to create application
+     * @return -- Status of creation
+     */
     @PostMapping("/create")
     public String createAD(@RequestBody Map<String, Object> requestBody) {
         try {

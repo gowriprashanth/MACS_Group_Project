@@ -23,7 +23,7 @@ public class ChatController {
 
     /**
      * Endpoint to send a chat message.
-     *
+     * @author Bhargav Kanodiya
      * @param requestBody JSON object containing user_id, room_id, and message.
      * @return A success message or an error message.
      * @throws ChatMessageException if an error occurs while sending the chat message.
@@ -45,7 +45,7 @@ public class ChatController {
 
     /**
      * Endpoint to get all chat messages for a specific room.
-     *
+     * @author Bhargav Kanodiya
      * @param room_id -- RoomId to get the messages of room
      * @return An ArrayList of ChatMessageModel containing chat messages for the specified room.
      * @throws ChatMessageException if an error occurs while fetching chat messages.
