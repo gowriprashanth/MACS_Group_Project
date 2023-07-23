@@ -1,7 +1,9 @@
 package com.project.accomatch.Controller;
 
+import com.project.accomatch.LoggerPack.LoggerClass;
 import com.project.accomatch.Model.Review;
 import com.project.accomatch.Service.ReviewService;
+import org.slf4j.Logger;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,10 +18,12 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
+    Logger logger = LoggerClass.getLogger();
     @PostMapping("/createReview")
     public void createReview(@RequestBody Review review) {
         int user_id = review.getUserId();
         int application_id = review.getApplicationId();
+        logger.info("review controller active");
         reviewService.createReview(review);
     }
 

@@ -1,6 +1,9 @@
 package com.project.accomatch.Repository.Implementation;
+import com.project.accomatch.Exception.DataAccessException;
+import com.project.accomatch.LoggerPack.LoggerClass;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Repository.LeasePostsLoggedinRepositoryInterface;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import java.sql.*;
@@ -9,6 +12,7 @@ import java.util.Date;
 
 @Repository
 public class LeasePostsLoggedinRepository implements LeasePostsLoggedinRepositoryInterface {
+    Logger logger = LoggerClass.getLogger();
     @Value("${username.db.accomatch}")
     private String username;
 
@@ -59,7 +63,8 @@ public class LeasePostsLoggedinRepository implements LeasePostsLoggedinRepositor
 
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle exception
+            logger.error(e.getMessage());
+            throw new DataAccessException("Failed to retrieve the reviews.", e);
         }
 
         return listOfApplicants;
