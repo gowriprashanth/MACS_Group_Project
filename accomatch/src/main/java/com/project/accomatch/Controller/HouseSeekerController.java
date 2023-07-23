@@ -18,21 +18,9 @@ import java.util.*;
 public class HouseSeekerController {
     @Autowired
     private HouseSeekerService houseSeekerService;
-    @Autowired
-    private CreateApplicationFactory createApplicationService;
 
     @GetMapping("/getListOfAllApplicantPosts")
     public List<HouseSeekerModel> getListOfAllApplicantPosts(){
         return houseSeekerService.getListOfAllApplicantPosts();
     }
-    @PostMapping("/create")
-    public String createAD(@RequestBody Map<String, Object> requestBody){
-        try {
-            return createApplicationService.createAD(requestBody);
-        } catch (Exception e){
-            return e.getMessage();
-        }
-    }
-
-
 }

@@ -5,6 +5,7 @@ import com.project.accomatch.LoggerPack.LoggerClass;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Service.AdminInterface;
 import com.project.accomatch.Service.Implementation.LeaseHolderDashboardService;
+import com.project.accomatch.Service.LeaseHolderDashboardInterface;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class AdminController {
     @Autowired
     AdminInterface adminInterface;
     @Autowired
-    private LeaseHolderDashboardService dashboardService;
+    private LeaseHolderDashboardInterface dashboardService;
 
     /**
      * Verifies a single ad
@@ -47,20 +48,19 @@ public class AdminController {
         return adminInterface.VerifyAllAd(posts);
     }
 
-
     /**
      * Retrieves the list of posts for Admin.
-     * @author Ramandeep kaur
      * @return The list of posts.
      */
     @GetMapping("/get/list/post")
     public List<Posts> getListOfPosts()  {
+        logger.info("Getting the list of posts for Admin.");
         return dashboardService.getListOfPosts();
     }
 
     /**
-     * Retrieves the list of posts for Admin bases on status.
-     * @author Ramandeep kaur
+     * Retrieves the list of posts for Admin based on status.
+     * @param map The request body containing the status.
      * @return The list of posts.
      */
     @PostMapping("/get/list/postbystatus")
@@ -69,9 +69,11 @@ public class AdminController {
         try {
             status = Integer.parseInt(map.get("status"));
         } catch (NumberFormatException e) {
+            logger.error("Invalid post status value: {}", e.getMessage());
             throw new InvalidPostStatusException("Invalid post status value");
         }
+
+        logger.info("Getting the list of posts for Admin based on status: {}", status);
         return dashboardService.getListOfPostsByStatus(status);
     }
-
 }

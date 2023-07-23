@@ -6,6 +6,7 @@ import com.project.accomatch.Repository.Implementation.LeaseHolderFoodTableOpera
 import com.project.accomatch.Repository.Implementation.LeaseHolderGenderTableOperations;
 import com.project.accomatch.Repository.Implementation.LeaseHolderImagesTableOperations;
 import com.project.accomatch.Repository.Implementation.LeaseholderAdsDao;
+import com.project.accomatch.Service.LeaseHolderDashboardInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Service
-public class LeaseHolderDashboardService {
+public class LeaseHolderDashboardService implements LeaseHolderDashboardInterface {
 
     @Autowired
     LeaseholderAdsDao leaseholderAdsDao;

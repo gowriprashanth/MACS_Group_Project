@@ -16,12 +16,19 @@ import java.util.Map;
 
 @Service
 public class HouseSeekerServiceImplementation implements HouseSeekerService {
+    private final HouseSeekerTableOperations houseSeekerTableOperations;
+    private final HouseSeekerFoodTableOperations houseSeekerFoodTableOperations;
+    private final HouseSeekerGenderTableOperations houseSeekerGenderTableOperations;
+
     @Autowired
-    HouseSeekerTableOperations houseSeekerTableOperations;
-    @Autowired
-    HouseSeekerFoodTableOperations houseSeekerFoodTableOperations;
-    @Autowired
-    HouseSeekerGenderTableOperations houseSeekerGenderTableOperations;
+    public HouseSeekerServiceImplementation(
+            HouseSeekerTableOperations houseSeekerTableOperations,
+            HouseSeekerFoodTableOperations houseSeekerFoodTableOperations,
+            HouseSeekerGenderTableOperations houseSeekerGenderTableOperations) {
+        this.houseSeekerTableOperations = houseSeekerTableOperations;
+        this.houseSeekerFoodTableOperations = houseSeekerFoodTableOperations;
+        this.houseSeekerGenderTableOperations = houseSeekerGenderTableOperations;
+    }
     @Override
     public String createAD(Map<String, Object>  requestBody) {
         try {
