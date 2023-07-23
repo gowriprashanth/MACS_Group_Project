@@ -7,6 +7,7 @@ import com.project.accomatch.JWT.JwtService;
 import com.project.accomatch.LoggerPack.LoggerClass;
 import com.project.accomatch.Model.UserModel;
 import com.project.accomatch.Repository.Implementation.UserTableOperations;
+import com.project.accomatch.Repository.UserTableOperationsInterface;
 import com.project.accomatch.Service.UserService;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class UserServiceImplementation implements UserService {
         this.authenticationManager = authenticationManager;
     }
     @Autowired
-    UserTableOperations userTableOperations;
+    UserTableOperationsInterface userTableOperations;
 
     /**
      * Signs up a new user and stores the user information in the database.

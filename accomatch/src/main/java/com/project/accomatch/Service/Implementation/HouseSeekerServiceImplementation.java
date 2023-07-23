@@ -1,6 +1,9 @@
 package com.project.accomatch.Service.Implementation;
 
 import com.project.accomatch.Model.HouseSeekerModel;
+import com.project.accomatch.Repository.HouseSeekerFoodTableOperationsInterface;
+import com.project.accomatch.Repository.HouseSeekerGenderTableOperationsInterface;
+import com.project.accomatch.Repository.HouseSeekerTableOperationsInterface;
 import com.project.accomatch.Repository.Implementation.HouseSeekerFoodTableOperations;
 import com.project.accomatch.Repository.Implementation.HouseSeekerGenderTableOperations;
 import com.project.accomatch.Repository.Implementation.HouseSeekerTableOperations;
@@ -16,9 +19,9 @@ import java.util.Map;
 
 @Service
 public class HouseSeekerServiceImplementation implements HouseSeekerService {
-    private final HouseSeekerTableOperations houseSeekerTableOperations;
-    private final HouseSeekerFoodTableOperations houseSeekerFoodTableOperations;
-    private final HouseSeekerGenderTableOperations houseSeekerGenderTableOperations;
+    private final HouseSeekerTableOperationsInterface houseSeekerTableOperations;
+    private final HouseSeekerFoodTableOperationsInterface houseSeekerFoodTableOperations;
+    private final HouseSeekerGenderTableOperationsInterface houseSeekerGenderTableOperations;
 
     @Autowired
     public HouseSeekerServiceImplementation(

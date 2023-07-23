@@ -7,6 +7,10 @@ import com.project.accomatch.Repository.Implementation.LeaseHolderFoodTableOpera
 import com.project.accomatch.Repository.Implementation.LeaseHolderGenderTableOperations;
 import com.project.accomatch.Repository.Implementation.LeaseHolderImagesTableOperations;
 import com.project.accomatch.Repository.Implementation.LeaseHolderTableOperations;
+import com.project.accomatch.Repository.LeaseHolderFoodTableOperationsInterface;
+import com.project.accomatch.Repository.LeaseHolderGenderTableOperationsInterface;
+import com.project.accomatch.Repository.LeaseHolderImagesTableOperationsInterface;
+import com.project.accomatch.Repository.LeaseHolderTableOperationsInterface;
 import com.project.accomatch.Service.LeaseHolderService;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +27,13 @@ import java.util.Map;
 @Service
 public class LeaseHolderServiceImplementation implements LeaseHolderService {
     @Autowired
-    LeaseHolderTableOperations leaseHolderTableOperations;
+    LeaseHolderTableOperationsInterface leaseHolderTableOperations;
     @Autowired
-    LeaseHolderFoodTableOperations leaseHolderFoodTableOperations;
+    LeaseHolderFoodTableOperationsInterface leaseHolderFoodTableOperations;
     @Autowired
-    LeaseHolderGenderTableOperations leaseHolderGenderTableOperations;
+    LeaseHolderGenderTableOperationsInterface leaseHolderGenderTableOperations;
     @Autowired
-    LeaseHolderImagesTableOperations leaseHolderImagesTableOperations;
+    LeaseHolderImagesTableOperationsInterface leaseHolderImagesTableOperations;
 
     Logger logger = LoggerClass.getLogger();
     /**

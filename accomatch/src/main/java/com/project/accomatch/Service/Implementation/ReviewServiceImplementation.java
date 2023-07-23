@@ -13,6 +13,7 @@ import com.project.accomatch.Repository.Implementation.LeaseholderAdsDao;
 import com.project.accomatch.Repository.Implementation.ReviewRepository;
 
 import com.project.accomatch.Repository.LeaseholderAdsDaoInterface;
+import com.project.accomatch.Repository.ReviewRepositoryInterface;
 import com.project.accomatch.Service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +26,7 @@ import java.util.List;
 @Service
 public class ReviewServiceImplementation implements ReviewService {
     @Autowired
-    public ReviewRepository reviewRepository;
+    public ReviewRepositoryInterface reviewRepository;
     @Autowired
     public LeaseholderAdsDaoInterface leaseholderAdsDao;
 
