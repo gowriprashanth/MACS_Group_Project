@@ -1,6 +1,7 @@
 package com.project.accomatch.Service.Implementation;
 
-import com.project.accomatch.Exception.ResourceNotFoundException;
+import com.project.accomatch.Exception.ApplicantNotFound;
+import com.project.accomatch.Exception.ApplicantNotFound;
 import com.project.accomatch.Model.Applicant;
 import com.project.accomatch.Repository.Implementation.LeaseApplicationRepository;
 import com.project.accomatch.Service.LeaseApplicationService;
@@ -19,7 +20,7 @@ public class LeaseApplicationImplementation implements LeaseApplicationService {
             return leaseApplcationRepository.getListOfApplicant(application_id);
         }
         catch (Exception e) {
-            throw new ResourceNotFoundException("Failed to retrieve the list of Applicants.");
+            throw new ApplicantNotFound("Failed to retrieve the list of Applicants.");
         }
     }
 

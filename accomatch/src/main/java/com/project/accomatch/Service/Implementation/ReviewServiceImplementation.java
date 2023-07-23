@@ -1,7 +1,8 @@
 package com.project.accomatch.Service.Implementation;
 
+import com.project.accomatch.Exception.ApplicantNotFound;
 import com.project.accomatch.Exception.DataAccessException;
-import com.project.accomatch.Exception.ResourceNotFoundException;
+import com.project.accomatch.Exception.ApplicantNotFound;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Model.Ratings;
 import com.project.accomatch.Model.Review;
@@ -56,7 +57,7 @@ public class ReviewServiceImplementation implements ReviewService {
         try {
             return reviewRepository.getAllPostReviews();
         } catch (Exception e) {
-            throw new ResourceNotFoundException("Failed to retrieve the list of Applicants.");
+            throw new ApplicantNotFound("Failed to retrieve the list of Applicants.");
         }
     }
 
@@ -106,7 +107,7 @@ public class ReviewServiceImplementation implements ReviewService {
         return listOfRatings;
         }
         catch (Exception e){
-            throw new ResourceNotFoundException("Failed to retrieve the list of Applicants.");
+            throw new ApplicantNotFound("Failed to retrieve the list of Applicants.");
         }
 
     }
