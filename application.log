@@ -3131,3 +3131,125 @@ io.jsonwebtoken.ExpiredJwtException: JWT expired at 2023-07-23T21:54:04Z. Curren
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:1589)
+2023-07-23 18:54:43.965 [main] INFO  c.p.accomatch.AccomatchApplication - Starting AccomatchApplication using Java 19.0.2 with PID 12064 (C:\Dal\Sem 2\ASDC\project new\group04\accomatch\target\classes started by bjkan in C:\Dal\Sem 2\ASDC\project new\group04)
+2023-07-23 18:54:43.969 [main] INFO  c.p.accomatch.AccomatchApplication - No active profile set, falling back to 1 default profile: "default"
+2023-07-23 18:54:46.118 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-07-23 18:54:46.134 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2023-07-23 18:54:46.134 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-07-23 18:54:46.134 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-07-23 18:54:46.213 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-07-23 18:54:46.213 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2172 ms
+2023-07-23 18:54:46.855 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3e3cd6fe, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1de0641b, org.springframework.security.web.context.SecurityContextHolderFilter@7e7e962d, org.springframework.security.web.header.HeaderWriterFilter@76e90da5, org.springframework.web.filter.CorsFilter@68b734a8, org.springframework.security.web.authentication.logout.LogoutFilter@6b4fc2d1, com.project.accomatch.JWT.JwtFilter@3b545206, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@e829999, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@750a04ec, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1a464fa3, org.springframework.security.web.session.SessionManagementFilter@7d528cf7, org.springframework.security.web.access.ExceptionTranslationFilter@57efc6fd, org.springframework.security.web.access.intercept.AuthorizationFilter@58ae402b]
+2023-07-23 18:54:47.062 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2023-07-23 18:54:47.125 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-23 18:54:47.140 [main] INFO  c.p.accomatch.AccomatchApplication - Started AccomatchApplication in 3.592 seconds (process running for 4.297)
+2023-07-23 18:54:55.376 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-23 18:54:55.376 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-07-23 18:54:55.376 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2023-07-23 18:54:55.517 [http-nio-8080-exec-1] INFO  c.p.accomatch.LoggerPack.LoggerClass - Login controller active
+2023-07-23 18:54:55.517 [http-nio-8080-exec-1] INFO  c.p.accomatch.LoggerPack.LoggerClass - verifying User credentials for logging in!!
+2023-07-23 18:54:56.489 [http-nio-8080-exec-2] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of posts for user: bhargavk2742@gmail.com
+2023-07-23 18:54:56.714 [http-nio-8080-exec-3] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of posts for user: bhargavk2742@gmail.com
+2023-07-23 18:54:59.539 [http-nio-8080-exec-7] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting details of post with application ID 2 for user: bhargavk2742@gmail.com
+2023-07-23 18:54:59.769 [http-nio-8080-exec-8] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting details of post with application ID 2 for user: bhargavk2742@gmail.com
+2023-07-23 18:55:00.161 [http-nio-8080-exec-10] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of images for post with application ID: 2
+2023-07-23 18:55:00.306 [http-nio-8080-exec-1] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of images for post with application ID: 2
+2023-07-23 18:55:00.556 [http-nio-8080-exec-2] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of food preference for post with application ID: 2
+2023-07-23 18:55:00.647 [http-nio-8080-exec-3] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of food preference for post with application ID: 2
+2023-07-23 18:55:00.968 [http-nio-8080-exec-4] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of gender preference for post with application ID: 2
+2023-07-23 18:55:01.363 [http-nio-8080-exec-6] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of gender preference for post with application ID: 2
+2023-07-23 18:55:02.882 [http-nio-8080-exec-3] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:03.017 [http-nio-8080-exec-4] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:03.260 [http-nio-8080-exec-7] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:03.375 [http-nio-8080-exec-6] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:03.630 [http-nio-8080-exec-8] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:03.745 [http-nio-8080-exec-5] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:03.996 [http-nio-8080-exec-9] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:04.103 [http-nio-8080-exec-10] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:04.349 [http-nio-8080-exec-2] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:04.461 [http-nio-8080-exec-1] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:04.711 [http-nio-8080-exec-3] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:04.828 [http-nio-8080-exec-4] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:05.085 [http-nio-8080-exec-7] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:05.194 [http-nio-8080-exec-6] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:05.432 [http-nio-8080-exec-8] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:05.552 [http-nio-8080-exec-5] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:05.815 [http-nio-8080-exec-9] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:05.911 [http-nio-8080-exec-10] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:06.166 [http-nio-8080-exec-2] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:06.278 [http-nio-8080-exec-1] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:06.557 [http-nio-8080-exec-3] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:06.634 [http-nio-8080-exec-4] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:06.901 [http-nio-8080-exec-7] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:07.002 [http-nio-8080-exec-6] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:07.272 [http-nio-8080-exec-8] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:07.371 [http-nio-8080-exec-5] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:07.639 [http-nio-8080-exec-9] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:07.739 [http-nio-8080-exec-10] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:08.002 [http-nio-8080-exec-2] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:08.117 [http-nio-8080-exec-1] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:08.374 [http-nio-8080-exec-3] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:08.469 [http-nio-8080-exec-4] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:08.733 [http-nio-8080-exec-7] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:08.835 [http-nio-8080-exec-6] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:09.101 [http-nio-8080-exec-8] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:09.194 [http-nio-8080-exec-5] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:09.451 [http-nio-8080-exec-9] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:09.563 [http-nio-8080-exec-10] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:09.825 [http-nio-8080-exec-2] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:09.931 [http-nio-8080-exec-1] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:10.184 [http-nio-8080-exec-3] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:10.293 [http-nio-8080-exec-4] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:10.546 [http-nio-8080-exec-7] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:10.657 [http-nio-8080-exec-6] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:10.924 [http-nio-8080-exec-8] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:11.020 [http-nio-8080-exec-5] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:11.305 [http-nio-8080-exec-9] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:11.394 [http-nio-8080-exec-10] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:11.659 [http-nio-8080-exec-2] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:11.752 [http-nio-8080-exec-1] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:12.024 [http-nio-8080-exec-3] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:12.121 [http-nio-8080-exec-4] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:12.383 [http-nio-8080-exec-7] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:12.483 [http-nio-8080-exec-6] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:12.747 [http-nio-8080-exec-8] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:12.853 [http-nio-8080-exec-5] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:13.107 [http-nio-8080-exec-9] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:13.227 [http-nio-8080-exec-10] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:13.472 [http-nio-8080-exec-2] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:13.605 [http-nio-8080-exec-1] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:13.835 [http-nio-8080-exec-3] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:13.976 [http-nio-8080-exec-4] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:14.185 [http-nio-8080-exec-7] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:14.319 [http-nio-8080-exec-6] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:14.536 [http-nio-8080-exec-8] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:14.708 [http-nio-8080-exec-5] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:14.902 [http-nio-8080-exec-9] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:15.064 [http-nio-8080-exec-10] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:15.269 [http-nio-8080-exec-2] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:15.433 [http-nio-8080-exec-1] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:15.627 [http-nio-8080-exec-3] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:15.788 [http-nio-8080-exec-4] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:15.977 [http-nio-8080-exec-7] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:16.159 [http-nio-8080-exec-6] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:16.357 [http-nio-8080-exec-8] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:16.528 [http-nio-8080-exec-5] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:16.729 [http-nio-8080-exec-9] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:16.897 [http-nio-8080-exec-10] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:17.099 [http-nio-8080-exec-2] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:17.271 [http-nio-8080-exec-1] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:17.705 [http-nio-8080-exec-3] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:17.782 [http-nio-8080-exec-4] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:18.157 [http-nio-8080-exec-8] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:55:18.160 [http-nio-8080-exec-6] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting details of post with application ID 2 for user: bhargavk2742@gmail.com
+2023-07-23 18:55:18.530 [http-nio-8080-exec-5] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting details of post with application ID 2 for user: bhargavk2742@gmail.com
+2023-07-23 18:55:18.896 [http-nio-8080-exec-2] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of images for post with application ID: 2
+2023-07-23 18:55:18.977 [http-nio-8080-exec-1] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of images for post with application ID: 2
+2023-07-23 18:55:19.301 [http-nio-8080-exec-3] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of food preference for post with application ID: 2
+2023-07-23 18:55:19.704 [http-nio-8080-exec-7] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of food preference for post with application ID: 2
+2023-07-23 18:55:19.708 [http-nio-8080-exec-4] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of gender preference for post with application ID: 2
+2023-07-23 18:55:19.960 [http-nio-8080-exec-8] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of gender preference for post with application ID: 2
+2023-07-23 18:57:13.289 [http-nio-8080-exec-7] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:57:13.532 [http-nio-8080-exec-4] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:57:25.404 [http-nio-8080-exec-9] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
+2023-07-23 18:57:25.562 [http-nio-8080-exec-2] INFO  c.p.accomatch.LoggerPack.LoggerClass - Fetching chat messages for room_id: 98
