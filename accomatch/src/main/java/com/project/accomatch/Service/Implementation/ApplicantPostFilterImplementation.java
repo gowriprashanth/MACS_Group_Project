@@ -1,6 +1,7 @@
 package com.project.accomatch.Service.Implementation;
 
 import com.project.accomatch.Model.Posts;
+import com.project.accomatch.Repository.ApplicantPostFIlteringOerationInterface;
 import com.project.accomatch.Repository.Implementation.ApplicantPostFilteringOperation;
 import com.project.accomatch.Service.ApplicantPostFilterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class ApplicantPostFilterImplementation implements ApplicantPostFilterSer
      * @return A list of Posts objects representing the filtered advertisement posts matching the applicant's preferences.
      */
     @Autowired
-    ApplicantPostFilteringOperation applicantPostFilteringOperation;
+    ApplicantPostFIlteringOerationInterface applicantPostFilteringOperation;
     @Override
     public List<Posts> filterPost(String[] gp, String[] fp, String age, String rt) {
         return applicantPostFilteringOperation.filterPosts(gp, fp, age, rt);

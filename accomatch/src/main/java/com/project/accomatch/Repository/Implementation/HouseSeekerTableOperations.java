@@ -66,6 +66,11 @@ public class HouseSeekerTableOperations implements HouseSeekerTableOperationsInt
         }
     }
 
+    /**
+     * Provides a list of all applicant posts.
+     * @auther Dhrumil Vimalbhai Gosaliya
+     * @return A list of HouseSeekerModel shows the applicant posts.
+     */
     public List<HouseSeekerModel> getListOfAllApplicantPosts() {
         List<HouseSeekerModel> listOfApplicantPosts = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(JDBC, username, password);

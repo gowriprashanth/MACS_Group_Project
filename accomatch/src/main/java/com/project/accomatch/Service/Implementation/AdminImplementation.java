@@ -1,6 +1,7 @@
 package com.project.accomatch.Service.Implementation;
 
 import com.project.accomatch.Model.Posts;
+import com.project.accomatch.Repository.AdminRepositoryInterface;
 import com.project.accomatch.Repository.Implementation.AdminRepository;
 import com.project.accomatch.Service.AdminInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class AdminImplementation implements AdminInterface {
 
     @Autowired
-    AdminRepository adminRepository;
+    AdminRepositoryInterface adminRepository;
 
     /**
      * Verifies a single advertisement post by updating its verification status in the database.

@@ -131,6 +131,13 @@ public class LeaseHolderDashboardController {
         return dashboardService.getListOfgenderPreferencesByApplicationId(applicationId);
     }
 
+    /**
+     * Retrieves a list of personal posts for a specific user based on their user ID.
+     * @auther Dhrumil Vimalbhai Gosaliya
+     * @param user_Id The user id of the user.
+     * @return A list of Posts objects representing the personal posts of the user.
+     * @throws InvalidInputException if the provided user ID is invalid.
+     */
     @GetMapping("/get/list/getListOfPersonalPosts/{user_Id}")
     public List<Posts> getListOfPersonalPosts(@PathVariable int user_Id) {
         if (user_Id <= 0) {

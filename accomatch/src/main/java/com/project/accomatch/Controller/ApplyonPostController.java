@@ -14,7 +14,7 @@ import java.util.Map;
 @RequestMapping("/api/applicant")
 public class ApplyonPostController {
     @Autowired
-    private ApplyonPostService applyonPostService;
+    ApplyonPostService applyonPostService;
     @PostMapping("/apply")
     public String apply(@RequestBody LeaseHolderApplicantModel leaseHolderApplicantModel){
         try{

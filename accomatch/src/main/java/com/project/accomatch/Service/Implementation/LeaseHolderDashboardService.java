@@ -7,6 +7,9 @@ import com.project.accomatch.Repository.Implementation.LeaseHolderFoodTableOpera
 import com.project.accomatch.Repository.Implementation.LeaseHolderGenderTableOperations;
 import com.project.accomatch.Repository.Implementation.LeaseHolderImagesTableOperations;
 import com.project.accomatch.Repository.Implementation.LeaseholderAdsDao;
+import com.project.accomatch.Repository.LeaseHolderFoodTableOperationsInterface;
+import com.project.accomatch.Repository.LeaseHolderGenderTableOperationsInterface;
+import com.project.accomatch.Repository.LeaseHolderImagesTableOperationsInterface;
 import com.project.accomatch.Service.LeaseHolderDashboardInterface;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +25,11 @@ public class LeaseHolderDashboardService implements LeaseHolderDashboardInterfac
     LeaseholderAdsDao leaseholderAdsDao;
 
     @Autowired
-    LeaseHolderFoodTableOperations leaseHolderFoodTableOperations;
+    LeaseHolderFoodTableOperationsInterface leaseHolderFoodTableOperations;
     @Autowired
-    LeaseHolderGenderTableOperations leaseHolderGenderTableOperations;
+    LeaseHolderGenderTableOperationsInterface leaseHolderGenderTableOperations;
     @Autowired
-    LeaseHolderImagesTableOperations leaseHolderImagesTableOperations;
+    LeaseHolderImagesTableOperationsInterface leaseHolderImagesTableOperations;
 
     Logger logger = LoggerClass.getLogger();
 
