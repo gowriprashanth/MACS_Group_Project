@@ -46,14 +46,13 @@ public class ChatController {
     /**
      * Endpoint to get all chat messages for a specific room.
      *
-     * @param requestBody JSON object containing room_id.
+     * @param room_id -- RoomId to get the messages of room
      * @return An ArrayList of ChatMessageModel containing chat messages for the specified room.
      * @throws ChatMessageException if an error occurs while fetching chat messages.
      */
-    @PostMapping("/get")
-    public ArrayList<ChatMessageModel> getMessages(@RequestBody Map<String, Object> requestBody) {
+    @GetMapping("/get/{room_id}")
+    public ArrayList<ChatMessageModel> getMessages(@PathVariable int room_id) {
         try {
-            int room_id = (Integer) requestBody.get("room_id");
             logger.info("Fetching chat messages for room_id: {}", room_id);
             return chatService.getMessages(room_id);
         } catch (Exception e) {
