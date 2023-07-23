@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @CrossOrigin("http://localhost:3000")
-@RequestMapping("/api/leaseowner/loggedinapplicant")
+@RequestMapping("/api/leaseholder/loggedinapplicant")
 public class LeasePostsLoggedinController {
     @Autowired
     public LeasePostsLoggedinService applicantService;
