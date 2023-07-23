@@ -1,5 +1,6 @@
 package com.project.accomatch.Controller;
 
+import com.project.accomatch.Exception.UserNotFoundException;
 import com.project.accomatch.Utlity.HasherClass;
 import com.project.accomatch.LoggerPack.LoggerClass;
 import com.project.accomatch.Model.UserModel;
@@ -9,6 +10,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 @CrossOrigin("http://localhost:3000")
@@ -17,7 +19,6 @@ import java.util.Objects;
 public class UserController {
     @Autowired
     private UserService userservice;
-
     Logger logger = LoggerClass.getLogger();
     @Autowired
     private MailSenderClass mailSender;
@@ -31,8 +32,16 @@ public class UserController {
      */
     @PostMapping("/signup")
     public String signUp(@RequestBody UserModel model){
-        logger.info("signup controller active");
-        return userservice.SignUp(model);
+        try{
+            if(model == null){
+                throw new UserNotFoundException("User cannot be null");
+            }
+            logger.info("signup controller active");
+            return userservice.SignUp(model);
+        }catch (UserNotFoundException u){
+            logger.error("user not found");
+            return u.getMessage();
+        }
     }
 
     /**
@@ -44,8 +53,18 @@ public class UserController {
      */
     @PostMapping("/login")
     public Map<String, String> login(@RequestBody UserModel model){
-       logger.info("Login controller active");
-       return userservice.Login(model);
+        try{
+            if(model == null){
+                throw new UserNotFoundException("User cannot be null");
+            }
+            logger.info("Login controller active");
+            return userservice.Login(model);
+        }catch (UserNotFoundException u){
+            logger.error("user not found");
+            Map<String, String> retMap = new HashMap<>();
+            retMap.put("Status", u.getMessage());
+            return retMap;
+        }
     }
 
     /**
@@ -66,8 +85,17 @@ public class UserController {
      */
     @GetMapping("/get/{id}")
     public UserModel getUserInformation(@PathVariable int id){
-        logger.info("get user information controller active");
-        return userservice.getUserInfo(id);
+        try{
+            if(id < 1){
+                throw new UserNotFoundException("User ID cannot be 0 or negative");
+            }
+            logger.info("get user information controller active");
+            return userservice.getUserInfo(id);
+        }catch (UserNotFoundException u){
+            logger.error("user not found");
+            return null;
+        }
+
     }
 
     /**
@@ -79,6 +107,9 @@ public class UserController {
     @PostMapping("/forgot/password")
     public String forgotPassword(@RequestBody UserModel model){
         try {
+            if(model == null){
+                throw new UserNotFoundException("User cannot be null");
+            }
             System.out.println(model.getEmail());
             String mailID = model.getEmail();
             String email = HasherClass.hashEmail(mailID);
@@ -95,7 +126,11 @@ public class UserController {
                 logger.info("Couldn't find the mail "+ model.getEmail());
                 return result;
             }
-        }catch(Exception e){
+        }catch (UserNotFoundException u){
+            logger.error("user not found");
+            return u.getMessage();
+        }
+            catch(Exception e){
             logger.error(e.getMessage());
             return e.getMessage();
         }
@@ -110,9 +145,15 @@ public class UserController {
     @PostMapping("/update/password")
     public String updatePassword(@RequestBody UserModel model){
         try {
+            if(model == null){
+                throw new UserNotFoundException("User cannot be null");
+            }
             model.setEmail(HasherClass.unHashEmail(model.getEmail()));
             logger.info("Update password controller active "+ model.getEmail());
             return userservice.ForgotPassword(model);
+        }catch (UserNotFoundException u){
+            logger.error("user not found");
+            return u.getMessage();
         }catch(Exception e){
             logger.error(e.getMessage());
             return e.getMessage();

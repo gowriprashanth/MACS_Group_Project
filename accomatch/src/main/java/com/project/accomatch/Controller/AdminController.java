@@ -1,6 +1,7 @@
 package com.project.accomatch.Controller;
 
 import com.project.accomatch.Exception.InvalidPostStatusException;
+import com.project.accomatch.Exception.PostNotFoundException;
 import com.project.accomatch.LoggerPack.LoggerClass;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Service.AdminInterface;
@@ -32,8 +33,15 @@ public class AdminController {
      */
     @PostMapping("/verify/one")
     public String verifySingleAd(@RequestBody Posts posts){
-        logger.info("single Ad verification controller active");
-        return adminInterface.VerifyOneAd(posts);
+        try{
+            if(posts == null){
+                throw new PostNotFoundException("Posts object cannot be null");
+            }
+            logger.info("single Ad verification controller active");
+            return adminInterface.VerifyOneAd(posts);
+        }catch (PostNotFoundException p){
+            return p.getMessage();
+        }
     }
 
     /**
@@ -43,8 +51,15 @@ public class AdminController {
      */
     @PostMapping("/verify/all")
     public String verifyAllAd(@RequestBody Posts posts){
-        logger.info("All Ad verification controller active");
-        return adminInterface.VerifyAllAd(posts);
+        try{
+            if(posts == null){
+                throw new PostNotFoundException("Posts cannot be null");
+            }
+            logger.info("All Ad verification controller active");
+            return adminInterface.VerifyAllAd(posts);
+        }catch (PostNotFoundException p){
+            return p.getMessage();
+        }
     }
 
     /**
