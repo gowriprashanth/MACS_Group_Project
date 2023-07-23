@@ -32,7 +32,7 @@ export const PostsDetailsPage = () => {
         status:"Pending"
     }
 
-    fetch("http://localhost:8080/api/applicant/apply", {
+    fetch("/api/applicant/apply", {
         method: "POST",
         headers: { "Content-Type": "application/json",
         "Authorization": `Bearer ${sessionStorage.getItem("token")}`}, // Include the authentication token in the headers
@@ -68,7 +68,7 @@ export const PostsDetailsPage = () => {
         application_id:applicationId
     }
     // setAlreadyApplied(await isUserAlreadyApplied());
-    fetch("http://localhost:8080/api/applicant/isApplied", {
+    fetch("/api/applicant/isApplied", {
     method: "POST",
     headers: {
         "Content-Type": "application/json",
@@ -99,7 +99,7 @@ setAlreadyApplied(await isUserAlreadyApplied());
   try {
     const authToken = sessionStorage.getItem("token"); // Retrieve the authentication token from sessionStorage
 
-    const postResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/post/details/${applicationId}`, {
+    const postResponse = await axios.get(`/api/leaseholder/dashboard/get/post/details/${applicationId}`, {
       headers: {
         'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
       }
@@ -107,28 +107,28 @@ setAlreadyApplied(await isUserAlreadyApplied());
     setPost(postResponse.data);
     console.log(postResponse.data);
 
-    const imagesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/images/${applicationId}`, {
+    const imagesResponse = await axios.get(`/api/leaseholder/dashboard/get/list/images/${applicationId}`, {
       headers: {
         'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
       }
     });
     setImages(imagesResponse.data);
 
-    const foodPreferencesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/food/${applicationId}`, {
+    const foodPreferencesResponse = await axios.get(`/api/leaseholder/dashboard/get/list/food/${applicationId}`, {
       headers: {
         'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
       }
     });
     setFoodPreferences(foodPreferencesResponse.data);
 
-    const genderPreferencesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/gender/${applicationId}`, {
+    const genderPreferencesResponse = await axios.get(`/api/leaseholder/dashboard/get/list/gender/${applicationId}`, {
       headers: {
         'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
       }
     });
     setGenderPreferences(genderPreferencesResponse.data);
 
-    const response = await axios.get(`http://localhost:8080/reviews/getListOfAllRatings/${applicationId}`, {
+    const response = await axios.get(`/api/reviews/getListOfAllRatings/${applicationId}`, {
       headers: {
         'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
       }
@@ -136,7 +136,7 @@ setAlreadyApplied(await isUserAlreadyApplied());
     setReviewResponse(response.data);
     console.log(response.data);
 
-    const ratingResponse = await axios.get(`http://localhost:8080/reviews/getAverageRatings/${applicationId}`, {
+    const ratingResponse = await axios.get(`/api/reviews/getAverageRatings/${applicationId}`, {
       headers: {
         'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
       }

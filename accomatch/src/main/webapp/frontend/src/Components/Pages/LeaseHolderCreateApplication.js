@@ -67,7 +67,7 @@ export const LeaseHolderCreateApplication =() =>{
             type:'LH'
         }
 
-        fetch("http://localhost:8080/application/create", {
+        fetch("/api/application/create", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

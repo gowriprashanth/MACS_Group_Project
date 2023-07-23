@@ -18,7 +18,7 @@ export const LeaseApplicantView = () => {
         const fetchApplicantDetails = async () => {
             try {
                 const authToken = sessionStorage.getItem("token");
-                const postResponse = await axios.get(`http://localhost:8080/api/leaseowner/applicant/get/list/applicant/${user_Id}`
+                const postResponse = await axios.get(`/api/leaseholder/applicant/get/list/applicant/${user_Id}`
                     , {
                         headers: {
                             Authorization: `Bearer ${authToken}`}});

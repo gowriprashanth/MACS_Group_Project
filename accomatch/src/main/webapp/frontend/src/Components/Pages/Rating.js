@@ -26,7 +26,7 @@ export const Rating = () => {
         }
 
         const authToken = sessionStorage.getItem("token"); // Replace with the actual authentication token
-        axios.post("http://localhost:8080/api/reviews/createReview", payload,{ 
+        axios.post("/api/reviews/createReview", payload,{ 
         headers : {
             Authorization: `Bearer ${authToken}`} // Include the authentication token in the headers
           })

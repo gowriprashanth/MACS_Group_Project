@@ -14,7 +14,7 @@ export const UserProfile = () => {
     useEffect(() => {
         const fetchUserDetails = async () => {
             try {
-                const userResponse = await axios.get(`http://localhost:8080/users/get/${user_Id}`);
+                const userResponse = await axios.get(`/api/users/get/${user_Id}`);
                 setUser(userResponse.data);
                 console.log(userResponse.data)
             } catch (error) {

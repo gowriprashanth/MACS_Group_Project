@@ -33,7 +33,7 @@ export const Login =() =>{
         setUser('');
         setPwd('');
 
-        fetch("http://localhost:8080/users/login", {
+        fetch("/api/users/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(bodyObj),

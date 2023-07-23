@@ -17,7 +17,7 @@ export const ApplicantPosts = () => {
             try {
               const authToken = sessionStorage.getItem("token"); //  authentication token
               
-              const postResponse = await axios.get(`http://localhost:8080/api/leaseowner/loggedinapplicant/get/list/applicant/${user_Id}`, {
+              const postResponse = await axios.get(`/api/leaseholder/loggedinapplicant/get/list/applicant/${user_Id}`, {
                 headers: {
                   Authorization: `Bearer ${authToken}` //  authentication token in the headers
                 }
