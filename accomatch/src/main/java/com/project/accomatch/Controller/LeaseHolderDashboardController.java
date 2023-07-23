@@ -1,7 +1,4 @@
-/**
- * Controller class for the leaseholder dashboard.
- * @author Ramandeep Kaur
- */
+
 package com.project.accomatch.Controller;
 
 import com.project.accomatch.Exception.InvalidInputException;
@@ -15,7 +12,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 import java.util.List;
-
+/**
+ * Controller class for the leaseholder dashboard.
+ * @author Ramandeep Kaur
+ */
 @RestController
 @CrossOrigin("http://localhost:3000")
 @RequestMapping("/api/leaseowner/dashboard")

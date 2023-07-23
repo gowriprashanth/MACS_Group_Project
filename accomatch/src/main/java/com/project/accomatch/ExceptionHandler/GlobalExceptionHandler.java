@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.nio.file.AccessDeniedException;
 import java.util.Date;
-
+/**
+ * Controller class for Global Exception handling
+ * @author Ramandeep Kaur
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -45,8 +48,8 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(ApplicationException.class)
-    public ResponseEntity<ErrorResponse> handleApplicationException(ApplicationException ex) {
+    @ExceptionHandler({ApplicationException.class, PostCreationException.class, ChatMessageException.class})
+    public ResponseEntity<ErrorResponse> handleInternalServerException(ApplicationException ex) {
 
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage(), new Date());
 

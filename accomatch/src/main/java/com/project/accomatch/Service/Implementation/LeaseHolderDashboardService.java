@@ -1,12 +1,14 @@
 package com.project.accomatch.Service.Implementation;
 
 import com.project.accomatch.Exception.DataAccessException;
+import com.project.accomatch.LoggerPack.LoggerClass;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Repository.Implementation.LeaseHolderFoodTableOperations;
 import com.project.accomatch.Repository.Implementation.LeaseHolderGenderTableOperations;
 import com.project.accomatch.Repository.Implementation.LeaseHolderImagesTableOperations;
 import com.project.accomatch.Repository.Implementation.LeaseholderAdsDao;
 import com.project.accomatch.Service.LeaseHolderDashboardInterface;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +27,20 @@ public class LeaseHolderDashboardService implements LeaseHolderDashboardInterfac
     LeaseHolderGenderTableOperations leaseHolderGenderTableOperations;
     @Autowired
     LeaseHolderImagesTableOperations leaseHolderImagesTableOperations;
+
+    Logger logger = LoggerClass.getLogger();
+
+    /**
+     * Retrieves the list of all posts.
+     *
+     * @return The list of posts.
+     * @throws DataAccessException If there is a failure to retrieve the list of posts from the database.
+     */
     public List<Posts> getListOfPosts() {
         try {
             return leaseholderAdsDao.getListOfPosts();
         } catch (SQLException e) {
+            logger.error("Failed to retrieve the list of posts.", e);
             throw new DataAccessException("Failed to retrieve the list of posts.", e);
         }
     }
@@ -38,19 +50,34 @@ public class LeaseHolderDashboardService implements LeaseHolderDashboardInterfac
         return leaseholderAdsDao.getListOfPostsByStatus( status);
     }
 
-
-    public List<String> getListOfgenderPreferencesByApplicationId(int applicantionId){
-      return   leaseHolderGenderTableOperations.getGenderPreferencesByApplicationId(applicantionId);
+    /**
+     * Retrieves the list of gender preferences for a post based on the application ID.
+     *
+     * @param applicationId The application ID.
+     * @return The list of gender preferences.
+     */
+    public List<String> getListOfgenderPreferencesByApplicationId(int applicationId){
+      return   leaseHolderGenderTableOperations.getGenderPreferencesByApplicationId(applicationId);
     }
 
-    public List<String> getListOfFoodPreferencesByApplicationId(int applicantionId){
-        return   leaseHolderFoodTableOperations.getFoodPreferencesByApplicationId(applicantionId);
+    public List<String> getListOfFoodPreferencesByApplicationId(int applicationId){
+        return   leaseHolderFoodTableOperations.getFoodPreferencesByApplicationId(applicationId);
     }
-
-    public List<String> getListOfImagesByApplicationId(int applicantionId){
-        return   leaseHolderImagesTableOperations.getImagesByApplicationId(applicantionId);
+    /**
+     * Retrieves the list of images for a post based on the application ID.
+     *
+     * @param applicationId The application ID.
+     * @return The list of images.
+     */
+    public List<String> getListOfImagesByApplicationId(int applicationId){
+        return   leaseHolderImagesTableOperations.getImagesByApplicationId(applicationId);
     }
-
+    /**
+     * Retrieves the details of a post based on the application ID.
+     *
+     * @param applicationId The application ID.
+     * @return The post details.
+     */
     public Posts getPostByApplicationId(int applicationId){
         return leaseholderAdsDao.getPostByApplicationId(applicationId);
     }

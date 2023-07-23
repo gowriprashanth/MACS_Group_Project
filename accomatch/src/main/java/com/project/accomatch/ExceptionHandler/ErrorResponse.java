@@ -4,7 +4,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
-
+/**
+ * Error Response class for Exception Handling
+ * @author Ramandeep Kaur
+ */
 public class ErrorResponse {
     @JsonProperty("status")
     private int statusCode;
