@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/leaseowner/loggedinapplicant")
 public class LeasePostsLoggedinController {
     @Autowired
-    private LeasePostsLoggedinService applicantService;
+    public LeasePostsLoggedinService applicantService;
 
     Logger logger = LoggerClass.getLogger();
     @GetMapping("/get/list/applicant/{user_id}")
