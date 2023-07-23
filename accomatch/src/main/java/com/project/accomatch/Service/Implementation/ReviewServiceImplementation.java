@@ -1,19 +1,17 @@
 package com.project.accomatch.Service.Implementation;
 
-import com.project.accomatch.Exception.ApplicantNotFound;
-import com.project.accomatch.Exception.DataAccessException;
-import com.project.accomatch.Exception.ApplicantNotFound;
+import com.project.accomatch.Exception.*;
+import com.project.accomatch.LoggerPack.LoggerClass;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Model.Ratings;
 import com.project.accomatch.Model.Review;
-
-import com.project.accomatch.Repository.LeaseHolderDashboardInterface;
 
 import com.project.accomatch.Repository.Implementation.LeaseholderAdsDao;
 import com.project.accomatch.Repository.Implementation.ReviewRepository;
 
 import com.project.accomatch.Repository.LeaseholderAdsDaoInterface;
 import com.project.accomatch.Service.ReviewService;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -38,12 +36,15 @@ public class ReviewServiceImplementation implements ReviewService {
     @Value("${Connection.db.accomatch}")
     private String JDBC;
 
+    Logger logger = LoggerClass.getLogger();
+
     @Override
     public void createReview(Review review) {
         try {
             reviewRepository.createReview(review);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.error("Error during creating reviews {}", e.getMessage(), e);
+            throw new ReviewCreationExcecption("Failed to create reviews");
         }
     }
 
@@ -57,7 +58,8 @@ public class ReviewServiceImplementation implements ReviewService {
         try {
             return reviewRepository.getAllPostReviews();
         } catch (Exception e) {
-            throw new ApplicantNotFound("Failed to retrieve the list of Applicants.");
+            logger.error("Error during retrieving all post reviews {}", e.getMessage(), e);
+            throw new PostNotFoundException("Failed to retrieve the list of Applicants.");
         }
     }
 
@@ -107,7 +109,8 @@ public class ReviewServiceImplementation implements ReviewService {
         return listOfRatings;
         }
         catch (Exception e){
-            throw new ApplicantNotFound("Failed to retrieve the list of Applicants.");
+            logger.error("Error during retrieving all post ratings {}", e.getMessage(), e);
+            throw new RatingsNotFoundException("Failed to retrieve ratings.");
         }
 
     }
@@ -163,8 +166,9 @@ public class ReviewServiceImplementation implements ReviewService {
             listOfRatings.add(ratings);
             }
 
-        } catch (SQLException e) {
-            throw new DataAccessException("Failed to retrieve the list of posts.", e);
+        } catch (Exception e) {
+            logger.error("Error during retrieving all post ratings {}", e.getMessage(), e);
+            throw new RatingsNotFoundException("Failed to retrieve ratings.");
         }
         return listOfRatings;
     }

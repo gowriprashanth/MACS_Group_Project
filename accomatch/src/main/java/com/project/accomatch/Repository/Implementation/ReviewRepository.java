@@ -115,6 +115,8 @@ public class ReviewRepository implements ReviewRepositoryInterface {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
+            throw new DataAccessException("Failed to retrieve the reviews.", e);
         }
         return listOfReviews;
     }
