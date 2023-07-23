@@ -17,7 +17,7 @@ import java.util.List;
  */
 @RestController
 @CrossOrigin("http://localhost:3000")
-@RequestMapping("/api/leaseowner/dashboard")
+@RequestMapping("/api/leaseholder/dashboard")
 public class LeaseHolderDashboardController {
     @Autowired
     private LeaseHolderDashboardInterface dashboardService;

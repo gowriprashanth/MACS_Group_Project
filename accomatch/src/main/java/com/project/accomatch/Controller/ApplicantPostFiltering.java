@@ -12,7 +12,7 @@ import java.util.Map;
 
 @CrossOrigin("http://localhost:3000")
 @RestController
-@RequestMapping("/applicant")
+@RequestMapping("/api/applicant")
 public class ApplicantPostFiltering {
 
     Logger logger = LoggerClass.getLogger();

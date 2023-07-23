@@ -22,8 +22,46 @@ export const PostsDetailsPage = () => {
   const [reviewResponse, setReviewResponse] = useState([]);
   const [errMsg, setErrMsg] =useState ('');
   const [success, setSuccess] = useState(false);
+  const [roomId,setRoomId]=useState();
   const handleReviewClick =()=>{
       navigate(`/ratingform/${applicationId}`)
+  }
+  const handleChatSubmit=async ()=>{
+    let bodyObj={
+      user_id : Number(sessionStorage.getItem("user_id")),
+      application_id : Number(applicationId)
+    }
+    fetch(`/api/room/getRoomId`,{
+      method:"POST",
+      headers: { "Content-Type": "application/json",
+      "Authorization": `Bearer ${sessionStorage.getItem("token")}`}, // Include the authentication token in the headers
+      body: JSON.stringify(bodyObj),
+    }).then((response) => {
+      console.log(response);
+      if(response.status===200){
+      }
+      return response.text(); // Read the response data as text
+    })
+    .then((data) => {
+      console.log(data); // Log the response data
+      setRoomId(data);
+      navigate(`/chat/${data}`,{
+      roomId:data
+      });
+      if (data === "success") {
+      setSuccess(true);
+      } else {
+      setErrMsg("Login failed. Please try again."); // Set an appropriate error message
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      toast.error('An error occurred while loading posts. Please try again.', {
+      position: toast.POSITION.TOP_RIGHT
+    });
+      setErrMsg("An error occurred. Please try again."); // Set an appropriate error message
+    });
+
   }
   const handleApplySubmit =async () => {
     let bodyObj = {
@@ -32,7 +70,7 @@ export const PostsDetailsPage = () => {
         status:"Pending"
     }
 
-    fetch("http://localhost:8080/api/applicant/apply", {
+    fetch("/api/applicant/apply", {
         method: "POST",
         headers: { "Content-Type": "application/json",
         "Authorization": `Bearer ${sessionStorage.getItem("token")}`}, // Include the authentication token in the headers
@@ -62,73 +100,48 @@ export const PostsDetailsPage = () => {
     });
     }
   useEffect(() => {
-    const isUserAlreadyApplied = async ()=>{
-      let bodyObj = {
-        user_id:sessionStorage.getItem("user_id"),
-        application_id:applicationId
-    }
-    // setAlreadyApplied(await isUserAlreadyApplied());
-    fetch("http://localhost:8080/api/applicant/isApplied", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${sessionStorage.getItem("token")}` // Include the authentication token in the headers
-    },
-    body: JSON.stringify(bodyObj),
-    
-})
-.then((response) => {
-    console.log(response);
-    return response.json(); // Read the response data as JSON
-})
-.then((data) => {
-    console.log(data); // Log the response data
-    if (data === "success") {
-        setSuccess(true);
-    } else {
-        setErrMsg("Login failed. Please try again."); // Set an appropriate error message
-    }
-})
-.catch((error) => {
-    setErrMsg("An error occurred. Please try again."); // Set an appropriate error message
-});
-setAlreadyApplied(await isUserAlreadyApplied());
- }
- const fetchPostDetails = async () => {
+  const fetchPostDetails = async () => {
   console.log(applicationId);
   try {
     const authToken = sessionStorage.getItem("token"); // Retrieve the authentication token from sessionStorage
 
-    const postResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/post/details/${applicationId}`, {
+    const postResponse = await axios.get(`/api/leaseholder/dashboard/get/post/details/${applicationId}`, {
       headers: {
         'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
       }
     });
     setPost(postResponse.data);
     console.log(postResponse.data);
-
-    const imagesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/images/${applicationId}`, {
+    const isUserApplied = await axios.post(`/api/applicant/isApplied`,{
+      user_id:sessionStorage.getItem("user_id"),
+      application_id:applicationId
+    },{
+      headers: {
+        'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
+    }});
+    setAlreadyApplied(isUserApplied.data);
+    const imagesResponse = await axios.get(`/api/leaseholder/dashboard/get/list/images/${applicationId}`, {
       headers: {
         'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
       }
     });
     setImages(imagesResponse.data);
 
-    const foodPreferencesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/food/${applicationId}`, {
+    const foodPreferencesResponse = await axios.get(`/api/leaseholder/dashboard/get/list/food/${applicationId}`, {
       headers: {
         'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
       }
     });
     setFoodPreferences(foodPreferencesResponse.data);
 
-    const genderPreferencesResponse = await axios.get(`http://localhost:8080/api/leaseowner/dashboard/get/list/gender/${applicationId}`, {
+    const genderPreferencesResponse = await axios.get(`/api/leaseholder/dashboard/get/list/gender/${applicationId}`, {
       headers: {
         'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
       }
     });
     setGenderPreferences(genderPreferencesResponse.data);
 
-    const response = await axios.get(`http://localhost:8080/reviews/getListOfAllRatings/${applicationId}`, {
+    const response = await axios.get(`/api/reviews/getListOfAllRatings/${applicationId}`, {
       headers: {
         'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
       }
@@ -136,7 +149,7 @@ setAlreadyApplied(await isUserAlreadyApplied());
     setReviewResponse(response.data);
     console.log(response.data);
 
-    const ratingResponse = await axios.get(`http://localhost:8080/reviews/getAverageRatings/${applicationId}`, {
+    const ratingResponse = await axios.get(`/api/reviews/getAverageRatings/${applicationId}`, {
       headers: {
         'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
       }
@@ -230,8 +243,7 @@ setAlreadyApplied(await isUserAlreadyApplied());
         </div>
       </div>
       {alreadyApplied ?
-      {/* Apply button */}
-      (<button className="chat-button">Chat</button>):
+      (<button className="chat-button" onClick={()=>handleChatSubmit()}>Chat</button>):
         (<button className="apply-button" onClick={()=>handleApplySubmit()}>Apply</button>) 
       }
 

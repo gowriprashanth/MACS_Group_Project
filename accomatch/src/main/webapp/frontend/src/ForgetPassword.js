@@ -21,7 +21,7 @@ export function ForgetPassword() {
             Swal.fire("Please Retype the Password correctly")
         }
 
-        axios.post("http://localhost:8080/users/update/password",payload)
+        axios.post("/api/users/update/password",payload)
             .then((resp)=>{
                 if(resp.data==="Success"){
                     Swal.fire("Password has been Reset")

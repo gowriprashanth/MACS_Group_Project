@@ -1,8 +1,8 @@
 package com.project.accomatch.Controller;
+
 import com.project.accomatch.Exception.InvalidInputException;
 import com.project.accomatch.LoggerPack.LoggerClass;
 import com.project.accomatch.Model.Applicant;
-import com.project.accomatch.Service.Implementation.LeaseApplicationImplementation;
 import com.project.accomatch.Service.LeaseApplicationService;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @CrossOrigin("http://localhost:3000")
-@RequestMapping("/api/leaseowner/applicant")
+@RequestMapping("/api/leaseholder/applicant")
 public class LeaseApplicationController {
     @Autowired
     public LeaseApplicationService applicantService;

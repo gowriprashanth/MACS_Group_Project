@@ -18,7 +18,7 @@ export const Signup = () => {
   const [mobile, setMobile] = useState('');
   const [address, setAddress] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
-  const [isLeaseOwner, setIsLeaseOwner] = useState(false);
+  const [isLeaseHolder, setIsLeaseHolder] = useState(false);
 
   const [errMsg, setErrMsg] =useState ('');
   const [success, setSuccess] = useState(false);
@@ -26,7 +26,7 @@ export const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, name, password, age, gender, mobile, address, isAdmin, isLeaseOwner);
+    console.log(email, name, password, age, gender, mobile, address, isAdmin, isLeaseHolder);
     let bodyObj = {
       email: email,
       name: name,
@@ -36,7 +36,7 @@ export const Signup = () => {
       mobile: mobile,
       address: address,
       is_admin: isAdmin ? 1 : 0,
-    is_leaseholder: isLeaseOwner ? 1 : 0
+    is_leaseholder: isLeaseHolder ? 1 : 0
     };
     setEmail('');
     setName('');
@@ -47,8 +47,8 @@ export const Signup = () => {
     setMobile('');
     setAddress('');
     setIsAdmin(false);
-    setIsLeaseOwner(false);
-    fetch("http://localhost:8080/users/signup", {
+    setIsLeaseHolder(false);
+    fetch("/api/users/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(bodyObj),
@@ -169,13 +169,13 @@ export const Signup = () => {
         </div>
 
         <div>
-          <label htmlFor="isLeaseOwner">Is Lease Owner:</label>
+          <label htmlFor="isLeaseHolder">Is Lease Owner:</label>
           <input
             type="checkbox"
-            id="isLeaseOwner"
-            checked={isLeaseOwner}
+            id="isLeaseHolder"
+            checked={isLeaseHolder}
            
-            onChange={(e) => setIsLeaseOwner(e.target.checked)}
+            onChange={(e) => setIsLeaseHolder(e.target.checked)}
             />
             </div>
             <button>Sign Up</button>

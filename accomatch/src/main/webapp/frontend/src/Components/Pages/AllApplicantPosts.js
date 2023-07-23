@@ -28,7 +28,7 @@ export const AllApplicantPosts = () => {
         try {
           const authToken = sessionStorage.getItem("token"); //  authentication token
           
-          const response = await axios.get("http://localhost:8080/houseSeeker/getListOfAllApplicantPosts", {
+          const response = await axios.get("/api/houseSeeker/getListOfAllApplicantPosts", {
             headers: {
               Authorization: `Bearer ${authToken}` // authentication token in the headers
             }
@@ -84,7 +84,7 @@ export const AllApplicantPosts = () => {
         const ageValue = filter.age;
 
         try {
-            const response = await axios.post("http://localhost:8080/applicant/posts/filter", {
+            const response = await axios.post("/api/applicant/posts/filter", {
                 Male: genderValue,
                 Female: filter.gender.female ? 1 : 0,
                 Veg: foodValue,

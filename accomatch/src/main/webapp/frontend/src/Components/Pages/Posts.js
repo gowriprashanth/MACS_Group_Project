@@ -34,7 +34,7 @@ export const Posts = () => {
     try {
       const authToken = sessionStorage.getItem("token"); //  authentication token
   
-      const postResponse = await axios.get("http://localhost:8080/api/leaseowner/dashboard/get/list/post", {
+      const postResponse = await axios.get("/api/leaseholder/dashboard/get/list/post", {
         headers: {
           'Authorization': `Bearer ${authToken}` // Include the authentication token in the headers
         }
@@ -43,7 +43,7 @@ export const Posts = () => {
       setPosts(postResponse.data);
       console.log(postResponse.data);
   
-      const ratingResponse = await axios.get("http://localhost:8080/reviews/getAllAverageRatings", {
+      const ratingResponse = await axios.get("/api/reviews/getAllAverageRatings", {
         headers: {
           'Authorization': `Bearer ${authToken}` // Include the authentication token in the headers
         }
@@ -106,7 +106,7 @@ export const Posts = () => {
     try {
       const authToken = sessionStorage.getItem("token"); // Replace with the actual authentication token
   
-      const response = await axios.post("http://localhost:8080/applicant/posts/filter", {
+      const response = await axios.post("/api/applicant/posts/filter", {
         Male: genderValue,
         Female: filter.gender.female ? 1 : 0,
         Veg: foodValue,

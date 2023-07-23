@@ -31,7 +31,7 @@ export const PostsByStatus = () => {
     try {
       const authToken = sessionStorage.getItem("token"); // authentication token
       
-      const response = await axios.get("http://localhost:8080/admin/get/list/post", {
+      const response = await axios.get("/api/admin/get/list/post", {
         headers: {
           Authorization: `Bearer ${authToken}` //  authentication token in the headers
         }
@@ -93,7 +93,7 @@ export const PostsByStatus = () => {
       
       if (filter.status !== "") {
         const response = await axios.post(
-          "http://localhost:8080/admin/get/list/postbystatus",
+          "/api/admin/get/list/postbystatus",
           {
             status: filter.status
           },
@@ -105,7 +105,7 @@ export const PostsByStatus = () => {
         );
         setPosts(response.data);
       } else {
-        const response = await axios.get("http://localhost:8080/admin/get/list/post", {
+        const response = await axios.get("/api/admin/get/list/post", {
           headers: {
             Authorization: `Bearer ${authToken}` // authentication token in the headers
           }

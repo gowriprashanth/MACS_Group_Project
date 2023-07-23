@@ -1,6 +1,5 @@
 package com.project.accomatch.Controller;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.accomatch.Model.ChatRoomModel;
 import com.project.accomatch.Model.LeaseHolderApplicantModel;
 import com.project.accomatch.Service.ApplyonPostService;
@@ -15,6 +14,13 @@ import java.util.Map;
 public class ApplyonPostController {
     @Autowired
     ApplyonPostService applyonPostService;
+
+    /**
+     * Apply on any application for the house
+     * @author Bhargav Kanodiya
+     * @param leaseHolderApplicantModel -- Model details of the Leaseholder applicant
+     * @return -- Status of the application
+     */
     @PostMapping("/apply")
     public String apply(@RequestBody LeaseHolderApplicantModel leaseHolderApplicantModel){
         try{
@@ -25,6 +31,13 @@ public class ApplyonPostController {
             return e.getMessage();
         }
     }
+
+    /**
+     * Method to verify if user has already applied on the post
+     * @author Bhargav Kanodiya
+     * @param requestBody -- Body of the request
+     * @return -- true if user has already applied
+     */
     @PostMapping("/isApplied")
     public boolean isUserApplied(@RequestBody Map<String,Object> requestBody){
         try{

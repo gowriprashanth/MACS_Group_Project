@@ -8,7 +8,7 @@ export function ForgetPasswordEmail() {
         const payload= {
            "email":document.getElementById("mail").value
         }
-        axios.post("http://localhost:8080/users/forgot/password",payload)
+        axios.post("/api/users/forgot/password",payload)
             .then((resp)=>{
                 if(resp.data==="Mail Sent"){
                     Swal.fire("Recovery mail has been sent check your Email")

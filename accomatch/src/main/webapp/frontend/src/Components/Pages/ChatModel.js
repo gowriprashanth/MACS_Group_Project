@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 import {w3cwebsocket as WebSocket} from "websocket";
+import axios from "axios";
 export const ChatModel = () => {
   const [message, setMessage] = useState('');
   const [messages,setMessages] = useState([]);
   const [receivedMessage, setReceivedMessage] = useState('');
   const [connection, setConnection] = useState(null);
+  const [errMsg, setErrMsg] =useState ('');
+  const [success, setSuccess] = useState(false);
+  const {roomId}=useParams();
 
   useEffect(() => {
-    const ws = new WebSocket('ws://localhost:8080/chat/1'); // Replace with your WebSocket server URL
+    const ws = new WebSocket('ws://localhost:8080/chat/'+roomId); // Replace with your WebSocket server URL
     setConnection(ws);
 
     ws.onopen = () => {
@@ -30,29 +35,67 @@ export const ChatModel = () => {
       ws.close(); // Close the WebSocket connection when the component unmounts
     };
   }, []);
+  const onOpenHandler=async()=>{
+    const response = await axios.get(`/api/chat/get/${Number(roomId)}`,{
+      headers:{
+        Authorization:`Bearer ${sessionStorage.getItem("token")}`
+      }
+    })
+    console.log(response)
+    await response.data.map(async(messageObj)=>{
+      if(messageObj.user_id===Number(sessionStorage.getItem("user_id"))){
+        setMessages((prevMessages)=>[...prevMessages,{message:messageObj.message,sender:true}]);
+      } else{
+        setMessages((prevMessages)=>[...prevMessages,{message:messageObj.message,sender:false}]);
+      }
+    })
+  }
   useEffect(() => {
     // This effect will run whenever messages change (new messages are received)
     // Scroll to the bottom of the chat container to show the latest message
     const chatContainer = document.getElementById('chat-container');
     chatContainer.scrollTop = chatContainer.scrollHeight;
-  }, [messages]);
+    onOpenHandler();
+    
+    
+  }, []);
   const sendMessage = (event) => {
     event.preventDefault();
     if (message.trim() !== '') {
       console.log(message)
       // Send the message to the server
       const messageBody = {
-        user_id:1,
+        user_id:Number(sessionStorage.getItem("user_id")),
         message: message,
-        room_id:1,
+        room_id:Number(roomId),
       };
       const jsonData = JSON.stringify(messageBody);
-      if(connection){}
+      if(connection){
         connection.send(jsonData);
         setMessages((prevMessages)=>[...prevMessages,{message:messageBody.message,sender:true}]);
         setMessage('');
       }
+      fetch("/api/chat/send",{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+          Authorization:`Bearer ${sessionStorage.getItem("token")}`
+        },
+        body:jsonData
+      })
+      .then((data) => {
+        console.log(data); // Log the response data
+        if (data === "success") {
+        setSuccess(true);
+        } else {
+        setErrMsg("Login failed. Please try again."); // Set an appropriate error message
+        }
+      })
+      .catch((error) => {
+        setErrMsg("An error occurred. Please try again."); // Set an appropriate error message
+      });
     }
+  }
     const handleKeyPress = (e) => {
       if (e.key === 'Enter') {
         sendMessage(e);
