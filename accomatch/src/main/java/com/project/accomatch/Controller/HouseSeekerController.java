@@ -17,6 +17,12 @@ public class HouseSeekerController {
     @Autowired
     private HouseSeekerService houseSeekerService;
 
+    /**
+     *
+     * Retrieves a list of all applicant posts.
+     * @auther Dhrumil Vimalbhai Gosaliya
+     * @return list of HouseSeekerModel objects representing the applicant posts.
+     */
     @GetMapping("/getListOfAllApplicantPosts")
     public List<HouseSeekerModel> getListOfAllApplicantPosts(){
         return houseSeekerService.getListOfAllApplicantPosts();

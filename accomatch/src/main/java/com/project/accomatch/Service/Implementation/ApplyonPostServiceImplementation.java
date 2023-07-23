@@ -4,9 +4,12 @@ import com.project.accomatch.Exception.ApplicationException;
 import com.project.accomatch.LoggerPack.LoggerClass;
 import com.project.accomatch.Model.ChatRoomModel;
 import com.project.accomatch.Model.LeaseHolderApplicantModel;
+import com.project.accomatch.Repository.ApplyonPostTableOperationsInterface;
+import com.project.accomatch.Repository.ChatRoomOperationsInterface;
 import com.project.accomatch.Repository.Implementation.ApplyonPostTableOperations;
 import com.project.accomatch.Repository.Implementation.ChatRoomOperations;
 import com.project.accomatch.Repository.Implementation.LeaseHolderTableOperations;
+import com.project.accomatch.Repository.LeaseHolderTableOperationsInterface;
 import com.project.accomatch.Service.ApplyonPostService;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +19,11 @@ import org.springframework.stereotype.Service;
 public class ApplyonPostServiceImplementation implements ApplyonPostService {
     Logger logger = LoggerClass.getLogger();
     @Autowired
-    ApplyonPostTableOperations applyonPostTableOperations;
+    ApplyonPostTableOperationsInterface applyonPostTableOperations;
     @Autowired
-    LeaseHolderTableOperations leaseHolderTableOperations;
+    LeaseHolderTableOperationsInterface leaseHolderTableOperations;
     @Autowired
-    ChatRoomOperations chatRoomOperations;
+    ChatRoomOperationsInterface chatRoomOperations;
 
     /**
      * Applies to a post and creates a chat room for communication.

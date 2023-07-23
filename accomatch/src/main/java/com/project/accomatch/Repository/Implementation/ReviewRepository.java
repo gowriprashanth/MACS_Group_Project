@@ -29,6 +29,14 @@ public class ReviewRepository implements ReviewRepositoryInterface {
 
     Logger logger = LoggerClass.getLogger();
 
+    /**
+     * Creates new review for a user.
+     *
+     * @auther Dhrumil Vimalbhai Gosaliya
+     * @param review review containing the details of the review to be created.
+     * @return number of rows affected by the database insertion.
+     * @throws DataAccessException if SQL-related exception occurs.
+     */
     public int createReview(Review review) {
         try {
             Connection connect;

@@ -19,6 +19,12 @@ public class ReviewController {
     }
 
     Logger logger = LoggerClass.getLogger();
+    /**
+     * Handles post request to create a new review for a user.
+     * @auther Dhrumil Vimalbhai Gosaliya
+     * @param review review containing the details of the review to be created.
+     */
+
     @PostMapping("/createReview")
     public void createReview(@RequestBody Review review) {
         int user_id = review.getUserId();

@@ -1,6 +1,5 @@
 package com.project.accomatch.Controller;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.accomatch.Model.ChatRoomModel;
 import com.project.accomatch.Model.LeaseHolderApplicantModel;
 import com.project.accomatch.Service.ApplyonPostService;
@@ -14,7 +13,7 @@ import java.util.Map;
 @RequestMapping("/api/applicant")
 public class ApplyonPostController {
     @Autowired
-    private ApplyonPostService applyonPostService;
+    ApplyonPostService applyonPostService;
     @PostMapping("/apply")
     public String apply(@RequestBody LeaseHolderApplicantModel leaseHolderApplicantModel){
         try{
