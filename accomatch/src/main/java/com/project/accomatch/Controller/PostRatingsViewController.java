@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/reviews")
 public class PostRatingsViewController {
     @Autowired
-    private ReviewServiceImplementation reviewServiceImplementation;
+    public ReviewServiceImplementation reviewServiceImplementation;
     @GetMapping("/getListOfAllRatings/{application_id}")
     public List<Review> getListOfAllRatings(@PathVariable int application_id){
         if (application_id <= 0) {
