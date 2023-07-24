@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 
 export const LeaseHolderPersonlPosts = () => {
     const { user_Id } = useParams();
+    const userid=sessionStorage.getItem("user_id");
     const [posts, setPosts] = useState([]);
     const [selectedPost, setSelectedPost] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,7 +20,7 @@ export const LeaseHolderPersonlPosts = () => {
             try {
               const authToken = sessionStorage.getItem("token"); //  authentication token
               
-              const postResponse = await axios.get(`/api/leaseholder/dashboard/get/list/getListOfPersonalPosts/${user_Id}`, {
+              const postResponse = await axios.get(`/api/leaseholder/dashboard/get/list/getListOfPersonalPosts/${userid}`, {
                 headers: {
                   Authorization: `Bearer ${authToken}` // authentication token in the headers
                 }
@@ -32,7 +33,7 @@ export const LeaseHolderPersonlPosts = () => {
           
 
         fetchPostDetails().then(r => console.log("Axios error coming"));
-    }, [user_Id]);
+    }, [userid]);
 
     const handleDetailsClick = (postId) => {
         navigate(`/posts/${postId}`);
