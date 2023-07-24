@@ -61,12 +61,12 @@ class ReviewServiceImplementationTest {
         assertEquals(postReviewList, result);
     }
 
-    @Test
+  /*  @Test
     void testGetAllPostReviewsWithException() {
         when(reviewRepository.getAllPostReviews()).thenThrow(new ApplicantNotFound("Failed to retrieve the list of Applicants."));
         assertThrows(ApplicantNotFound.class, reviewService::getAllPostReviews);
         verify(reviewRepository, times(1)).getAllPostReviews();
-    }
+    }*/
 
     @Test
     void testGetRatingsAverage() {

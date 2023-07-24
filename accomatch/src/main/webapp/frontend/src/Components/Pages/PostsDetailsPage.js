@@ -81,7 +81,7 @@ export const PostsDetailsPage = () => {
         if(response.status===200){
             navigate("/posts");
         }
-        return response.text(); // Read the response data as text
+        return response.json(); // Read the response data as text
     })
     .then((data) => {
         console.log(data); // Log the response data
