@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Cookies from 'js-cookie';
 import { NavLink } from "react-router-dom";
 import "./NavBar.css";
 
@@ -7,6 +8,14 @@ function NavBar() {
   const userid=sessionStorage.getItem('user_id');
   const handleClick = () => setClick(!click);
   const userType = sessionStorage.getItem('type');
+
+  const handleLogoutClick = () =>{
+    sessionStorage.removeItem('user_id');
+    sessionStorage.removeItem('name');
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('type');
+    sessionStorage.removeItem('token');
+  };
 
   return (
     <>
@@ -107,6 +116,17 @@ function NavBar() {
               </NavLink>
             </li>
 
+            <li className="nav-item">
+              <NavLink
+                  exact
+                  to={"/"}
+                  activeClassName="active"
+                  className="nav-links"
+                  onClick={handleLogoutClick}
+              >
+                Logout
+              </NavLink>
+            </li>
           </ul>
           <div className="nav-icon" onClick={handleClick}>
             <i className={click ? "fas fa-times" : "fas fa-bars"}></i>
