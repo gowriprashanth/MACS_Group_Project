@@ -3,6 +3,7 @@ import {useRef, useState , useEffect} from 'react';
 import { Link } from 'react-router-dom'; // Import the Link component from react-router-dom
 import axios from 'axios';
 import {useNavigate}  from 'react-router-dom';
+import Cookies from "js-cookie";
 export const Login =() =>{
 
     const userRef =useRef();
@@ -65,6 +66,8 @@ export const Login =() =>{
             sessionStorage.setItem("type", type);
             sessionStorage.setItem("token", token);
             console.log(sessionStorage.getItem('user_id'));
+
+
             if (status === "Success") {
             setSuccess(true);
             } else {
