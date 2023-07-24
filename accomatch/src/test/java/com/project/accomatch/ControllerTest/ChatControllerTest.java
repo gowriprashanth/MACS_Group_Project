@@ -57,10 +57,10 @@ public class ChatControllerTest {
 
         when(chatService.getMessages(anyInt())).thenThrow(new ChatMessageException("Error"));
 
-     /*   assertThrows(ChatMessageException.class, () -> {
-            chatController.getMessages(requestBody);
+        assertThrows(ChatMessageException.class, () -> {
+            chatController.getMessages(requestBody.size());
         });
-*/
+
         verify(chatService, times(1)).getMessages(anyInt());
     }
 }
