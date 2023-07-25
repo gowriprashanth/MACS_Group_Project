@@ -57,15 +57,15 @@ export const LeaseHolderPersonlPosts = () => {
                         <div className="post-image">
                             <img src={post.document} alt={`Post ${post.title}`} />
                         </div>
-                        <div className="post-details">
-                            <h3 onClick={() => openModal(post)}>{post.title}</h3>
+                        <div className="post-details" onClick={()=>openModal(post)}>
+                            <h3>{post.title}</h3>
                             <p>{post.subtitle}</p>
                             <p>Address: {post.address}</p>
                             <p>City: {post.city}</p>
                             <p>Rent: {post.rent}</p>
                             <p>Room Type: {post.roomType}</p>
-                            <p>Area: {post.area} sqft</p>
-                            <p>Available From: {post.availableFrom}</p>
+                            <p>Spots available: {post.size}</p>
+                            <p>Available From: {post.startDate}</p>
                         </div>
                     </div>
                 ))}
@@ -79,8 +79,8 @@ export const LeaseHolderPersonlPosts = () => {
                         <p>City: {selectedPost.city}</p>
                         <p>Rent: {selectedPost.rent}</p>
                         <p>Room Type: {selectedPost.roomType}</p>
-                        <p>Area: {selectedPost.area} sqft</p>
-                        <p>Available From: {selectedPost.availableFrom}</p>
+                        <p>Spots Available: {selectedPost.size}</p>
+                        <p>Available From: {selectedPost.startDate}</p>
                         <button onClick={() => handleDetailsClick(selectedPost.leaseholderApplicationId)}>More Details</button>
                         <button onClick={closeModal}>Close</button>
                     </div>
