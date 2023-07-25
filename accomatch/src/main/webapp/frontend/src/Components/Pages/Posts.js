@@ -36,6 +36,28 @@ export const Posts = () => {
     loadPosts();
   }, []);
 
+  
+  useEffect(() => {
+    async function getRatings(){
+      const ratings = [];
+      const authToken = sessionStorage.getItem("token"); //  authentication token
+      for (let index = 0; index < posts.length; index++) {
+        const post = posts[index];
+        const application_id = post.leaseholderApplicationId;
+        const data = await axios.get(`/api/reviews/getAverageRatings/${application_id}`,{
+        headers: {
+          'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
+        }
+      });
+      console.log(data.data[0]);
+      ratings.push(data.data[0]);
+      }
+      setRatings(ratings);
+    }
+    getRatings();
+  }, [posts]);
+
+
   const loadPosts = async () => {
     try {
       const authToken = sessionStorage.getItem("token"); //  authentication token
@@ -129,7 +151,7 @@ export const Posts = () => {
       console.error(error);
     }
   };
-  
+
   const toggleFilter = () => {
     setIsFilterOpen(prevValue => !prevValue);
   };
