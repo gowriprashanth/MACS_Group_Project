@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/leaseholder/applicant")
@@ -24,6 +26,18 @@ public class LeaseApplicationController {
         }
         logger.info("Lease Applicant controller active");
         return applicantService.getListOfApplicants(application_id);
+    }
+
+    @PostMapping("/changeStatus")
+    public boolean chanegStatusofApplication(@RequestBody Map<String,Object> requestBody){
+        int application_id= (Integer) requestBody.get("application_id");
+        int user_id = (Integer) requestBody.get("user_id");
+        String status = (String) requestBody.get("status");
+        if(application_id<=0 || user_id<=0){
+            throw new InvalidInputException("Invalid application Id or user Id provided.");
+        }
+        logger.info("Lease Applicant Controller Active");
+        return applicantService.changeStatusofApplicant(application_id,user_id,status);
     }
 
 }

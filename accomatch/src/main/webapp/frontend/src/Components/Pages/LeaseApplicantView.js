@@ -74,7 +74,34 @@ export const LeaseApplicantView = () => {
         });
     
       }
-    const handleStatusChangeSubmit=(isApprove)=>{
+    const handleStatusChangeSubmit=async(isApprove,userId)=>{
+        try{
+            let status;
+            if(isApprove){
+                status="Accepted";
+            } else {
+                status="Rejected";
+            }
+            let bodyObj={
+                status:status,
+                user_id:userId,
+                application_id:Number(applicationId)
+            }
+            const authToken = sessionStorage.getItem("token");
+                const res = await axios.post(`/api/leaseholder/applicant/changeStatus`,JSON.stringify(bodyObj)
+                    , {
+                        headers: {
+                            Authorization: `Bearer ${authToken}`,
+                            "Content-Type": "application/json"}});
+                if(res){
+                    setSuccess(true);
+                } else{
+                    setErrMsg("Something went wrong");
+                }
+                console.log(res.data);
+        } catch(error){
+            console.log(error);
+        }
 
     }
     const openModal = (applicant) => {
@@ -107,8 +134,8 @@ export const LeaseApplicantView = () => {
                             <p>Gender: {applicant.gender}</p>
                             <p>Mobile: {applicant.mobile} </p>
                             <button className="chat-button" onClick={()=>handleChatSubmit(applicant.userId)}>Chat</button>
-                            <button className="approve-button" onClick={()=>handleStatusChangeSubmit(true)}>Approve</button>
-                            <button className="reject-button" onClick={()=>handleStatusChangeSubmit(false)}>Reject</button>
+                            <button className="approve-button" onClick={()=>handleStatusChangeSubmit(true,applicant.userId)}>Approve</button>
+                            <button className="reject-button" onClick={()=>handleStatusChangeSubmit(false,applicant.userId)}>Reject</button>
                     </div>
                 ))}
             </div>
