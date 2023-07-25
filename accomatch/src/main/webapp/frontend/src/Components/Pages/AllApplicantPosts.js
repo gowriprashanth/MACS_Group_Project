@@ -182,13 +182,10 @@ export const AllApplicantPosts = () => {
                             <img src={post.document} alt={`Post ${post.title}`} />
                         </div>
                         <div className="post-details">
-                            <h3 onClick={() => openModal(post)}>Id: {post.user_id}</h3>
-                            <p>Name: {post.username}</p>
-                            <p>Age: {post.age}</p>
+                            <h3 onClick={() => openModal(post)}> {post.name}</h3>
                             <p>City: {post.location_city}</p>
                             <p>Other Preferences: {post.other_preferences}</p>
                             <p>Room Type: {post.room_type}</p>
-                            <p>Date: {post.date}</p>
                         </div>
                     </div>
                 ))}
