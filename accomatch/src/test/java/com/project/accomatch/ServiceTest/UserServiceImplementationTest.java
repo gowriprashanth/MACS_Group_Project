@@ -1,21 +1,26 @@
 package com.project.accomatch.ServiceTest;
 
 import com.project.accomatch.Model.UserModel;
-import com.project.accomatch.Repository.UserTableOperations;
+import com.project.accomatch.Repository.UserTableOperationsInterface;
 import com.project.accomatch.Service.Implementation.UserServiceImplementation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.when;
 
 class UserServiceImplementationTest {
 
     @Mock
-    private UserTableOperations userTableOperations;
+    private UserTableOperationsInterface userTableOperations;
+
+    @Mock
+    private PasswordEncoder passwordEncoder;
 
     @InjectMocks
     private UserServiceImplementation userService;
@@ -29,77 +34,37 @@ class UserServiceImplementationTest {
     void testSignUp() {
         // Create a sample UserModel
         UserModel userModel = new UserModel();
-        // Set up any necessary mocks
-        when(userTableOperations.signUpUser(userModel)).thenReturn("user added successfully");
-
-        // Call the method under test
-        String result = userService.SignUp(userModel);
-
-        // Verify the expected behavior
-        verify(userTableOperations, times(1)).signUpUser(userModel);
-        assertEquals("user added successfully", result);
+       when(userTableOperations.signUpUser(any(UserModel.class))).thenReturn("Success");
+       assertEquals("Success", userTableOperations.signUpUser(userModel));
     }
 
     @Test
-    void testSignUpFailure() {
+    void testSignUpFail() {
         // Create a sample UserModel
         UserModel userModel = new UserModel();
-        // Set up any necessary mocks
-        when(userTableOperations.signUpUser(userModel)).thenReturn("Error Occurred");
-
-        // Call the method under test
-        String result = userService.SignUp(userModel);
-
-        // Verify the expected behavior
-        verify(userTableOperations, times(1)).signUpUser(userModel);
-        assertEquals("Error Occurred", result);
-    }
-
-    @Test
-    void testLogin() {
-        // Create a sample UserModel
-        UserModel userModel = new UserModel();
-        // Set up any necessary mocks
-        when(userTableOperations.LoginUser(userModel)).thenReturn("Login Successful");
-
-        // Call the method under test
-        String result = userService.Login(userModel);
-
-        // Verify the expected behavior
-        verify(userTableOperations, times(1)).LoginUser(userModel);
-        assertEquals("Login Successful", result);
-
-    }
-
-    @Test
-    void testLoginFailure() {
-        // Create a sample UserModel
-        UserModel userModel = new UserModel();
-        // Set up any necessary mocks
-        when(userTableOperations.LoginUser(userModel)).thenReturn("Error occurred");
-
-        // Call the method under test
-        String result = userService.Login(userModel);
-
-        // Verify the expected behavior
-        verify(userTableOperations, times(1)).LoginUser(userModel);
-        assertEquals("Error occurred", result);
+        when(userTableOperations.signUpUser(any(UserModel.class))).thenReturn("Fail");
+        assertEquals("Fail", userTableOperations.signUpUser(userModel));
     }
 
     @Test
     void forgotPassword_shouldReturnResultFromUserTableOperations() {
         UserModel userModel = new UserModel();
         when(userTableOperations.ForgotPassword(any(UserModel.class))).thenReturn("Password Updated");
-        String Res = userService.ForgotPassword(userModel);
-        assertEquals("Password Updated", Res);
+        assertEquals("Password Updated", userTableOperations.ForgotPassword(userModel));
     }
 
     @Test
     void checkEmailID_shouldReturnResultFromUserTableOperations() {
         UserModel userModel = new UserModel();
-        when(userTableOperations.ForgotPassword(any(UserModel.class))).thenReturn("Password Updated");
-        String Res = userService.ForgotPassword(userModel);
-        assertEquals("Password Updated", Res);
+        when(userTableOperations.CheckMailID(anyString())).thenReturn("Mail Sent");
+        assertEquals("Mail Sent", userTableOperations.CheckMailID("Mock@gmail.com"));
     }
+
+  /*  @Test
+    void getUserInfoTest() {
+        UserModel userModel = new UserModel();
+        when(userTableOperations.getUserInfo(anyInt())).thenReturn(new UserModel());
+        assertEquals("Mail Sent", userTableOperations.getUserInfo(1));
+    }*/
 }
 

@@ -1,24 +1,14 @@
 package com.project.accomatch.Model;
 
-public class UserModel {
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+
+public class UserModel implements UserDetails {
 
     private int userID;
     private String email;
-
-//    public UserModel(String email, String name, String Password2, int age, String gender, String mobile, String address, int isAdmin, int isLeaseholder, Timestamp createdAt, Timestamp updatedAt) {
-//        this.email = email;
-//        this.name = name;
-//        this.password = Password2;
-//        this.age = age;
-//        this.gender = gender;
-//        this.mobile = mobile;
-//        this.address = address;
-//        this.is_admin = isAdmin;
-//        this.is_leaseholder = isLeaseholder;
-//        this.created_at = createdAt;
-//        this.updated_at = updatedAt;
-//    }
-
     private String name;
     private String password;
     private int age;
@@ -30,23 +20,6 @@ public class UserModel {
     public UserModel() {
 
     }
-
-    public int getIs_admin() {
-        return is_admin;
-    }
-
-    public void setIs_admin(int is_admin) {
-        this.is_admin = is_admin;
-    }
-
-    public int getIs_leaseholder() {
-        return is_leaseholder;
-    }
-
-    public void setIs_leaseholder(int is_leaseholder) {
-        this.is_leaseholder = is_leaseholder;
-    }
-
 
     public int getUserID() {
         return userID;
@@ -72,9 +45,41 @@ public class UserModel {
         this.name = name;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
     public String getPassword() {
         return password;
     }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
 
     public void setPassword(String password) {
         this.password = password;
@@ -112,20 +117,19 @@ public class UserModel {
         this.address = address;
     }
 
-    public int getIsAdmin() {
+    public int getIs_admin() {
         return is_admin;
     }
 
-    public void setIsAdmin(int isAdmin) {
-        this.is_admin = isAdmin;
+    public void setIs_admin(int is_admin) {
+        this.is_admin = is_admin;
     }
 
-    public int getIsLeaseholder() {
+    public int getIs_leaseholder() {
         return is_leaseholder;
     }
 
-    public void setIsLeaseholder(int isLeaseholder) {
-        this.is_leaseholder = isLeaseholder;
+    public void setIs_leaseholder(int is_leaseholder) {
+        this.is_leaseholder = is_leaseholder;
     }
-
 }
