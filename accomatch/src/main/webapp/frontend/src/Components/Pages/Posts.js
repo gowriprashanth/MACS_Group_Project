@@ -287,7 +287,7 @@ export const Posts = () => {
           </div>
         </div>
       )}
-
+        {!isFilterOpen &&(
       <div className="post-list">
         {ratings.map((rate, index) => (
             <div className="post" key={index}>
@@ -302,6 +302,7 @@ export const Posts = () => {
             </div>
         ))}
       </div>
+        )}
       </div >
     </div>
 );
