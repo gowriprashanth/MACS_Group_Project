@@ -6,9 +6,7 @@ import com.project.accomatch.Service.ReviewService;
 import org.slf4j.Logger;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin
 @RestController
 @RequestMapping("/api/reviews")
 public class ReviewController {
