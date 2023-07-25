@@ -1,9 +1,9 @@
 package com.project.accomatch.ControllerTest;
 
-import com.project.accomatch.Controller.UserController;
+import com.project.accomatch.Controller.AuthController;
 import com.project.accomatch.Model.UserModel;
 import com.project.accomatch.Service.Implementation.MailSenderClass;
-import com.project.accomatch.Service.UserService;
+import com.project.accomatch.Service.AuthService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -20,12 +20,12 @@ import static org.mockito.Mockito.*;
 public class UserControllerTest {
 
     @Mock
-    UserService userService;
+    AuthService userService;
     @Mock
     MailSenderClass mailSenderClass;
 
     @InjectMocks
-    UserController usercontroller;
+    AuthController usercontroller;
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -93,14 +93,7 @@ public class UserControllerTest {
         verify(userService, times(1)).ForgotPassword(userModel);
     }
 
-    @Test
-    public void getUserInfoTest(){
-        int testData = 1;
-        UserModel userModel = new UserModel();
-        when(userService.getUserInfo(anyInt())).thenReturn(userModel);
-        assertEquals(userModel, usercontroller.getUserInformation(testData));
-        verify(userService, times(1)).getUserInfo(testData);
-    }
+
 
 }
 

@@ -32,7 +32,7 @@ public class SecurityConfiguration extends SecurityConfigurerAdapter<DefaultSecu
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
-                    .authorizeHttpRequests().requestMatchers("/api/users/**","/chat/**").permitAll()
+                    .authorizeHttpRequests().requestMatchers("/api/auth/**","/chat/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

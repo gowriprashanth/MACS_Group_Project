@@ -48,7 +48,7 @@ export const Signup = () => {
     setAddress('');
     setIsAdmin(false);
     setIsLeaseHolder(false);
-    fetch("/api/users/signup", {
+    fetch("/api/auth/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(bodyObj),

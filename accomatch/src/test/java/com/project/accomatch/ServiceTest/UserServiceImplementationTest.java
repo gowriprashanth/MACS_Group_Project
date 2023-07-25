@@ -2,7 +2,7 @@ package com.project.accomatch.ServiceTest;
 
 import com.project.accomatch.Model.UserModel;
 import com.project.accomatch.Repository.UserTableOperationsInterface;
-import com.project.accomatch.Service.Implementation.UserServiceImplementation;
+import com.project.accomatch.Service.Implementation.AuthServiceImplementation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -23,7 +23,7 @@ class UserServiceImplementationTest {
     private PasswordEncoder passwordEncoder;
 
     @InjectMocks
-    private UserServiceImplementation userService;
+    private AuthServiceImplementation userService;
 
     @BeforeEach
     void setUp() {

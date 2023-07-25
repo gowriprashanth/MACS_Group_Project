@@ -3,7 +3,6 @@ import {useRef, useState , useEffect} from 'react';
 import { Link } from 'react-router-dom'; // Import the Link component from react-router-dom
 import axios from 'axios';
 import {useNavigate}  from 'react-router-dom';
-import Cookies from "js-cookie";
 export const Login =() =>{
 
     const userRef =useRef();
@@ -34,7 +33,7 @@ export const Login =() =>{
         setUser('');
         setPwd('');
 
-        fetch("/api/users/login", {
+        fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(bodyObj),
@@ -66,8 +65,6 @@ export const Login =() =>{
             sessionStorage.setItem("type", type);
             sessionStorage.setItem("token", token);
             console.log(sessionStorage.getItem('user_id'));
-
-
             if (status === "Success") {
             setSuccess(true);
             } else {
