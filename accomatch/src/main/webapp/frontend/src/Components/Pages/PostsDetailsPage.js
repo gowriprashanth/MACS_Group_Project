@@ -23,6 +23,10 @@ export const PostsDetailsPage = () => {
   const [errMsg, setErrMsg] =useState ('');
   const [success, setSuccess] = useState(false);
   const [roomId,setRoomId]=useState();
+  let isLeaseHolder=false;
+  if(sessionStorage.getItem("type")=="LH"){
+    isLeaseHolder=true;
+  }
   const handleReviewClick =()=>{
       navigate(`/ratingform/${applicationId}`)
   }
@@ -100,6 +104,7 @@ export const PostsDetailsPage = () => {
     });
     }
   useEffect(() => {
+  
   const fetchPostDetails = async () => {
   console.log(applicationId);
   try {
@@ -167,6 +172,7 @@ export const PostsDetailsPage = () => {
 };
 
 
+    console.log(isLeaseHolder)
     fetchPostDetails();
   }, [applicationId]);
 
@@ -242,11 +248,12 @@ export const PostsDetailsPage = () => {
           ))}
         </div>
       </div>
-      {alreadyApplied ?
+      {!isLeaseHolder ?
+      (alreadyApplied ?
       (<button className="chat-button" onClick={()=>handleChatSubmit()}>Chat</button>):
         (<button className="apply-button" onClick={()=>handleApplySubmit()}>Apply</button>) 
+      ):null
       }
-
       {/* Applicant button */}
       <button onClick={() => handleApplicantClick(post.leaseholderApplicationId)}>Applicant</button>
       {/*/!* Review button *!/*/}
