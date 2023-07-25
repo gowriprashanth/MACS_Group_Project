@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin
 @RequestMapping("/api/chat")
 public class ChatController {
     @Autowired
