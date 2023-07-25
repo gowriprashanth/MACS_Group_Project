@@ -20,7 +20,13 @@ export const Posts = () => {
     },
     food: {
       vegetarian: false,
-      nonVegetarian: false,
+      nonvegetarian: false,
+      eggetarian:false,
+      vegan:false
+    },
+    room_type: {
+      sharing: false,
+      private: false,
     },
     age: ''
   });
@@ -98,21 +104,22 @@ export const Posts = () => {
 
   const handleFilterSubmit = async (event) => {
     event.preventDefault();
+    const genderPref = Object.keys(filter.gender).filter(key => filter.gender[key]).join(',');
+    const foodPref = Object.keys(filter.food).filter(key => filter.food[key]).join(',');
+    const roomTypePref = Object.keys(filter.room_type).filter(key => filter.room_type[key]).join(',');
   
-    const genderValue = filter.gender.male ? 1 : 0;
-    const foodValue = filter.food.vegetarian ? 1 : 0;
     const ageValue = filter.age;
-  
+    const obj= {
+      gender_pref: genderPref,
+      food_pref: foodPref,
+      age:ageValue,
+      room_type:roomTypePref
+    }
+  console.log(obj)
     try {
       const authToken = sessionStorage.getItem("token"); // Replace with the actual authentication token
   
-      const response = await axios.post("/api/applicant/posts/filter", {
-        Male: genderValue,
-        Female: filter.gender.female ? 1 : 0,
-        Veg: foodValue,
-        NonVeg: filter.food.nonVegetarian ? 1 : 0,
-        age: ageValue
-      }, {
+      const response = await axios.post("/api/applicant/posts/filter", obj, {
         headers: {
           'Authorization': `Bearer ${authToken}` // Include the authentication token in the headers
         }
@@ -181,11 +188,52 @@ export const Posts = () => {
                 <div>
                   <input
                     type="checkbox"
-                    name="food-nonVegetarian"
-                    checked={filter.food.nonVegetarian}
+                    name="food-eggetarian"
+                    checked={filter.food.eggetarian}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label>Eggetarian</label>
+                </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    name="food-vegan"
+                    checked={filter.food.vegan}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label>Vegan</label>
+                </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    name="food-nonvegetarian"
+                    checked={filter.food.nonvegetarian}
                     onChange={handleCheckboxChange}
                   />
                   <label>Non Vegetarian</label>
+                </div>
+              </div>
+            </div>
+            <div className="filter-row">
+              <label>Room Type:</label>
+              <div className="checkbox-group">
+                <div>
+                  <input
+                    type="checkbox"
+                    name="room_type-sharing"
+                    checked={filter.room_type.sharing}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label>Sharing</label>
+                </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    name="room_type-private"
+                    checked={filter.room_type.private}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label>Private</label>
                 </div>
               </div>
             </div>
