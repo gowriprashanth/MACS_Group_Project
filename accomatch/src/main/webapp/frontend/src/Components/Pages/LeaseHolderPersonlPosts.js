@@ -43,7 +43,7 @@ export const LeaseHolderPersonlPosts = () => {
         setSelectedPost(post);
         setIsModalOpen(true);
     }
-
+console.log(isModalOpen,selectedPost);
     const closeModal = () => {
         setIsModalOpen(false);
     }
@@ -53,15 +53,15 @@ export const LeaseHolderPersonlPosts = () => {
         <div className="dashboard-container">
             <div className="post-list">
                 {posts.map((post, index) => (
-                    <div className="post" key={index}>
+                    <div className="post" key={index}  onClick={()=>openModal(post)}>
                         <div className="post-image">
                             <img src={post.document} alt={`Post ${post.title}`} />
                         </div>
-                        <div className="post-details" onClick={()=>openModal(post)}>
+                        <div className="post-details">
                             <h3>{post.title}</h3>
                             <p>{post.subtitle}</p>
                             <p>Address: {post.address}</p>
-                            <p>City: {post.city}</p>
+                            <p>City: {post.locationCity}</p>
                             <p>Rent: {post.rent}</p>
                             <p>Room Type: {post.roomType}</p>
                             <p>Spots available: {post.size}</p>
@@ -71,12 +71,12 @@ export const LeaseHolderPersonlPosts = () => {
                 ))}
             </div>
             {isModalOpen && (
-                <div className="modal">
+                <div className="custom-modal">
                     <div className="modal-content">
                         <h3>{selectedPost.title}</h3>
                         <p>{selectedPost.subtitle}</p>
                         <p>Address: {selectedPost.address}</p>
-                        <p>City: {selectedPost.city}</p>
+                        <p>City: {selectedPost.locationCity}</p>
                         <p>Rent: {selectedPost.rent}</p>
                         <p>Room Type: {selectedPost.roomType}</p>
                         <p>Spots Available: {selectedPost.size}</p>
