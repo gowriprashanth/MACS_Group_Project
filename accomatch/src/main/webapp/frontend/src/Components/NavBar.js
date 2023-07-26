@@ -52,6 +52,20 @@ function NavBar() {
               </NavLink>
             </li>
             )}
+            
+            {userType === 'AP' && (
+            <li className="nav-item">
+              <NavLink
+                exact
+                to={"/posts/myapplications/"+ userid}
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleClick}
+              >
+                My Applications
+              </NavLink>
+            </li>
+            )}
             <li className="nav-item">
               <NavLink
                   exact

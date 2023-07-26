@@ -3,14 +3,11 @@ package com.project.accomatch.Service.Implementation;
 import com.project.accomatch.Exception.DataAccessException;
 import com.project.accomatch.LoggerPack.LoggerClass;
 import com.project.accomatch.Model.Posts;
-import com.project.accomatch.Repository.Implementation.LeaseHolderFoodTableOperations;
-import com.project.accomatch.Repository.Implementation.LeaseHolderGenderTableOperations;
-import com.project.accomatch.Repository.Implementation.LeaseHolderImagesTableOperations;
 import com.project.accomatch.Repository.Implementation.LeaseholderAdsDao;
 import com.project.accomatch.Repository.LeaseHolderFoodTableOperationsInterface;
 import com.project.accomatch.Repository.LeaseHolderGenderTableOperationsInterface;
 import com.project.accomatch.Repository.LeaseHolderImagesTableOperationsInterface;
-import com.project.accomatch.Service.LeaseHolderDashboardInterface;
+import com.project.accomatch.Service.DashboardInterface;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +16,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Service
-public class LeaseHolderDashboardService implements LeaseHolderDashboardInterface {
+public class LeaseHolderDashboardService implements DashboardInterface {
 
     @Autowired
     LeaseholderAdsDao leaseholderAdsDao;
