@@ -56,26 +56,46 @@ export const PostsByStatus = () => {
     setIsModalOpen(false);
   }
 
-  const handleCheckboxChange = (event) => {
-    const { name, checked } = event.target;
-    const filterType = name.split('-')[0];
-    const option = name.split('-')[1];
+  const handleApproveClick = async (postId) => {
+    try {
+       
+    const token = sessionStorage.getItem('token');
+    console.log('Token:', token);
 
-    setFilter((prevFilter) => ({
-      ...prevFilter,
-      [filterType]: {
-        ...prevFilter[filterType],
-        [option]: checked ? 1 : 0,
-      },
-    }));
+      
+      console.log(`Post ${postId} is approved!`);
+     
+     const response = await axios.post('/api/admin/verify/one', { 
+      leaseholderApplicationId: postId, isVerified: 1 }
+      ,{
+        headers: {
+          'Authorization': `Bearer ${token}`,'Content-Type': 'application/json' // Include the authentication token in the headers
+        }
+      }
+      );
+   
+    console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const handleAgeChange = (event) => {
-    const { value } = event.target;
-    setFilter(prevFilter => ({
-      ...prevFilter,
-      age: value
-    }));
+  const handleRejectClick = async (postId) => {
+    try {
+     
+      console.log(`Post ${postId} is rejected!`);
+      const response = await axios.post('/api/admin/verify/one', { 
+        leaseholderApplicationId: postId, isVerified: -1 }
+        ,{
+          headers: {
+            'Authorization': `Bearer ${sessionStorage.getItem('token')}` 
+          }
+        }
+        );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleStatusChange = (event) => {
@@ -103,6 +123,8 @@ export const PostsByStatus = () => {
             }
           }
         );
+        console.log("Filtered Posts:", response.data); // Debug the response data
+     
         setPosts(response.data);
       } else {
         const response = await axios.get("/api/admin/get/list/post", {
@@ -164,11 +186,23 @@ export const PostsByStatus = () => {
               <h3 onClick={() => openModal(post)}>{post.title}</h3>
               <p>{post.subtitle}</p>
               <p>Address: {post.address}</p>
-              <p>City: {post.city}</p>
+              <p>City: {post.locationCity}</p>
               <p>Rent: {post.rent}</p>
               <p>Room Type: {post.roomType}</p>
-              <p>Area: {post.area} sqft</p>
-              <p>Available From: {post.availableFrom}</p>
+              <p>Spots available: {post.size} </p>
+              <p>Available From: {post.startDate}</p>
+              
+              {/* Approved and Reject buttons */}
+              { 
+                <div className="button-group">
+                  <button className="button-approved" onClick={() => handleApproveClick(post.leaseholderApplicationId)}>
+                    Approve
+                  </button>
+                  <button className="button-rejected" onClick={() => handleRejectClick(post.leaseholderApplicationId)}>
+                    Reject
+                  </button>
+                </div>
+              }
             </div>
           </div>
         ))}

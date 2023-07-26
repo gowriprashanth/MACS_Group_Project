@@ -1,0 +1,18 @@
+.applicant-details h3 {
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .applicant-details {
+    flex: 1;
+  }
+  
+  .applicant-details p {
+    margin: 5px 0;
+  }
+  
+  .applicant-details p:first-child {
+    font-weight: bold;
+  }

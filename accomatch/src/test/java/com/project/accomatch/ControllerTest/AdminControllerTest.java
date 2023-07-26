@@ -14,6 +14,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -34,20 +35,36 @@ public class AdminControllerTest {
         MockitoAnnotations.openMocks(this);
     }
 
-    @Test
-    public void verifyOneTestSuccess(){
-        Posts posts = mock(Posts.class);
-        when(adminInterface.VerifyOneAd(posts)).thenReturn("Success");
-        assertEquals("Success", adminController.verifySingleAd(posts));
-        verify(adminInterface, times(1)).VerifyOneAd(posts);
+    public void testVerifySingleAdSuccess() {
+        // Mock the input data
+        Map<String, String> posts = new HashMap<>();
+        posts.put("isVerified", "1");
+        posts.put("leaseholderApplicationId", "123");
+
+        // Mock the behavior of adminInterface.VerifyOneAd()
+        when(adminInterface.VerifyOneAd(any(Posts.class))).thenReturn("Success");
+
+        // Call the API method
+        String result = adminController.verifySingleAd(posts);
+
+        // Verify that the adminInterface.VerifyOneAd() method was called with the expected Posts object
+        verify(adminInterface).VerifyOneAd(argThat(postss -> Integer.parseInt(posts.get("isVerified")) == 1 && Integer.parseInt(posts.get("LeaseholderApplicationId")) == 123));
+
+        // Assert the result is as expected
+        assertEquals("Success", result);
     }
 
     @Test
-    public void verifyOneTestFailure(){
-        Posts posts = mock(Posts.class);
-        when(adminInterface.VerifyOneAd(posts)).thenReturn("Fail");
-        assertEquals("Fail", adminController.verifySingleAd(posts));
-        verify(adminInterface, times(1)).VerifyOneAd(posts);
+    public void testVerifySingleAdNullInput() {
+        // Mock the input data as null
+        Map<String, String> posts = null;
+
+        // Call the API method
+        String result = adminController.verifySingleAd(posts);
+
+
+        // Assert the result is as expected
+        assertEquals("Posts object cannot be null", result);
     }
 
     @Test

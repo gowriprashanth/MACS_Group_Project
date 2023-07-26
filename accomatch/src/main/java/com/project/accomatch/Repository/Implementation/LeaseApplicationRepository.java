@@ -54,4 +54,23 @@ public class LeaseApplicationRepository implements LeaseApplicationRepositoryInt
 
         return listOfApplicants;
     }
+
+    @Override
+    public boolean changeStatusofApplication(int application_id, int user_id, String status) {
+        try (Connection connection = DriverManager.getConnection(JDBC, username, password);
+             PreparedStatement statement = connection.prepareStatement("Update leaseholder_applicant SET status=? WHERE application_id=? AND user_id=?"
+             )){
+            statement.setString(1,status);
+            statement.setInt(2,application_id);
+            statement.setInt(3,user_id);
+            statement.executeUpdate();
+            statement.close();
+            connection.close();
+            return true;
+        } catch (SQLException e){
+            e.printStackTrace();
+            logger.error(e.getMessage());
+            return false;
+        }
+    }
 }

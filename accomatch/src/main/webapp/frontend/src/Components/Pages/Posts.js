@@ -36,6 +36,28 @@ export const Posts = () => {
     loadPosts();
   }, []);
 
+  
+  useEffect(() => {
+    async function getRatings(){
+      const ratings = [];
+      const authToken = sessionStorage.getItem("token"); //  authentication token
+      for (let index = 0; index < posts.length; index++) {
+        const post = posts[index];
+        const application_id = post.leaseholderApplicationId;
+        const data = await axios.get(`/api/reviews/getAverageRatings/${application_id}`,{
+        headers: {
+          'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
+        }
+      });
+      console.log(data.data[0]);
+      ratings.push(data.data[0]);
+      }
+      setRatings(ratings);
+    }
+    getRatings();
+  }, [posts]);
+
+
   const loadPosts = async () => {
     try {
       const authToken = sessionStorage.getItem("token"); //  authentication token
@@ -129,7 +151,7 @@ export const Posts = () => {
       console.error(error);
     }
   };
-  
+
   const toggleFilter = () => {
     setIsFilterOpen(prevValue => !prevValue);
   };
@@ -253,16 +275,16 @@ export const Posts = () => {
       <div className="container">
       <div className="post-list">
         {posts.map((post, index) => (
-          <div className="post" key={index}>
+          <div className="post" key={index}  onClick={()=>openModal(post)}>
             <div className="post-image">
               <img src={post.document} alt={`Post ${post.title}`} />
             </div>
             <div className="post-details"
-            onClick={()=>openModal(post)}>
+            >
               <h3>{post.title}</h3>
               <p>{post.subtitle}</p>
               <p>Address: {post.address}</p>
-              <p>City: {post.city}</p>
+              <p>City: {post.locationCity}</p>
               <p>Rent: {post.rent}</p>
               <p>Room Type: {post.roomType}</p>
               <p>Spots available: {post.size} </p>
@@ -277,7 +299,7 @@ export const Posts = () => {
             <h3>{selectedPost.title}</h3>
             <p>{selectedPost.subtitle}</p>
             <p>Address: {selectedPost.address}</p>
-            <p>City: {selectedPost.city}</p>
+            <p>City: {selectedPost.locationCity}</p>
             <p>Rent: {selectedPost.rent}</p>
             <p>Room Type: {selectedPost.roomType}</p>
             <p>Spots available: {selectedPost.size} </p>
@@ -287,7 +309,7 @@ export const Posts = () => {
           </div>
         </div>
       )}
-
+        {!isFilterOpen &&(
       <div className="post-list">
         {ratings.map((rate, index) => (
             <div className="post" key={index}>
@@ -302,6 +324,7 @@ export const Posts = () => {
             </div>
         ))}
       </div>
+        )}
       </div >
     </div>
 );
