@@ -74,7 +74,7 @@ export const LeaseApplicantView = () => {
         });
     
       }
-    const handleStatusChangeSubmit=async(isApprove,userId)=>{
+    const handleStatusChangeSubmit=async(isApprove,userId,email)=>{
         try{
             let status;
             if(isApprove){
@@ -85,7 +85,8 @@ export const LeaseApplicantView = () => {
             let bodyObj={
                 status:status,
                 user_id:userId,
-                application_id:Number(applicationId)
+                application_id:Number(applicationId),
+                email
             }
             const authToken = sessionStorage.getItem("token");
                 const res = await axios.post(`/api/leaseholder/applicant/changeStatus`,JSON.stringify(bodyObj)
@@ -134,8 +135,8 @@ export const LeaseApplicantView = () => {
                             <p>Gender: {applicant.gender}</p>
                             <p>Mobile: {applicant.mobile} </p>
                             <button className="chat-button" onClick={()=>handleChatSubmit(applicant.userId)}>Chat</button>
-                            <button className="approve-button" onClick={()=>handleStatusChangeSubmit(true,applicant.userId)}>Approve</button>
-                            <button className="reject-button" onClick={()=>handleStatusChangeSubmit(false,applicant.userId)}>Reject</button>
+                            <button className="approve-button" onClick={()=>handleStatusChangeSubmit(true,applicant.userId,applicant.email)}>Approve</button>
+                            <button className="reject-button" onClick={()=>handleStatusChangeSubmit(false,applicant.userId,applicant.email)}>Reject</button>
                     </div>
                 ))}
             </div>
