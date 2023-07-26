@@ -20,7 +20,7 @@ public class LeaseApplicationController {
     public LeaseApplicationService applicantService;
 
     @Autowired
-    private MailSenderClass mailSenderClass;
+    public MailSenderClass mailSenderClass;
     Logger logger = LoggerClass.getLogger();
 
     /**

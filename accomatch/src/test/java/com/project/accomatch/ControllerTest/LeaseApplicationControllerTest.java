@@ -3,6 +3,7 @@ package com.project.accomatch.ControllerTest;
 import com.project.accomatch.Controller.LeaseApplicationController;
 import com.project.accomatch.Exception.InvalidInputException;
 import com.project.accomatch.Model.Applicant;
+import com.project.accomatch.Service.Implementation.MailSenderClass;
 import com.project.accomatch.Service.LeaseApplicationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,12 +20,14 @@ class LeaseApplicationControllerTest {
 
     private LeaseApplicationService applicantService;
     private LeaseApplicationController leaseApplicationController;
+    MailSenderClass mailSenderClass2 = mock(MailSenderClass.class);
 
     @BeforeEach
     void setUp() {
         applicantService = mock(LeaseApplicationService.class);
         leaseApplicationController = new LeaseApplicationController();
         leaseApplicationController.applicantService = applicantService;
+        leaseApplicationController.mailSenderClass = mailSenderClass2;
     }
 
     @Test
@@ -55,6 +58,7 @@ class LeaseApplicationControllerTest {
         requestBody.put("application_id", applicationId);
         requestBody.put("user_id", userId);
         requestBody.put("status", status);
+        doNothing().when(mailSenderClass2).sendEmail(any(String.class), any(String.class), anyString());
 
         // Mock the service method
         when(applicantService.changeStatusofApplicant(applicationId, userId, status)).thenReturn(true);
