@@ -29,7 +29,7 @@ public class AdminRepository implements AdminRepositoryInterface {
      * @return A string indicating the result of the update process. "Success" on successful update,
      *         "Error" if there was an error during the update.
      */
-    public String OneAd(Posts posts){
+    public String verifyOneAd(Posts posts){
         try (Connection connect = DriverManager.getConnection(JDBC, username, password);
              Statement statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
 
@@ -55,7 +55,7 @@ public class AdminRepository implements AdminRepositoryInterface {
      * @return A string indicating the result of the update process. "Success" on successful update,
      *         "Error" if there was an error during the update.
      */
-    public String AllAd(Posts posts){
+    public String verifyAllAd(Posts posts){
         try (Connection connect = DriverManager.getConnection(JDBC, username, password);
              Statement statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
             String sql = "update leaseholder_ads set is_verified = ?";
