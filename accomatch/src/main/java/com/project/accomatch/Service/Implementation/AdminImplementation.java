@@ -2,7 +2,6 @@ package com.project.accomatch.Service.Implementation;
 
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Repository.AdminRepositoryInterface;
-import com.project.accomatch.Repository.Implementation.AdminRepository;
 import com.project.accomatch.Service.AdminInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ public class AdminImplementation implements AdminInterface {
      */
     @Override
     public String VerifyOneAd(Posts posts) {
-        return adminRepository.OneAd(posts);
+        return adminRepository.verifyOneAd(posts);
     }
 
     /**
@@ -32,7 +31,7 @@ public class AdminImplementation implements AdminInterface {
      */
     @Override
     public String VerifyAllAd(Posts posts) {
-        return adminRepository.AllAd(posts);
+        return adminRepository.verifyAllAd(posts);
     }
 
 }
