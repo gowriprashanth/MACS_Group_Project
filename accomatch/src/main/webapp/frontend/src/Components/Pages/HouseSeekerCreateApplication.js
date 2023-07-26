@@ -87,7 +87,7 @@ export const HouseSeekerCreateApplication =() =>{
             </p>
             <h1>Create Houseseeker application</h1>
             <form onSubmit={handleLoginSubmit}>
-                <label htmlFor ="location">location:</label>
+                <label htmlFor ="location">Location:</label>
                 <input 
                     type="text"
                     id="location"
@@ -95,7 +95,7 @@ export const HouseSeekerCreateApplication =() =>{
                     value={location}
                     required
                 />
-                <label htmlFor ="roomtype">roomtype:</label>
+                <label htmlFor ="roomtype">Roomtype:</label>
                 <label>sharing
                 <input 
                     type="radio"
@@ -176,7 +176,7 @@ export const HouseSeekerCreateApplication =() =>{
                     value={foodPreferences}
                 />
                 </label>
-                <label htmlFor ="startdate">startdate:</label>
+                <label htmlFor ="startdate">Startdate:</label>
                 <input 
                     type="date"
                     id="startdate"
@@ -184,7 +184,7 @@ export const HouseSeekerCreateApplication =() =>{
                     value={startDate}
                     required
                 />
-                <label htmlFor ="otherpreferences">Other Preferences:</label>
+                <label htmlFor ="otherpreferences">Other preferences:</label>
                 <input 
                     type="text"
                     id="otherpreferences"
