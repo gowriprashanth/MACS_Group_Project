@@ -85,11 +85,11 @@ export const PostsDetailsPage = () => {
         if(response.status===200){
             navigate("/posts");
         }
-        return response.json(); // Read the response data as text
+        return response.json; // Read the response data as text
     })
     .then((data) => {
         console.log(data); // Log the response data
-        if (data === "success") {
+        if (data === "Applied Successfully") {
         setSuccess(true);
         } else {
         setErrMsg("Login failed. Please try again."); // Set an appropriate error message

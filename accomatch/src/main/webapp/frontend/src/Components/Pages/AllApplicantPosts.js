@@ -47,6 +47,7 @@ export const AllApplicantPosts = () => {
 
     const openModal = (post) => {
         setSelectedPost(post);
+        console.log(post)
         setIsModalOpen(true);
     }
 
@@ -177,35 +178,20 @@ export const AllApplicantPosts = () => {
             </div>
             <div className="post-list">
                 {posts.map((post, index) => (
-                    <div className="post" key={index}>
+                    <div className="post" key={index} >
                         <div className="post-image">
                             <img src={post.document} alt={`Post ${post.title}`} />
                         </div>
                         <div className="post-details">
-                            <h3 onClick={() => openModal(post)}> {post.name}</h3>
+                            <h3 > {post.name}</h3>
                             <p>City: {post.location_city}</p>
                             <p>Other Preferences: {post.other_preferences}</p>
                             <p>Room Type: {post.room_type}</p>
+                            <p>Start Date: {post.start_date}</p>
                         </div>
                     </div>
                 ))}
             </div>
-            {isModalOpen && (
-                <div className="custom-modal">
-                    <div className="modal-content">
-                        <h3>{selectedPost.title}</h3>
-                        <p>{selectedPost.subtitle}</p>
-                        <p>Address: {selectedPost.address}</p>
-                        <p>City: {selectedPost.city}</p>
-                        <p>Rent: {selectedPost.rent}</p>
-                        <p>Room Type: {selectedPost.roomType}</p>
-                        <p>Area: {selectedPost.area} sqft</p>
-                        <p>Available From: {selectedPost.availableFrom}</p>
-                        <button onClick={() => handleDetailsClick(selectedPost.leaseholderApplicationId)}>More Details</button>
-                        <button onClick={closeModal}>Close</button>
-                    </div>
-                </div>
-            )}
         </div>
     );
 };

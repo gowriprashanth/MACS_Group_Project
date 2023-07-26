@@ -52,10 +52,11 @@ export const HouseSeekerCreateApplication =() =>{
           })
         .then((data) => {
             console.log(data); // Log the response data
-            if (data === "success") {
+            if (data.ok) {
             setSuccess(true);
+            navigate("/posts");
             } else {
-            setErrMsg("Login failed. Please try again."); // Set an appropriate error message
+            setErrMsg("Something went wrong"); // Set an appropriate error message
             }
         })
         .catch((error) => {

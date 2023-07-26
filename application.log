@@ -162,3 +162,73 @@
 2023-07-24 22:00:21.278 [http-nio-8080-exec-8] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; For input string: "undefined"]
 2023-07-24 22:00:39.249 [http-nio-8080-exec-7] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; For input string: "undefined"]
 2023-07-24 22:00:39.502 [http-nio-8080-exec-5] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; For input string: "undefined"]
+2023-07-26 10:12:43.556 [main] INFO  c.p.accomatch.AccomatchApplication - Starting AccomatchApplication using Java 19.0.2 with PID 42172 (C:\Dal\Sem 2\ASDC\project new\group04\accomatch\target\classes started by bjkan in C:\Dal\Sem 2\ASDC\project new\group04)
+2023-07-26 10:12:43.577 [main] INFO  c.p.accomatch.AccomatchApplication - No active profile set, falling back to 1 default profile: "default"
+2023-07-26 10:12:45.507 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-07-26 10:12:45.515 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2023-07-26 10:12:45.516 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-07-26 10:12:45.516 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-07-26 10:12:45.615 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-07-26 10:12:45.618 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1847 ms
+2023-07-26 10:12:47.047 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4e3e11b9, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@67cffead, org.springframework.security.web.context.SecurityContextHolderFilter@1c33e528, org.springframework.security.web.header.HeaderWriterFilter@32faa16c, org.springframework.web.filter.CorsFilter@214beff9, org.springframework.security.web.authentication.logout.LogoutFilter@7793ad58, com.project.accomatch.JWT.JwtFilter@51d387d3, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@53d2d002, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@71370fec, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1ff15a50, org.springframework.security.web.session.SessionManagementFilter@e09f1b6, org.springframework.security.web.access.ExceptionTranslationFilter@67bf0480, org.springframework.security.web.access.intercept.AuthorizationFilter@4207852d]
+2023-07-26 10:12:47.359 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2023-07-26 10:12:47.407 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-26 10:12:47.426 [main] INFO  c.p.accomatch.AccomatchApplication - Started AccomatchApplication in 4.423 seconds (process running for 4.992)
+2023-07-26 10:13:39.720 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-26 10:13:39.720 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-07-26 10:13:39.736 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 16 ms
+2023-07-26 10:13:40.002 [http-nio-8080-exec-1] INFO  c.p.accomatch.LoggerPack.LoggerClass - Login controller active
+2023-07-26 10:13:40.002 [http-nio-8080-exec-1] INFO  c.p.accomatch.LoggerPack.LoggerClass - verifying User credentials for logging in!!
+2023-07-26 10:13:40.739 [http-nio-8080-exec-2] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of posts for user: bjkanodiya42@gmail.com
+2023-07-26 10:13:54.444 [http-nio-8080-exec-10] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting details of post with application ID 2 for user: bjkanodiya42@gmail.com
+2023-07-26 10:13:54.819 [http-nio-8080-exec-6] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of images for post with application ID: 2
+2023-07-26 10:13:55.095 [http-nio-8080-exec-7] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of food preference for post with application ID: 2
+2023-07-26 10:13:55.235 [http-nio-8080-exec-8] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of gender preference for post with application ID: 2
+2023-07-26 10:14:11.726 [http-nio-8080-exec-4] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of posts for user: bjkanodiya42@gmail.com
+2023-07-26 10:14:14.182 [http-nio-8080-exec-3] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting details of post with application ID 2 for user: bjkanodiya42@gmail.com
+2023-07-26 10:14:14.970 [http-nio-8080-exec-6] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of images for post with application ID: 2
+2023-07-26 10:14:15.369 [http-nio-8080-exec-8] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of food preference for post with application ID: 2
+2023-07-26 10:14:15.808 [http-nio-8080-exec-1] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of gender preference for post with application ID: 2
+2023-07-26 10:14:24.619 [http-nio-8080-exec-10] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; For input string: "undefined"]
+2023-07-26 10:24:57.741 [http-nio-8080-exec-5] INFO  c.p.accomatch.LoggerPack.LoggerClass - Login controller active
+2023-07-26 10:24:57.741 [http-nio-8080-exec-5] INFO  c.p.accomatch.LoggerPack.LoggerClass - verifying User credentials for logging in!!
+2023-07-26 10:24:58.011 [http-nio-8080-exec-6] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of posts for user: bjkanodiya42@gmail.com
+2023-07-26 10:29:32.956 [http-nio-8080-exec-9] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; For input string: "undefined"]
+2023-07-26 10:30:22.796 [http-nio-8080-exec-6] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting details of post with application ID 1 for user: bjkanodiya42@gmail.com
+2023-07-26 10:30:22.817 [http-nio-8080-exec-6] INFO  c.p.accomatch.LoggerPack.LoggerClass - No details of post were found with application ID 1 for user: bjkanodiya42@gmail.com
+2023-07-26 10:30:38.421 [http-nio-8080-exec-1] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting details of post with application ID 1 for user: bjkanodiya42@gmail.com
+2023-07-26 10:30:38.443 [http-nio-8080-exec-1] INFO  c.p.accomatch.LoggerPack.LoggerClass - No details of post were found with application ID 1 for user: bjkanodiya42@gmail.com
+2023-07-26 10:39:20.184 [http-nio-8080-exec-10] INFO  c.p.accomatch.LoggerPack.LoggerClass - Login controller active
+2023-07-26 10:39:20.184 [http-nio-8080-exec-10] INFO  c.p.accomatch.LoggerPack.LoggerClass - verifying User credentials for logging in!!
+2023-07-26 10:39:20.629 [http-nio-8080-exec-9] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of posts for user: bjkanodiya42@gmail.com
+2023-07-26 10:41:46.089 [http-nio-8080-exec-2] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of posts for user: bjkanodiya42@gmail.com
+2023-07-26 10:50:29.771 [http-nio-8080-exec-9] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of posts for user: bjkanodiya42@gmail.com
+2023-07-26 10:50:32.974 [http-nio-8080-exec-1] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting details of post with application ID 2 for user: bjkanodiya42@gmail.com
+2023-07-26 10:50:33.581 [http-nio-8080-exec-2] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of images for post with application ID: 2
+2023-07-26 10:50:33.708 [http-nio-8080-exec-3] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of food preference for post with application ID: 2
+2023-07-26 10:50:33.965 [http-nio-8080-exec-10] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of gender preference for post with application ID: 2
+2023-07-26 10:50:34.765 [http-nio-8080-exec-8] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of posts for user: bjkanodiya42@gmail.com
+2023-07-26 10:51:51.694 [http-nio-8080-exec-7] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting details of post with application ID 6 for user: bjkanodiya42@gmail.com
+2023-07-26 10:51:52.062 [http-nio-8080-exec-3] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of images for post with application ID: 6
+2023-07-26 10:51:52.361 [http-nio-8080-exec-10] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of food preference for post with application ID: 6
+2023-07-26 10:51:52.449 [http-nio-8080-exec-4] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of gender preference for post with application ID: 6
+2023-07-26 10:51:58.924 [http-nio-8080-exec-6] INFO  c.p.accomatch.LoggerPack.LoggerClass - Applying to a post for postId:6 and userID: 15
+2023-07-26 10:51:59.331 [http-nio-8080-exec-5] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of posts for user: bjkanodiya42@gmail.com
+2023-07-26 10:54:57.717 [http-nio-8080-exec-3] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting details of post with application ID 8 for user: bjkanodiya42@gmail.com
+2023-07-26 10:54:58.087 [http-nio-8080-exec-4] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of images for post with application ID: 8
+2023-07-26 10:54:58.343 [http-nio-8080-exec-9] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of food preference for post with application ID: 8
+2023-07-26 10:54:58.489 [http-nio-8080-exec-8] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of gender preference for post with application ID: 8
+2023-07-26 10:55:01.870 [http-nio-8080-exec-7] INFO  c.p.accomatch.LoggerPack.LoggerClass - Applying to a post for postId:8 and userID: 15
+2023-07-26 10:55:02.238 [http-nio-8080-exec-2] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of posts for user: bjkanodiya42@gmail.com
+2023-07-26 10:55:21.091 [http-nio-8080-exec-4] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting details of post with application ID 9 for user: bjkanodiya42@gmail.com
+2023-07-26 10:55:21.560 [http-nio-8080-exec-8] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of images for post with application ID: 9
+2023-07-26 10:55:21.746 [http-nio-8080-exec-6] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of food preference for post with application ID: 9
+2023-07-26 10:55:21.961 [http-nio-8080-exec-5] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of gender preference for post with application ID: 9
+2023-07-26 10:55:24.293 [http-nio-8080-exec-3] INFO  c.p.accomatch.LoggerPack.LoggerClass - Applying to a post for postId:9 and userID: 15
+2023-07-26 10:55:24.660 [http-nio-8080-exec-10] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of posts for user: bjkanodiya42@gmail.com
+2023-07-26 10:59:01.296 [http-nio-8080-exec-8] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting details of post with application ID 11 for user: bjkanodiya42@gmail.com
+2023-07-26 10:59:01.732 [http-nio-8080-exec-5] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of images for post with application ID: 11
+2023-07-26 10:59:02.018 [http-nio-8080-exec-7] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of food preference for post with application ID: 11
+2023-07-26 10:59:02.132 [http-nio-8080-exec-2] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of gender preference for post with application ID: 11
+2023-07-26 10:59:03.414 [http-nio-8080-exec-4] INFO  c.p.accomatch.LoggerPack.LoggerClass - Applying to a post for postId:11 and userID: 15
+2023-07-26 10:59:03.794 [http-nio-8080-exec-9] INFO  c.p.accomatch.LoggerPack.LoggerClass - Getting list of posts for user: bjkanodiya42@gmail.com
