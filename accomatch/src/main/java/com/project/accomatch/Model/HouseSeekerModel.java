@@ -48,14 +48,9 @@ public class HouseSeekerModel {
     public HouseSeekerModel() {
     }
 
-    // Concrete builder implementation
-
-
-    // Static method to obtain the builder instance
+    //  method to obtain the builder instance
     public static HouseSeekerModelBuilder builder(int user_id, String location_city, String room_type, Date start_date) {
         return new HouseSeekerModelBuilderImpl(user_id, location_city, room_type, start_date);
     }
-
-    // Getters and setters (omitted for brevity)
-    // ...
+    
 }

@@ -2,6 +2,8 @@ package com.project.accomatch.Service.Implementation;
 
 import com.project.accomatch.Service.HouseSeekerService;
 import com.project.accomatch.Service.LeaseHolderService;
+import com.project.accomatch.Utlity.ResponseStatus;
+import com.project.accomatch.Utlity.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,18 +18,24 @@ public class CreateApplicationFactory {
     @Autowired
     HouseSeekerService houseSeekerService;
 
-    public String createAD(Map<String,Object> requestBody){
-        try{
-            if(requestBody.get("type").equals("AP")) {
+    public String createAD(Map<String, Object> requestBody) {
+        try {
+            String userTypeStr = (String) requestBody.get("type");
+            UserType userType = UserType.fromString(userTypeStr);
+
+            if (userType.equals(UserType.AP)) {
                 houseSeekerService.createAD(requestBody);
-            }else if(requestBody.get("type").equals("LH"))
+            } else if (userType.equals(UserType.LH)) {
                 leaseHolderService.createAD(requestBody);
-            return "Success";
-        }catch(Exception e){
-            return "Error";
+            }
+
+            return ResponseStatus.SUCCESS.getMessage();
+        } catch (Exception e) {
+            return ResponseStatus.ERROR.getMessage();
         }
-
-
     }
 
+
+
 }
+
