@@ -4,7 +4,7 @@ import com.project.accomatch.Controller.AdminController;
 import com.project.accomatch.Exception.InvalidPostStatusException;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Service.AdminInterface;
-import com.project.accomatch.Service.LeaseHolderDashboardInterface;
+import com.project.accomatch.Service.DashboardInterface;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -24,7 +24,7 @@ import static org.mockito.Mockito.times;
 public class AdminControllerTest {
 
     @Mock
-    private LeaseHolderDashboardInterface dashboardService;
+    private DashboardInterface dashboardService;
     @Mock
     AdminInterface adminInterface;
     @InjectMocks

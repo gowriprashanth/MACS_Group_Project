@@ -4,7 +4,7 @@ import com.project.accomatch.Exception.InvalidInputException;
 import com.project.accomatch.Exception.PostNotFoundException;
 import com.project.accomatch.LoggerPack.LoggerClass;
 import com.project.accomatch.Model.Posts;
-import com.project.accomatch.Service.LeaseHolderDashboardInterface;
+import com.project.accomatch.Service.DashboardInterface;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +20,7 @@ import java.util.List;
 @RequestMapping("/api/leaseholder/dashboard")
 public class LeaseHolderDashboardController {
     @Autowired
-    private LeaseHolderDashboardInterface dashboardService;
+    private DashboardInterface dashboardService;
 
     Logger logger = LoggerClass.getLogger();
     /**

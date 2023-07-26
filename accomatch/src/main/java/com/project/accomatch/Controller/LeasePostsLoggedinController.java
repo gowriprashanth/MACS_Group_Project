@@ -21,7 +21,7 @@ public class LeasePostsLoggedinController {
         if (user_id <= 0) {
             throw new InvalidInputException("Invalid application ID provided.");
         }
-        logger.info("Lease Post loogedin controller active");
+        logger.info("Lease Post logged in controller active");
         return applicantService.getListOfLoggedinApplicants(user_id);
     }
 

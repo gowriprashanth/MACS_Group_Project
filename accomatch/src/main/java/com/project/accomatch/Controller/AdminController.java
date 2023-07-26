@@ -5,7 +5,7 @@ import com.project.accomatch.Exception.PostNotFoundException;
 import com.project.accomatch.LoggerPack.LoggerClass;
 import com.project.accomatch.Model.Posts;
 import com.project.accomatch.Service.AdminInterface;
-import com.project.accomatch.Service.LeaseHolderDashboardInterface;
+import com.project.accomatch.Service.DashboardInterface;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +25,7 @@ public class AdminController {
     @Autowired
     AdminInterface adminInterface;
     @Autowired
-    private LeaseHolderDashboardInterface dashboardService;
+    private DashboardInterface dashboardService;
 
     /**
      * Verifies a single ad

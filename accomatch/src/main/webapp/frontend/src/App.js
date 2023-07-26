@@ -23,6 +23,7 @@ import { ToastContainer } from 'react-toastify';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorPage from './Components/Pages/ErrorPage';
 import { UserProfile } from './Components/Pages/UserProfile';
+import { ApplicantAppliedPosts } from './Components/Pages/ApplicantAppliedPosts';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -59,6 +60,7 @@ function App() {
             <Route path="/applicantposts/:user_Id" element={<ApplicantPosts />} />
             <Route path="/ratingform/:applicationId" element={<Rating />} />
             <Route path="/userprofile/:user_Id" element={<UserProfile/>}/>
+            <Route path="/posts/myapplications/:user_Id" element={<ApplicantAppliedPosts/>}/>
           </Routes>
         </ErrorBoundary>
       </div>

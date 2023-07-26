@@ -4,7 +4,7 @@ import com.project.accomatch.Model.Posts;
 
 import java.util.List;
 
-public interface LeaseHolderDashboardInterface {
+public interface DashboardInterface {
     public List<Posts> getListOfPosts();
 
     public List<Posts> getListOfPostsByStatus(int status);
