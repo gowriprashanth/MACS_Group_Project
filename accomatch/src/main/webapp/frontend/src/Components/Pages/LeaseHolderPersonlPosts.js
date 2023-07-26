@@ -36,7 +36,7 @@ export const LeaseHolderPersonlPosts = () => {
     }, [userid]);
 
     const handleDetailsClick = (postId) => {
-        navigate(`/posts/${postId}`);
+        navigate(`/personalpostdetails/${postId}`);
     };
 
     const openModal = (post) => {

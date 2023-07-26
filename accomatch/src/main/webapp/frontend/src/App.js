@@ -7,6 +7,7 @@ import { PostsByStatus } from './Components/Pages/PostsByStatus';
 import { PostsDetailsPage } from './Components/Pages/PostsDetailsPage';
 import { Applicants } from './Components/Pages/Applicants';
 import { LeaseHolderPersonlPosts } from './Components/Pages/LeaseHolderPersonlPosts';
+import { PersonalPostsDetailsPage } from './Components/Pages/PersonalPostsDetailsPage';
 import { AllApplicantPosts } from './Components/Pages/AllApplicantPosts';
 import { Login } from './Login';
 import { Signup } from './Signup';
@@ -47,12 +48,13 @@ function App() {
             <Route path="/postsbystatus" element={<PostsByStatus />} />
             <Route path="/applicants" element={<Applicants />} />
             <Route path="/personalposts/:user_Id" element={<LeaseHolderPersonlPosts />} />
+            <Route path="/personalpostdetails/:applicationId" element={<PersonalPostsDetailsPage/>} />
             <Route path="/allapplicant" element={<AllApplicantPosts />} />
             <Route path="/create" element={<LeaseHolderCreateApplication />} />
             <Route path="/createApplicant" element={<HouseSeekerCreateApplication />} />
             <Route path="/forgetpassword" element={<ForgetPasswordEmail />} />
             <Route path="/updatepassword" element={<ForgetPassword />} />
-            <Route path="/leaseapplicantview/:user_Id" element={<LeaseApplicantView />} />
+            <Route path="/leaseapplicantview/:applicationId" element={<LeaseApplicantView />} />
             <Route path='/chat/:roomId' element={<ChatModel/>}/>
             <Route path="/applicantposts/:user_Id" element={<ApplicantPosts />} />
             <Route path="/ratingform/:applicationId" element={<Rating />} />
