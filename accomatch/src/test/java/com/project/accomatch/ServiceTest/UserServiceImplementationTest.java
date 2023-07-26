@@ -11,6 +11,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
@@ -35,36 +36,35 @@ class UserServiceImplementationTest {
         // Create a sample UserModel
         UserModel userModel = new UserModel();
        when(userTableOperations.signUpUser(any(UserModel.class))).thenReturn("Success");
-       assertEquals("Success", userTableOperations.signUpUser(userModel));
+       assertEquals("Success", userService.SignUp(userModel));
     }
 
     @Test
     void testSignUpFail() {
         // Create a sample UserModel
         UserModel userModel = new UserModel();
-        when(userTableOperations.signUpUser(any(UserModel.class))).thenReturn("Fail");
-        assertEquals("Fail", userTableOperations.signUpUser(userModel));
+        when(userTableOperations.signUpUser(any(UserModel.class))).thenReturn("Failed");
+        assertEquals("Failed", userService.SignUp(userModel));
     }
-
     @Test
     void forgotPassword_shouldReturnResultFromUserTableOperations() {
         UserModel userModel = new UserModel();
         when(userTableOperations.ForgotPassword(any(UserModel.class))).thenReturn("Password Updated");
-        assertEquals("Password Updated", userTableOperations.ForgotPassword(userModel));
+        assertEquals("Password Updated", userService.ForgotPassword(userModel));
     }
 
     @Test
     void checkEmailID_shouldReturnResultFromUserTableOperations() {
         UserModel userModel = new UserModel();
         when(userTableOperations.CheckMailID(anyString())).thenReturn("Mail Sent");
-        assertEquals("Mail Sent", userTableOperations.CheckMailID("Mock@gmail.com"));
+        assertEquals("Mail Sent", userService.CheckEmailID("Mock@gmail.com"));
     }
 
-  /*  @Test
+  @Test
     void getUserInfoTest() {
         UserModel userModel = new UserModel();
         when(userTableOperations.getUserInfo(anyInt())).thenReturn(new UserModel());
-        assertEquals("Mail Sent", userTableOperations.getUserInfo(1));
-    }*/
+        assertNull(userTableOperations.getUserInfo(1).getAddress());
+    }
 }
 
