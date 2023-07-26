@@ -55,7 +55,7 @@ export const LeaseHolderCreateApplication =() =>{
             location_city:location,
             size,
             room_type:roomType,
-            document:'https://unsplash.com/photos/e616t35Vbeg',
+            document:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Victoria-park-kitchener-lake.jpg/800px-Victoria-park-kitchener-lake.jpg',
             rent,
             other_preferences:otherPreferences,
             start_date:startDate,
@@ -63,7 +63,7 @@ export const LeaseHolderCreateApplication =() =>{
             end_age:endAge,
             food_preferences:foodPreferences,
             gender_preferences:genderPreferences,
-            images:['https://unsplash.com/photos/e616t35Vbeg'],
+            images:['https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Victoria-park-kitchener-lake.jpg/800px-Victoria-park-kitchener-lake.jpg','https://images1.apartments.com/i2/991otg0L0cjJomys4aNphYO9A-iDOaMaGC1NHsWzYSQ/111/baker-arms-wexford-apartments-dartmouth-ns-primary-photo.jpg'],
             type:'LH'
         }
 
@@ -123,7 +123,7 @@ export const LeaseHolderCreateApplication =() =>{
                     value={title}
                     required
                 />
-                 <label htmlFor ="subtitle">subtitle:</label>
+                 <label htmlFor ="subtitle">Subtitle:</label>
                 <input 
                     type="text"
                     id="subtitle"
@@ -131,7 +131,7 @@ export const LeaseHolderCreateApplication =() =>{
                     value={subtitle}
                     required
                 />
-                <label htmlFor ="address">address:</label>
+                <label htmlFor ="address">Address:</label>
                 <input 
                     type="text"
                     id="address"
@@ -139,7 +139,7 @@ export const LeaseHolderCreateApplication =() =>{
                     value={address}
                     required
                 />
-                <label htmlFor ="location">location:</label>
+                <label htmlFor ="location">Location:</label>
                 <input 
                     type="text"
                     id="location"
@@ -147,7 +147,7 @@ export const LeaseHolderCreateApplication =() =>{
                     value={location}
                     required
                 />
-                <label htmlFor ="size">size:</label>
+                <label htmlFor ="size">Number of people required:</label>
                 <input 
                     type="Number"
                     id="size"
@@ -155,7 +155,7 @@ export const LeaseHolderCreateApplication =() =>{
                     value={size}
                     required
                 />
-                <label htmlFor ="roomtype">roomtype:</label>
+                <label htmlFor ="roomtype">Roomtype:</label>
                 <label>sharing
                 <input 
                     type="radio"
@@ -236,21 +236,21 @@ export const LeaseHolderCreateApplication =() =>{
                     value={foodPreferences}
                 />
                 </label>
-                <label htmlFor ="document">document:</label>
+                <label htmlFor ="document">Document:</label>
                 <input 
                     type="file"
                     id="document"
                     onChange={(e) => fileUpload(e.target.value,false)}
                     value={document}
                 />
-                <label htmlFor ="photos">photos:</label>
+                <label htmlFor ="photos">Photos:</label>
                 <input 
                     type="file"
                     id="photos"
                     onChange={(e) => fileUpload(e.target.value,true)}
                     value={images}
                 />
-                <label htmlFor ="startdate">startdate:</label>
+                <label htmlFor ="startdate">Startdate:</label>
                 <input 
                     type="date"
                     id="startdate"
@@ -274,7 +274,7 @@ export const LeaseHolderCreateApplication =() =>{
                     value={otherPreferences}
                     required
                 />
-                <label htmlFor ="startage">minimum age:</label>
+                <label htmlFor ="startage">Minimum age:</label>
                 <input 
                     type="number"
                     id="startage"
@@ -282,7 +282,7 @@ export const LeaseHolderCreateApplication =() =>{
                     value={startAge}
                     required
                 />
-                <label htmlFor ="endAge">maximum age:</label>
+                <label htmlFor ="endAge">Maximum age:</label>
                 <input 
                     type="number"
                     id="endage"

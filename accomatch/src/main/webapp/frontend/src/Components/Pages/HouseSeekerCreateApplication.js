@@ -85,7 +85,7 @@ export const HouseSeekerCreateApplication =() =>{
             <p ref={errRef} className ={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
                 {errMsg}
             </p>
-            <h1>Create House application</h1>
+            <h1>Create Houseseeker application</h1>
             <form onSubmit={handleLoginSubmit}>
                 <label htmlFor ="location">location:</label>
                 <input 
