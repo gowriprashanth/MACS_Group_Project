@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,createContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './Components/NavBar';
 import { Home } from './Components/Pages/Home';
@@ -26,21 +26,35 @@ import { UserProfile } from './Components/Pages/UserProfile';
 import { ApplicantAppliedPosts } from './Components/Pages/ApplicantAppliedPosts';
 
 import 'react-toastify/dist/ReactToastify.css';
-
+export const AuthContext = createContext();
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const initialLoggedInState = localStorage.getItem('isLoggedIn') === 'true';
+  const [isLoggedIn, setIsLoggedIn] = useState(initialLoggedInState);
 
   const handleLoginSuccess = () => {
     setIsLoggedIn(true);
+    localStorage.setItem('isLoggedIn', 'true');
   };
+  const handleLogOut=()=>{
+    setIsLoggedIn(false);
+    // Clear any user-related data from session storage or cookies as needed
+    sessionStorage.removeItem('user_id');
+    sessionStorage.removeItem('name');
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('type');
+    sessionStorage.removeItem('token');
+    localStorage.removeItem('isLoggedIn');
+  }
 
   return (
     <Router>
-      {isLoggedIn && <NavBar />}
+      <AuthContext.Provider value={{ isLoggedIn, handleLoginSuccess }}>
+      {isLoggedIn && <NavBar onLogOut={handleLogOut}/>} {/* Render NavBar only if isLoggedIn is true */}
       <div className="pages">
         <ToastContainer />
         <ErrorBoundary FallbackComponent={ErrorPage}>
           <Routes>
+            {/* Conditionally render based on isLoggedIn */}
             <Route path="/" element={<Login onLoginSuccess={handleLoginSuccess} />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/home" element={<Home />} />
@@ -60,10 +74,11 @@ function App() {
             <Route path="/applicantposts/:user_Id" element={<ApplicantPosts />} />
             <Route path="/ratingform/:applicationId" element={<Rating />} />
             <Route path="/userprofile/:user_Id" element={<UserProfile/>}/>
-            <Route path="/posts/myapplications/:user_Id" element={<ApplicantAppliedPosts/>}/>
+            <Route path="/posts/appliedapplications/:user_Id" element={<ApplicantAppliedPosts/>}/>
           </Routes>
         </ErrorBoundary>
       </div>
+      </AuthContext.Provider>
     </Router>
   );
 }

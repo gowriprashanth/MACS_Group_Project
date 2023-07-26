@@ -1,14 +1,15 @@
 import './Login.css';
-import {useRef, useState , useEffect} from 'react';
+import {useRef, useState , useEffect,useContext} from 'react';
 import { Link } from 'react-router-dom'; // Import the Link component from react-router-dom
 import axios from 'axios';
 import {useNavigate}  from 'react-router-dom';
 import Cookies from "js-cookie";
+import { AuthContext } from './App';
 export const Login =() =>{
 
     const userRef =useRef();
     const errRef =useRef();
-
+    const { handleLoginSuccess } = useContext(AuthContext);
     const navigate =useNavigate();
     const [user, setUser]= useState('');
     const [pwd, setPwd] = useState('');
@@ -74,6 +75,7 @@ export const Login =() =>{
             setErrMsg("Login failed. Please try again."); // Set an appropriate error message
             }
             if(status==="Success"){
+                handleLoginSuccess();
                 navigate("/posts");
             }
         })
