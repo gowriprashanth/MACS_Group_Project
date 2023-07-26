@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -32,13 +33,16 @@ public class AdminController {
      * @return Success if verified or else Error
      */
     @PostMapping("/verify/one")
-    public String verifySingleAd(@RequestBody Posts posts){
+    public String verifySingleAd(@RequestBody Map<String, String> posts){
         try{
             if(posts == null){
                 throw new PostNotFoundException("Posts object cannot be null");
             }
+            Posts post=new Posts();
+            post.setVerified(Integer.parseInt(posts.get("isVerified")));
+            post.setLeaseholderApplicationId(Integer.parseInt(posts.get("leaseholderApplicationId")));
             logger.info("single Ad verification controller active");
-            return adminInterface.VerifyOneAd(posts);
+            return adminInterface.VerifyOneAd(post);
         }catch (PostNotFoundException p){
             return p.getMessage();
         }

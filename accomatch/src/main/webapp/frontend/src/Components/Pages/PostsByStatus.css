@@ -111,3 +111,14 @@
     gap: 10px;
   }
   
+.button-approved {
+  background-color: #b0e57c;
+  color: white;
+  margin-right: 10px; 
+}
+
+.button-rejected {
+  background-color: #e57373;
+  color: white;
+  margin-right: 10px; 
+}
