@@ -296,7 +296,6 @@ export const Posts = () => {
         <p>Room Type: {post.roomType}</p>
         <p>Spots available: {post.size} </p>
         <p>Available From: {post.startDate}</p>
-        <p>is Verified: {post.isVerified}</p>
       </div>
     </div>
   ))}

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
 export const AllApplicantPosts = () => {
+    const dummyImage = "https://www.pngitem.com/pimgs/m/581-5813504_avatar-dummy-png-transparent-png.png";
     const [posts, setPosts] = useState([]);
     const [selectedPost, setSelectedPost] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -180,7 +181,7 @@ export const AllApplicantPosts = () => {
                 {posts.map((post, index) => (
                     <div className="post" key={index} >
                         <div className="post-image">
-                            <img src={post.document} alt={`Post ${post.title}`} />
+                            <img src={dummyImage} alt={`Post ${post.title}`} />
                         </div>
                         <div className="post-details">
                             <h3 > {post.name}</h3>
