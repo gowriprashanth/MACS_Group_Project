@@ -1,5 +1,6 @@
 import './Signup.css';
 import { useRef, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const Signup = () => {
   const emailRef = useRef();
@@ -17,16 +18,16 @@ export const Signup = () => {
   const [gender, setGender] = useState('');
   const [mobile, setMobile] = useState('');
   const [address, setAddress] = useState('');
-  const [isAdmin, setIsAdmin] = useState(false);
   const [isLeaseHolder, setIsLeaseHolder] = useState(false);
 
   const [errMsg, setErrMsg] =useState ('');
   const [success, setSuccess] = useState(false);
+  const navigate=useNavigate();
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, name, password, age, gender, mobile, address, isAdmin, isLeaseHolder);
+    console.log(email, name, password, age, gender, mobile, address, isLeaseHolder);
     let bodyObj = {
       email: email,
       name: name,
@@ -35,7 +36,7 @@ export const Signup = () => {
       gender: gender,
       mobile: mobile,
       address: address,
-      is_admin: isAdmin ? 1 : 0,
+      is_admin: 0,
     is_leaseholder: isLeaseHolder ? 1 : 0
     };
     setEmail('');
@@ -46,7 +47,6 @@ export const Signup = () => {
     setName('');
     setMobile('');
     setAddress('');
-    setIsAdmin(false);
     setIsLeaseHolder(false);
     fetch("/api/users/signup", {
       method: "POST",
@@ -61,6 +61,7 @@ export const Signup = () => {
         console.log(data); // Log the response data
         if (data === "success") {
           setSuccess(true);
+          navigate(`/login`);
         } else {
           setErrMsg("Signup failed. Please try again."); // Set an appropriate error message
         }
@@ -68,6 +69,7 @@ export const Signup = () => {
       .catch((error) => {
         setErrMsg("An error occurred. Please try again."); // Set an appropriate error message
       });
+      
   };
 
 
@@ -158,15 +160,6 @@ export const Signup = () => {
           value={address}
         />
 
-        <div>
-          <label htmlFor="isAdmin">Is Admin:</label>
-          <input
-            type="checkbox"
-            id="isAdmin"
-            checked={isAdmin}
-            onChange={(e) => setIsAdmin(e.target.checked)}
-          />
-        </div>
 
         <div>
           <label htmlFor="isLeaseHolder">Is Lease Owner:</label>

@@ -26,28 +26,28 @@ public class AdminImplementationTest {
     @Test
     public void VerifyOneTestSuccess(){
         Posts posts = new Posts();
-        when(adminRepository.OneAd(any(Posts.class))).thenReturn("Success");
+        when(adminRepository.verifyOneAd(any(Posts.class))).thenReturn("Success");
         assertEquals("Success", adminImplementation.VerifyOneAd(posts));
     }
 
     @Test
     public void VerifyOneTestFailure(){
         Posts posts = new Posts();
-        when(adminRepository.OneAd(any(Posts.class))).thenReturn("Failure");
+        when(adminRepository.verifyOneAd(any(Posts.class))).thenReturn("Failure");
         assertEquals("Failure", adminImplementation.VerifyOneAd(posts));
     }
 
     @Test
     public void VerifyAllTestSuccess(){
         Posts posts = new Posts();
-        when(adminRepository.AllAd(any(Posts.class))).thenReturn("Success");
+        when(adminRepository.verifyAllAd(any(Posts.class))).thenReturn("Success");
         assertEquals("Success", adminImplementation.VerifyAllAd(posts));
     }
 
     @Test
     public void VerifyAllTestFailure(){
         Posts posts = new Posts();
-        when(adminRepository.AllAd(any(Posts.class))).thenReturn("Fail");
+        when(adminRepository.verifyAllAd(any(Posts.class))).thenReturn("Fail");
         assertEquals("Fail", adminImplementation.VerifyAllAd(posts));
     }
 }

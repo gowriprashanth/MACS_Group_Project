@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
 export const AllApplicantPosts = () => {
+    const dummyImage = "https://www.pngitem.com/pimgs/m/581-5813504_avatar-dummy-png-transparent-png.png";
     const [posts, setPosts] = useState([]);
     const [selectedPost, setSelectedPost] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -47,6 +48,7 @@ export const AllApplicantPosts = () => {
 
     const openModal = (post) => {
         setSelectedPost(post);
+        console.log(post)
         setIsModalOpen(true);
     }
 
@@ -177,38 +179,20 @@ export const AllApplicantPosts = () => {
             </div>
             <div className="post-list">
                 {posts.map((post, index) => (
-                    <div className="post" key={index}>
+                    <div className="post" key={index} >
                         <div className="post-image">
-                            <img src={post.document} alt={`Post ${post.title}`} />
+                            <img src={dummyImage} alt={`Post ${post.title}`} />
                         </div>
                         <div className="post-details">
-                            <h3 onClick={() => openModal(post)}>Id: {post.user_id}</h3>
-                            <p>Name: {post.username}</p>
-                            <p>Age: {post.age}</p>
+                            <h3 > {post.name}</h3>
                             <p>City: {post.location_city}</p>
                             <p>Other Preferences: {post.other_preferences}</p>
                             <p>Room Type: {post.room_type}</p>
-                            <p>Date: {post.date}</p>
+                            <p>Start Date: {post.start_date}</p>
                         </div>
                     </div>
                 ))}
             </div>
-            {isModalOpen && (
-                <div className="custom-modal">
-                    <div className="modal-content">
-                        <h3>{selectedPost.title}</h3>
-                        <p>{selectedPost.subtitle}</p>
-                        <p>Address: {selectedPost.address}</p>
-                        <p>City: {selectedPost.city}</p>
-                        <p>Rent: {selectedPost.rent}</p>
-                        <p>Room Type: {selectedPost.roomType}</p>
-                        <p>Area: {selectedPost.area} sqft</p>
-                        <p>Available From: {selectedPost.availableFrom}</p>
-                        <button onClick={() => handleDetailsClick(selectedPost.leaseholderApplicationId)}>More Details</button>
-                        <button onClick={closeModal}>Close</button>
-                    </div>
-                </div>
-            )}
         </div>
     );
 };

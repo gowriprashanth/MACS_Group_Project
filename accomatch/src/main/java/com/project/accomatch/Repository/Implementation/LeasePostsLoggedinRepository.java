@@ -28,8 +28,8 @@ public class LeasePostsLoggedinRepository implements LeasePostsLoggedinRepositor
         try (Connection connection = DriverManager.getConnection(JDBC, username, password);
              /*PreparedStatement statement = connection.prepareStatement("(SELECT user_id,name,email,age,gender,mobile FROM user where user_id =" +
                      "(SELECT user_id FROM houseseeker_applicant where application_id = ?))"*/
-             PreparedStatement statement = connection.prepareStatement("(SELECT * FROM leaseholder_ads where leaseholder_application_id="+
-                     "(SELECT leaseholder_applicant_id FROM leaseholder_applicant where user_id = ?))"))
+             PreparedStatement statement = connection.prepareStatement("(SELECT * FROM leaseholder_ads where leaseholder_application_id IN"+
+                     "(SELECT application_id FROM leaseholder_applicant where user_id = ?))"))
              {
             statement.setInt(1,application_id);
             ResultSet resultSet= statement.executeQuery();

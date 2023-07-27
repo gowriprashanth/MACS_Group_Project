@@ -48,7 +48,7 @@ public class ChatOperations implements ChatOperationsInterface {
             connect = DriverManager.getConnection(JDBC, username, password);
             // Create a statement object.
             statement = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            String sql = "SELECT * FROM chat WHERE room_id = ? ORDER BY time DESC";
+            String sql = "SELECT * FROM chat WHERE room_id = ? ORDER BY time ASC";
             PreparedStatement preparedStatement = connect.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1,room_id);
             preparedStatement.executeQuery();

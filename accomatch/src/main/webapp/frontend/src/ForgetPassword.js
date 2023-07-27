@@ -46,10 +46,10 @@ export function ForgetPassword() {
             <Card className="text-center">
                 <Card.Body>
                     <Card.Title>Confirm Your Password</Card.Title>
-                    <input type={Text} id="New" placeholder="new Password" />
+                    <input type="password" id="New" placeholder="new Password" />
                     <br/>
                     <br/>
-                    <input type={Text} id="Retypenew" placeholder="Retype new Password" />
+                    <input type="password" id="Retypenew" placeholder="Retype new Password" />
                     <br />
                     <br />
                     <Button variant="primary" onClick={handlereset}>Reset Password</Button>

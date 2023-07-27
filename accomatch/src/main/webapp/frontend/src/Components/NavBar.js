@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import { NavLink } from "react-router-dom";
 import "./NavBar.css";
 
-function NavBar() {
+function NavBar({ onLogOut }) {
   const [click, setClick] = useState(false);
   const userid=sessionStorage.getItem('user_id');
   const handleClick = () => setClick(!click);
@@ -15,13 +15,14 @@ function NavBar() {
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('type');
     sessionStorage.removeItem('token');
+
   };
 
   return (
     <>
       <nav className="navbar">
         <div className="nav-container">
-          <NavLink exact to="/" className="nav-logo">
+          <NavLink exact to="/posts" className="nav-logo">
             AccoMatch 
             <i className="fas fa-home"></i>
           </NavLink>
@@ -49,6 +50,20 @@ function NavBar() {
                 onClick={handleClick}
               >
                 Personal Posts
+              </NavLink>
+            </li>
+            )}
+            
+            {userType === 'AP' && (
+            <li className="nav-item">
+              <NavLink
+                exact
+                to={"/posts/appliedapplications/"+ userid}
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleClick}
+              >
+                Applied Applications
               </NavLink>
             </li>
             )}
@@ -122,7 +137,10 @@ function NavBar() {
                   to={"/"}
                   activeClassName="active"
                   className="nav-links"
-                  onClick={handleLogoutClick}
+                  onClick={()=>{
+                    handleLogoutClick();
+                    onLogOut();
+                  }}
               >
                 Logout
               </NavLink>

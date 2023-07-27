@@ -9,7 +9,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import { Link, useNavigate } from 'react-router-dom';
 
-export const PostsDetailsPage = () => {
+export const PersonalPostsDetailsPage = () => {
   const navigate =useNavigate();
 
   const { applicationId } = useParams();
@@ -85,11 +85,11 @@ export const PostsDetailsPage = () => {
         if(response.status===200){
             navigate("/posts");
         }
-        return response.json; // Read the response data as text
+        return response.json(); // Read the response data as text
     })
     .then((data) => {
         console.log(data); // Log the response data
-        if (data === "Applied Successfully") {
+        if (data === "success") {
         setSuccess(true);
         } else {
         setErrMsg("Login failed. Please try again."); // Set an appropriate error message
@@ -179,6 +179,10 @@ export const PostsDetailsPage = () => {
   if (!post) {
     return <div>Loading...</div>;
   }
+  const handleApplicantClick = (applicationId) => {
+    console.log(applicationId)
+    navigate(`/leaseapplicantview/${applicationId}`);
+  };
   return (
     <div className="details-container">
       <div className="details-title">
@@ -252,6 +256,8 @@ export const PostsDetailsPage = () => {
       ):null
       }
 
+      {/* Applicant button */}
+      <button onClick={() => handleApplicantClick(post.leaseholderApplicationId)}>Applicant</button>
       {/*/!* Review button *!/*/}
       <button onClick={() => handleReviewClick(post.application_id)}>Review the post</button>
         <div >

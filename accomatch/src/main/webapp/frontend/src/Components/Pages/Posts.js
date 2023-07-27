@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import './Posts.css';
 import {  useNavigate } from 'react-router-dom';
+import verifiedIcon from './user-check-solid.svg'; 
 
 
 
@@ -35,6 +36,28 @@ export const Posts = () => {
   useEffect(() => {
     loadPosts();
   }, []);
+
+  
+  useEffect(() => {
+    async function getRatings(){
+      const ratings = [];
+      const authToken = sessionStorage.getItem("token"); //  authentication token
+      for (let index = 0; index < posts.length; index++) {
+        const post = posts[index];
+        const application_id = post.leaseholderApplicationId;
+        const data = await axios.get(`/api/reviews/getAverageRatings/${application_id}`,{
+        headers: {
+          'Authorization': `Bearer ${authToken}` // Include the retrieved authentication token in the headers
+        }
+      });
+      console.log(data.data[0]);
+      ratings.push(data.data[0]);
+      }
+      setRatings(ratings);
+    }
+    getRatings();
+  }, [posts]);
+
 
   const loadPosts = async () => {
     try {
@@ -129,7 +152,7 @@ export const Posts = () => {
       console.error(error);
     }
   };
-  
+
   const toggleFilter = () => {
     setIsFilterOpen(prevValue => !prevValue);
   };
@@ -252,42 +275,52 @@ export const Posts = () => {
       </div>
       <div className="container">
       <div className="post-list">
-        {posts.map((post, index) => (
-          <div className="post" key={index}>
-            <div className="post-image">
-              <img src={post.document} alt={`Post ${post.title}`} />
-            </div>
-            <div className="post-details"
-            onClick={()=>openModal(post)}>
-              <h3>{post.title}</h3>
-              <p>{post.subtitle}</p>
-              <p>Address: {post.address}</p>
-              <p>City: {post.city}</p>
-              <p>Rent: {post.rent}</p>
-              <p>Room Type: {post.roomType}</p>
-              <p>Area: {post.area} sqft</p>
-              <p>Available From: {post.availableFrom}</p>
-            </div>
-          </div>
-        ))}
+  {posts.map((post, index) => (
+    <div className="post" key={index} onClick={() => openModal(post)}>
+      <div className="post-image">
+        <img src={post.document} alt={`Post ${post.title}`} />
       </div>
+      <div className="post-details">
+        <div className="post-header">
+          {post.isVerified === 1 && (
+            <div className="verified-icon-wrapper">
+              <img src={verifiedIcon} alt="Verified" className="verified-icon" />
+            </div>
+          )}
+          <h3>{post.title}</h3>
+        </div>
+        <p>{post.subtitle}</p>
+        <p>Address: {post.address}</p>
+        <p>City: {post.locationCity}</p>
+        <p>Rent: {post.rent}</p>
+        <p>Room Type: {post.roomType}</p>
+        <p>Spots available: {post.size} </p>
+        <p>Available From: {post.startDate}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
+
+
+
       {isModalOpen && (
         <div className="custom-modal">
           <div className="modal-content">
             <h3>{selectedPost.title}</h3>
             <p>{selectedPost.subtitle}</p>
             <p>Address: {selectedPost.address}</p>
-            <p>City: {selectedPost.city}</p>
+            <p>City: {selectedPost.locationCity}</p>
             <p>Rent: {selectedPost.rent}</p>
             <p>Room Type: {selectedPost.roomType}</p>
-            <p>Area: {selectedPost.area} sqft</p>
-            <p>Available From: {selectedPost.availableFrom}</p>
+            <p>Spots available: {selectedPost.size} </p>
+            <p>Available From: {selectedPost.startDate}</p>
             <button onClick={() => handleDetailsClick(selectedPost.leaseholderApplicationId)}>More Details</button>
             <button onClick={closeModal}>Close</button>
           </div>
         </div>
       )}
-
+        {!isFilterOpen &&(
       <div className="post-list">
         {ratings.map((rate, index) => (
             <div className="post" key={index}>
@@ -302,6 +335,7 @@ export const Posts = () => {
             </div>
         ))}
       </div>
+        )}
       </div >
     </div>
 );

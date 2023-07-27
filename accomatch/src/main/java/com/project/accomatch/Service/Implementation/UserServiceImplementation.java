@@ -6,7 +6,6 @@ import com.project.accomatch.JWT.CustomUserDetailsService;
 import com.project.accomatch.JWT.JwtService;
 import com.project.accomatch.LoggerPack.LoggerClass;
 import com.project.accomatch.Model.UserModel;
-import com.project.accomatch.Repository.Implementation.UserTableOperations;
 import com.project.accomatch.Repository.UserTableOperationsInterface;
 import com.project.accomatch.Service.UserService;
 import org.slf4j.Logger;
@@ -22,26 +21,16 @@ import java.util.Map;
 
 @Service
 public class UserServiceImplementation implements UserService {
-    private final UserTableOperations userDao;
 
     Logger logger = LoggerClass.getLogger();
-    private final CustomUserDetailsService userDetailsService;
-
-    private final PasswordEncoder passwordEncoder;
-    private final JwtService jwtService;
-    private final AuthenticationManager authenticationManager;
-
     @Autowired
-    public UserServiceImplementation(
-            UserTableOperations userDao, CustomUserDetailsService userDetailsService, PasswordEncoder passwordEncoder, JwtService jwtService,
-            AuthenticationManager authenticationManager
-    ) {
-        this.userDao = userDao;
-        this.userDetailsService = userDetailsService;
-        this.passwordEncoder = passwordEncoder;
-        this.jwtService = jwtService;
-        this.authenticationManager = authenticationManager;
-    }
+    CustomUserDetailsService userDetailsService;
+    @Autowired
+     PasswordEncoder passwordEncoder;
+    @Autowired
+    JwtService jwtService;
+    @Autowired
+    AuthenticationManager authenticationManager;
     @Autowired
     UserTableOperationsInterface userTableOperations;
 

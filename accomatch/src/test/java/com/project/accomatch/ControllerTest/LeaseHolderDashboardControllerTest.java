@@ -7,7 +7,7 @@ import com.project.accomatch.Controller.LeaseHolderDashboardController;
 import com.project.accomatch.Exception.InvalidInputException;
 import com.project.accomatch.Exception.PostNotFoundException;
 import com.project.accomatch.Model.Posts;
-import com.project.accomatch.Service.LeaseHolderDashboardInterface;
+import com.project.accomatch.Service.DashboardInterface;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -25,7 +25,7 @@ import java.util.List;
 public class LeaseHolderDashboardControllerTest {
 
     @Mock
-    private LeaseHolderDashboardInterface dashboardService;
+    private DashboardInterface dashboardService;
 
     @InjectMocks
     private LeaseHolderDashboardController dashboardController;

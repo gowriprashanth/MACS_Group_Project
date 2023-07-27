@@ -133,3 +133,24 @@
   flex-direction: column;
   /* Add any additional styling properties as needed */
 }
+.post-header {
+  display: flex;
+  align-items: center; /* Vertically center the items in the header */
+}
+
+.verified-icon-wrapper {
+  width: 20px; /* Adjust the size of the wrapper to your preference */
+  height: 20px;
+  border-radius: 50%; /* Create a circular background */
+  background-color: green; /* Set the background color to green */
+  margin-right: 10px; /* Add some space between the icon and post title */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.verified-icon {
+  width: 16px; /* Adjust the size of the icon */
+  height: 16px;
+  /* Additional styles for the icon if needed */
+}

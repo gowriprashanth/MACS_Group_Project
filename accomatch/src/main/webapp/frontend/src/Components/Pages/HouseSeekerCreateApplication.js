@@ -52,10 +52,11 @@ export const HouseSeekerCreateApplication =() =>{
           })
         .then((data) => {
             console.log(data); // Log the response data
-            if (data === "success") {
+            if (data.ok) {
             setSuccess(true);
+            navigate("/posts");
             } else {
-            setErrMsg("Login failed. Please try again."); // Set an appropriate error message
+            setErrMsg("Something went wrong"); // Set an appropriate error message
             }
         })
         .catch((error) => {
@@ -84,9 +85,9 @@ export const HouseSeekerCreateApplication =() =>{
             <p ref={errRef} className ={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
                 {errMsg}
             </p>
-            <h1>Create House application</h1>
+            <h1>Create Houseseeker application</h1>
             <form onSubmit={handleLoginSubmit}>
-                <label htmlFor ="location">location:</label>
+                <label htmlFor ="location">Location:</label>
                 <input 
                     type="text"
                     id="location"
@@ -94,7 +95,7 @@ export const HouseSeekerCreateApplication =() =>{
                     value={location}
                     required
                 />
-                <label htmlFor ="roomtype">roomtype:</label>
+                <label htmlFor ="roomtype">Roomtype:</label>
                 <label>sharing
                 <input 
                     type="radio"
@@ -175,7 +176,7 @@ export const HouseSeekerCreateApplication =() =>{
                     value={foodPreferences}
                 />
                 </label>
-                <label htmlFor ="startdate">startdate:</label>
+                <label htmlFor ="startdate">Startdate:</label>
                 <input 
                     type="date"
                     id="startdate"
@@ -183,7 +184,7 @@ export const HouseSeekerCreateApplication =() =>{
                     value={startDate}
                     required
                 />
-                <label htmlFor ="otherpreferences">Other Preferences:</label>
+                <label htmlFor ="otherpreferences">Other preferences:</label>
                 <input 
                     type="text"
                     id="otherpreferences"
