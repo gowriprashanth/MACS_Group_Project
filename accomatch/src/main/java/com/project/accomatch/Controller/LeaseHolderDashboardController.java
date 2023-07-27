@@ -48,6 +48,8 @@ public class LeaseHolderDashboardController {
     @GetMapping("/get/post/details/{applicationId}")
     public Posts getPostDetails(@PathVariable int applicationId, Authentication authentication) {
         if (applicationId <= 0) {
+            logger.error("No details of post were found with application ID {}:", applicationId);
+
             throw new InvalidInputException("Invalid application ID provided.");
         }
 
