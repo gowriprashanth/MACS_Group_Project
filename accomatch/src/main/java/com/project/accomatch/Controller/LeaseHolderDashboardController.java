@@ -48,6 +48,8 @@ public class LeaseHolderDashboardController {
     @GetMapping("/get/post/details/{applicationId}")
     public Posts getPostDetails(@PathVariable int applicationId, Authentication authentication) {
         if (applicationId <= 0) {
+            logger.error("No details of post were found with application ID {}:", applicationId);
+
             throw new InvalidInputException("Invalid application ID provided.");
         }
 
@@ -60,7 +62,7 @@ public class LeaseHolderDashboardController {
         // Checking if the post with the given application ID exists
         Posts post = dashboardService.getPostByApplicationId(applicationId);
         if (post == null) {
-            logger.info("No details of post were found with application ID {} for user: {}", applicationId, username);
+            logger.error("No details of post were found with application ID {} for user: {}", applicationId, username);
             throw new PostNotFoundException("Post not found with application ID: " + applicationId);
         }
 
@@ -84,7 +86,7 @@ public class LeaseHolderDashboardController {
         // Checking if the post with the given application ID exists
         Posts post = dashboardService.getPostByApplicationId(applicationId);
         if (post == null) {
-            logger.info("No details of post were found with application ID: {}", applicationId);
+            logger.error("No details of post were found with application ID: {}", applicationId);
             throw new PostNotFoundException("Post not found with application ID: " + applicationId);
         }
 
@@ -105,7 +107,7 @@ public class LeaseHolderDashboardController {
         logger.info("Getting list of food preference for post with application ID: {}", applicationId);
         Posts post = dashboardService.getPostByApplicationId(applicationId);
         if (post == null) {
-            logger.info("No details of post were found with application ID: {}", applicationId);
+            logger.error("No details of post were found with application ID: {}", applicationId);
             throw new PostNotFoundException("Post not found with application ID: " + applicationId);
         }
         return dashboardService.getListOfFoodPreferencesByApplicationId(applicationId);
@@ -125,7 +127,7 @@ public class LeaseHolderDashboardController {
         logger.info("Getting list of gender preference for post with application ID: {}", applicationId);
         Posts post = dashboardService.getPostByApplicationId(applicationId);
         if (post == null) {
-            logger.info("No details of post were found with application ID: {}", applicationId);
+            logger.error("No details of post were found with application ID: {}", applicationId);
             throw new PostNotFoundException("Post not found with application ID: " + applicationId);
         }
         return dashboardService.getListOfgenderPreferencesByApplicationId(applicationId);
