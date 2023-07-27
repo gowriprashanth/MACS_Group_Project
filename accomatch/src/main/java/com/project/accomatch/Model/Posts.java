@@ -1,5 +1,7 @@
 package com.project.accomatch.Model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
 public class Posts {
@@ -17,6 +19,7 @@ public class Posts {
     private Date startDate;
     private int startAge;
     private int endAge;
+    @JsonProperty("isVerified")
     private int isVerified;
     private Date createdAt;
     private Date updatedAt;

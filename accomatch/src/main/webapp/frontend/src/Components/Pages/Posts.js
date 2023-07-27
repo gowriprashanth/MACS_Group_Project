@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import './Posts.css';
 import {  useNavigate } from 'react-router-dom';
+import verifiedIcon from './user-check-solid.svg'; 
 
 
 
@@ -274,25 +275,36 @@ export const Posts = () => {
       </div>
       <div className="container">
       <div className="post-list">
-        {posts.map((post, index) => (
-          <div className="post" key={index}  onClick={()=>openModal(post)}>
-            <div className="post-image">
-              <img src={post.document} alt={`Post ${post.title}`} />
-            </div>
-            <div className="post-details"
-            >
-              <h3>{post.title}</h3>
-              <p>{post.subtitle}</p>
-              <p>Address: {post.address}</p>
-              <p>City: {post.locationCity}</p>
-              <p>Rent: {post.rent}</p>
-              <p>Room Type: {post.roomType}</p>
-              <p>Spots available: {post.size} </p>
-              <p>Available From: {post.startDate}</p>
-            </div>
-          </div>
-        ))}
+  {posts.map((post, index) => (
+    <div className="post" key={index} onClick={() => openModal(post)}>
+      <div className="post-image">
+        <img src={post.document} alt={`Post ${post.title}`} />
       </div>
+      <div className="post-details">
+        <div className="post-header">
+          {post.isVerified === 1 && (
+            <div className="verified-icon-wrapper">
+              <img src={verifiedIcon} alt="Verified" className="verified-icon" />
+            </div>
+          )}
+          <h3>{post.title}</h3>
+        </div>
+        <p>{post.subtitle}</p>
+        <p>Address: {post.address}</p>
+        <p>City: {post.locationCity}</p>
+        <p>Rent: {post.rent}</p>
+        <p>Room Type: {post.roomType}</p>
+        <p>Spots available: {post.size} </p>
+        <p>Available From: {post.startDate}</p>
+        <p>is Verified: {post.isVerified}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
+
+
+
       {isModalOpen && (
         <div className="custom-modal">
           <div className="modal-content">
